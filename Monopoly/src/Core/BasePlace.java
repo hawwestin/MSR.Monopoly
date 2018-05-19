@@ -13,52 +13,25 @@ import java.util.ArrayList;
  * @author Michal aka street or other monument to by own by a player
  *
  */
-public class BasePlace {
+public abstract class BasePlace {
 
     //Decorator of IPLaces ... jakos obkleic place budynkami.. i jakos je zdjac 
     //jak ktos sprzeda parcele 
-    private Player owner;
-    private ArrayList<Player> guests = new ArrayList<Player>();
-    private int _price;
-    private int _rent;
+    protected ArrayList<Player> guests = new ArrayList<Player>();
     private String _name;
     private BasePlace _nextStreet;
-    private Color _color;
+    private Color _borderColor = Color.BLACK;
 
-    public BasePlace() {
-    }
-
-    public BasePlace(int price, String name, int rent) {
-        owner = null;
-        _price = price;
-        _rent = rent;
+    public BasePlace(String name) {
         _name = name;
     }
 
-    private int Price() {
-        return _price;
-    }
+    public abstract void StepAction(Player guest);
 
-    public void Buy(Player buyer) {
-        owner = buyer;
-        buyer.Buy(this, _price);
-    }
+    public abstract void MoveOver(Player guest, int distance);
 
-    public void SetValue(int value){
-        _rent += value;
-    }
-    
-    public void PlayerStep(Player guest) {
-        if (owner != guest && owner != null) {
-            guest.Pay(_rent);
-            owner.EarnMoney(_rent);
-        }
-    }
-
-    public void Sell() {
-        owner.Sell(this, _price);
-        owner = null;
-        _rent = 0;
+    public void SetNext(BasePlace next) {
+        _nextStreet = next;
     }
 
     @Override

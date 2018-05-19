@@ -16,15 +16,16 @@ public class Player {
     private int money;
     private ArrayList<BasePlace> posse = new ArrayList<BasePlace>();
     //Symbol
-    //Colot of the player    
+    //Colot of the player  
+    private int _playerNumber;
 
-    public Player() {
-        money = 200; //todo Some Config FIle to setup Base amount of money
+    public Player(int number) {
+        money = 1500; //todo Some Config FIle to setup Base amount of money
+        _playerNumber = number;
     }
 
     public int GetMoney() {
         return money;
-
     }
 
     public void EarnMoney(int salary) {
