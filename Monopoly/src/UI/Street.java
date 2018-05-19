@@ -42,6 +42,12 @@ public class Street extends javax.swing.JPanel {
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
+        jLName.setText("name");
+
+        jPColor.setBackground(new java.awt.Color(0, 0, 153));
+        jPColor.setForeground(new java.awt.Color(0, 0, 204));
+        jPColor.setToolTipText("");
+
         javax.swing.GroupLayout jPColorLayout = new javax.swing.GroupLayout(jPColor);
         jPColor.setLayout(jPColorLayout);
         jPColorLayout.setHorizontalGroup(
@@ -53,6 +59,8 @@ public class Street extends javax.swing.JPanel {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
+        jLPrice.setText("100");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -61,8 +69,8 @@ public class Street extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
+                    .addComponent(jLName, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                    .addComponent(jLPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -71,7 +79,7 @@ public class Street extends javax.swing.JPanel {
                 .addComponent(jPColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLName, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
                 .addComponent(jLPrice)
                 .addContainerGap())
         );

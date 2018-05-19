@@ -7,14 +7,14 @@ package Core;
 
 import java.awt.Color;
 
-public class Street extends BasePlace {
+public class StreetCore extends BasePlace {
 
     private Player owner;
     private int _price;
     private int _rent;
     private Color _color;
 
-    public Street(String name, Color color) {
+    public StreetCore(String name, Color color) {
         super(name);
         _color = color;
     }

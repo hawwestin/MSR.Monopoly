@@ -3,14 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Michal/Dropbox/wit-ja/8%20semestr/Java_proj/Monopoly/src/Core/DevelopedHouse.java</file>
+            <file>file:/C:/Users/Michal/Dropbox/wit-ja/8%20semestr/Java_proj/Monopoly/src/UI/Street.java</file>
+            <file>file:/C:/Users/Michal/Dropbox/wit-ja/8%20semestr/Java_proj/Monopoly/src/UI/Board.java</file>
             <file>file:/C:/Users/Michal/Dropbox/wit-ja/8%20semestr/Java_proj/Monopoly/src/Core/Game.java</file>
             <file>file:/C:/Users/Michal/Dropbox/wit-ja/8%20semestr/Java_proj/Monopoly/src/Core/Player.java</file>
             <file>file:/C:/Users/Michal/Dropbox/wit-ja/8%20semestr/Java_proj/Monopoly/src/Core/WelcomeSettings.java</file>
-            <file>file:/C:/Users/Michal/Dropbox/wit-ja/8%20semestr/Java_proj/Monopoly/src/Core/BoughtPlace.java</file>
+            <file>file:/C:/Users/Michal/Dropbox/wit-ja/8%20semestr/Java_proj/Monopoly/src/UI/Corner.java</file>
+            <file>file:/C:/Users/Michal/Dropbox/wit-ja/8%20semestr/Java_proj/Monopoly/src/Core/StreetCore.java</file>
             <file>file:/C:/Users/Michal/Dropbox/wit-ja/8%20semestr/Java_proj/Monopoly/src/Core/BasePlace.java</file>
-            <file>file:/C:/Users/Michal/Dropbox/wit-ja/8%20semestr/Java_proj/Monopoly/src/Core/Board.java</file>
-            <file>file:/C:/Users/Michal/Dropbox/wit-ja/8%20semestr/Java_proj/Monopoly/src/Core/DevelopedHotel.java</file>
+            <file>file:/C:/Users/Michal/Dropbox/wit-ja/8%20semestr/Java_proj/Monopoly/src/Core/Corner.java</file>
         </group>
     </open-files>
 </project-private>

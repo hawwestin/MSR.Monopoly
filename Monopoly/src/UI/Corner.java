@@ -5,17 +5,22 @@
  */
 package UI;
 
+import Core.BasePlace;
+
 /**
  *
  * @author Michal
  */
 public class Corner extends javax.swing.JPanel {
 
+    private BasePlace _place;
+
     /**
      * Creates new form Corner
      */
-    public Corner() {
+    public Corner(BasePlace place) {
         initComponents();
+        _place = place;
     }
 
     /**
@@ -27,19 +32,35 @@ public class Corner extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLName = new javax.swing.JLabel();
+
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        jLName.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLName.setText("x");
+        jLName.setToolTipText("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLName, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLName, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLName;
     // End of variables declaration//GEN-END:variables
 }

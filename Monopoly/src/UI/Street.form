@@ -27,8 +27,8 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLName" max="32767" attributes="0"/>
-                  <Component id="jLPrice" pref="126" max="32767" attributes="0"/>
+                  <Component id="jLName" pref="126" max="32767" attributes="0"/>
+                  <Component id="jLPrice" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -40,7 +40,7 @@
               <Component id="jPColor" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jLName" min="-2" pref="22" max="-2" attributes="0"/>
-              <EmptySpace pref="146" max="32767" attributes="0"/>
+              <EmptySpace pref="131" max="32767" attributes="0"/>
               <Component id="jLPrice" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -49,8 +49,20 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLName">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="name"/>
+      </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="jPColor">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="99" green="0" red="0" type="rgb"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="cc" green="0" red="0" type="rgb"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -66,6 +78,9 @@
       </Layout>
     </Container>
     <Component class="javax.swing.JLabel" name="jLPrice">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="100"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
