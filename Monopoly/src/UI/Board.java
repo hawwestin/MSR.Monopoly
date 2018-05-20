@@ -30,7 +30,7 @@ public class Board extends javax.swing.JFrame {
         
         Corner ccc = new Corner(aa);
         add(ccc);
-        Street aaa = new Street(aa);
+        StreetSouth aaa = new StreetSouth(aa);
         add(aaa);
     }
 
@@ -43,17 +43,60 @@ public class Board extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPFrameBoard = new javax.swing.JPanel();
+        jPBoard = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(2110, 2160));
+        setPreferredSize(new java.awt.Dimension(2110, 2160));
+
+        jPFrameBoard.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPFrameBoard.setPreferredSize(new java.awt.Dimension(1910, 1910));
+
+        jPBoard.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPBoard.setPreferredSize(new java.awt.Dimension(1850, 1850));
+
+        javax.swing.GroupLayout jPBoardLayout = new javax.swing.GroupLayout(jPBoard);
+        jPBoard.setLayout(jPBoardLayout);
+        jPBoardLayout.setHorizontalGroup(
+            jPBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1848, Short.MAX_VALUE)
+        );
+        jPBoardLayout.setVerticalGroup(
+            jPBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1848, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPFrameBoardLayout = new javax.swing.GroupLayout(jPFrameBoard);
+        jPFrameBoard.setLayout(jPFrameBoardLayout);
+        jPFrameBoardLayout.setHorizontalGroup(
+            jPFrameBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPFrameBoardLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jPBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+        jPFrameBoardLayout.setVerticalGroup(
+            jPFrameBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPFrameBoardLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jPBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 709, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPFrameBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 200, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 798, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPFrameBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 250, Short.MAX_VALUE))
         );
 
         pack();
@@ -95,5 +138,7 @@ public class Board extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPBoard;
+    private javax.swing.JPanel jPFrameBoard;
     // End of variables declaration//GEN-END:variables
 }

@@ -11,7 +11,7 @@ import Core.BasePlace;
  *
  * @author Michal
  */
-public class Street extends javax.swing.JPanel {
+public class StreetSouth extends javax.swing.JPanel {
 
     //nad ulica powinien być jeszcze ogolny miejsc na pole 
     private BasePlace _place;
@@ -19,7 +19,7 @@ public class Street extends javax.swing.JPanel {
     /**
      * Creates new form Street
      */
-    public Street(BasePlace place) {
+    public StreetSouth(BasePlace place) {
         initComponents();
         _place = place;
         
@@ -41,7 +41,9 @@ public class Street extends javax.swing.JPanel {
         jLPrice = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        setPreferredSize(new java.awt.Dimension(250, 150));
 
+        jLName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLName.setText("name");
 
         jPColor.setBackground(new java.awt.Color(0, 0, 153));
@@ -52,36 +54,36 @@ public class Street extends javax.swing.JPanel {
         jPColor.setLayout(jPColorLayout);
         jPColorLayout.setHorizontalGroup(
             jPColorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 50, Short.MAX_VALUE)
         );
         jPColorLayout.setVerticalGroup(
             jPColorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
+            .addGap(0, 135, Short.MAX_VALUE)
         );
 
+        jLPrice.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLPrice.setText("100");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPColor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(jPColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLName, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                    .addComponent(jLName, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
                     .addComponent(jLPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addComponent(jLName, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
-                .addComponent(jLPrice)
-                .addContainerGap())
+                .addGap(70, 70, 70)
+                .addComponent(jLPrice))
         );
     }// </editor-fold>//GEN-END:initComponents
 
