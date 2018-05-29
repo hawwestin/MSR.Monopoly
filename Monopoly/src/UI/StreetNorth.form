@@ -28,7 +28,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLName" pref="126" max="32767" attributes="0"/>
-                  <Component id="jLPrice" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLPrice" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -37,12 +37,12 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLPrice" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="131" max="32767" attributes="0"/>
-              <Component id="jLName" min="-2" pref="22" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jPColor" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jLName" min="-2" pref="22" max="-2" attributes="0"/>
+              <EmptySpace pref="131" max="32767" attributes="0"/>
+              <Component id="jLPrice" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -50,7 +50,6 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLName">
       <Properties>
-        <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="name"/>
       </Properties>
     </Component>
@@ -80,7 +79,6 @@
     </Container>
     <Component class="javax.swing.JLabel" name="jLPrice">
       <Properties>
-        <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="100"/>
       </Properties>
     </Component>

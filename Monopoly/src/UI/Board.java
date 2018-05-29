@@ -25,7 +25,7 @@ public class Board extends javax.swing.JPanel {
         
         Corner ccc = new Corner(aa);
         add(ccc);
-        StreetSouth aaa = new StreetSouth(aa);
+        StreetWest aaa = new StreetWest(aa);
         add(aaa);
     }
 

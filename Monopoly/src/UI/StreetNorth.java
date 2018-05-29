@@ -42,7 +42,6 @@ public class StreetNorth extends javax.swing.JPanel {
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
-        jLName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLName.setText("name");
 
         jPColor.setBackground(new java.awt.Color(0, 0, 153));
@@ -60,7 +59,6 @@ public class StreetNorth extends javax.swing.JPanel {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jLPrice.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLPrice.setText("100");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -78,12 +76,12 @@ public class StreetNorth extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLPrice)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
-                .addComponent(jLName, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLName, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                .addComponent(jLPrice)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
