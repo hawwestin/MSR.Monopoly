@@ -6,9 +6,9 @@
 package Core;
 
 
-public class Corner extends BasePlace {
+public class CornerCore extends BasePlace {
 
-    public Corner(String name) {
+    public CornerCore(String name) {
         super(name);
     }
 
