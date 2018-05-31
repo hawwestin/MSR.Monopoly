@@ -9,8 +9,6 @@ package UI;
  *
  * @author Michal
  */
-public class StreetGrafics {
-    
-    
+public class BaseField {
     
 }

@@ -5,10 +5,11 @@
  */
 package UI;
 
-import Core.StreetCore;
+import Viewer.Viewer;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.LayoutManager;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,14 +20,34 @@ import javax.swing.JPanel;
  */
 public class gg {
 
+    private static javax.swing.JScrollPane jScrollPane1;
+    private static javax.swing.JTextArea jTextArea1;
+    private static Viewer ViewerBoard;
+
     public static void main(String[] args) {
         JFrame frame = new JFrame("Monopoly");
-        Board board = new Board();                
+        ViewerBoard = new Viewer();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        
+        ImagePanel map = new ImagePanel();
+        
+        ViewerBoard.addPainter(new Board(),1);        
+        ViewerBoard.addPainter(map,0);        
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
 
-        frame.add(board);
-        frame.setSize(300, 300);
+   
+        frame.setSize(1024, 1024);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        frame.getContentPane().add(ViewerBoard, BorderLayout.CENTER);
+        frame.getContentPane().add(jScrollPane1, BorderLayout.EAST);
+        
+        
 
+        //Game Loop. 
     }
 }

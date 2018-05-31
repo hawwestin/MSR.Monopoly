@@ -23,6 +23,10 @@ public class Corner extends javax.swing.JPanel {
         _place = place;
     }
 
+    public Corner(){
+        initComponents();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,6 +39,9 @@ public class Corner extends javax.swing.JPanel {
         jLName = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        setMaximumSize(new java.awt.Dimension(250, 250));
+        setMinimumSize(new java.awt.Dimension(10, 10));
+        setPreferredSize(new java.awt.Dimension(50, 50));
 
         jLName.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
