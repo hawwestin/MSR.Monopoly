@@ -5,6 +5,8 @@
  */
 package Core;
 
+import UI.BaseField;
+import UI.StreetField;
 import java.awt.Color;
 
 public class StreetCore extends BasePlace {
@@ -56,4 +58,17 @@ public class StreetCore extends BasePlace {
         _rent = 0;
     }
 
+    @Override
+    public Color BorderColor() {
+        if (owner != null) {
+            return owner.color;
+        } else {
+            return Color.BLACK;
+        }
+    }
+
+    @Override
+    public BaseField makeField(int number, int x, int y, String align) {
+        return new StreetField(this, number, x, y, align);
+    }
 }

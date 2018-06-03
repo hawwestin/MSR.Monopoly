@@ -5,13 +5,17 @@
  */
 package Core;
 
+import UI.ActionField;
 import UI.BaseField;
-import UI.Corner;
 import java.awt.Color;
 
-public class CornerCore extends BasePlace {
+/**
+ *
+ * @author michal
+ */
+public class ActionCore extends BasePlace{
 
-    public CornerCore(String name) {
+    public ActionCore(String name) {
         super(name);
     }
 
@@ -27,14 +31,12 @@ public class CornerCore extends BasePlace {
 
     @Override
     public Color BorderColor() {
-        return Color.BLACK;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public BaseField makeField(int number, int x, int y, String align) {
-        return new Corner(this, number, x, y, align);       
+        return new ActionField(this, number, x, y, align);        
     }
-
     
-
 }

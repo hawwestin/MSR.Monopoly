@@ -6,13 +6,11 @@
 package UI;
 
 import Viewer.Viewer;
+import Viewer.ViewerInfoHandler;
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.LayoutManager;
+import java.awt.Dimension;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.JLabel;
 
 /**
  *
@@ -23,31 +21,38 @@ public class gg {
     private static javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTextArea jTextArea1;
     private static Viewer ViewerBoard;
+    private static Board board;
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Monopoly");
         ViewerBoard = new Viewer();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        
-        ImagePanel map = new ImagePanel();
-        
-        ViewerBoard.addPainter(new Board(),1);        
-        ViewerBoard.addPainter(map,0);        
+        board = new Board(ViewerBoard);
+
+       
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-   
-        frame.setSize(1024, 1024);
-        frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+
         frame.getContentPane().add(ViewerBoard, BorderLayout.CENTER);
         frame.getContentPane().add(jScrollPane1, BorderLayout.EAST);
-        
-        
+
+        JLabel infoLabel = new JLabel(" ");
+        frame.getContentPane().add(infoLabel, BorderLayout.SOUTH);
+        ViewerBoard.addMouseMotionListener(
+                new ViewerInfoHandler(infoLabel, ViewerBoard));
+
+//        ViewerBoard.setPreferredSize(new Dimension(500, 500));
+        frame.pack();
+//        ViewerBoard.setPreferredSize(null);
+        frame.setLocationRelativeTo(null);
+        frame.setSize(1024, 1024);
+        frame.setVisible(true);
 
         //Game Loop. 
+        //What is the difrence paint a PaintCOmponent ??
     }
 }

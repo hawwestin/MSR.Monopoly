@@ -19,30 +19,34 @@ import javax.swing.JPanel;
  *
  * @author Michal
  */
-public class ImagePanel extends JPanel implements Painter{
-    int aa= 1151111121;
-    
-     private BufferedImage image;
+public class ImagePanel extends JPanel implements Painter {
 
-    public ImagePanel() {
-       try{
-          image = ImageIO.read(new File("Monopoly-Board.jpg"));
-       } catch( IOException e){
-           
-       }
+    private BufferedImage image;
+    private int _xOffset;
+    private int _yOffset;
+
+    public ImagePanel(int xOffset, int yOffset) {
+        _xOffset = xOffset;
+        _yOffset = yOffset;
+
+        try {
+            image = ImageIO.read(new File("Monopoly-Board.jpg"));
+        } catch (IOException e) {
+
+        }
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(image, 0, 0, this); 
+        g.drawImage(image, 0, 0, this);
     }
 
     @Override
     public void paint(Graphics2D g, AffineTransform worldToScreen, double w, double h) {
         AffineTransform oldAT = g.getTransform();
         g.transform(worldToScreen);
-        g.drawImage(image, 0, 0, this); 
+        g.drawImage(image, _xOffset, _yOffset, this);
         g.setTransform(oldAT);
     }
 }

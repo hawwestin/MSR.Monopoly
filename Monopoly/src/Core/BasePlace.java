@@ -5,6 +5,7 @@
  */
 package Core;
 
+import UI.BaseField;
 import java.awt.Color;
 import java.util.ArrayList;
 
@@ -18,9 +19,7 @@ public abstract class BasePlace {
     //Decorator of IPLaces ... jakos obkleic place budynkami.. i jakos je zdjac 
     //jak ktos sprzeda parcele 
     protected ArrayList<Player> guests = new ArrayList<Player>();
-    private String _name;
-    private BasePlace _nextStreet;
-    private Color _borderColor = Color.BLACK;
+    private String _name;    
 
     public BasePlace(String name) {
         _name = name;
@@ -30,9 +29,9 @@ public abstract class BasePlace {
 
     public abstract void MoveOver(Player guest, int distance);
 
-    public void SetNext(BasePlace next) {
-        _nextStreet = next;
-    }
+    public abstract Color BorderColor();
+    
+    public abstract BaseField makeField(int number, int x, int y, String align);
 
     @Override
     public String toString() {
