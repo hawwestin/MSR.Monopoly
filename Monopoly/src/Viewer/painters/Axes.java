@@ -35,7 +35,7 @@ import Viewer.geom.AffineTransforms;
 /**
  * Utility methods related to computations of ticks on axes
  */
-class Axes
+public class Axes
 {
     /**
      * The default values to snap to
@@ -54,7 +54,7 @@ class Axes
      * @param order The order
      * @return The format string
      */
-    static String formatStringFor(double order)
+    public static String formatStringFor(double order)
     {
         if (order < 1e-100 || !Double.isFinite(order))
         {
@@ -107,7 +107,7 @@ class Axes
      * @param value The value
      * @return The snapped value
      */
-    static double computeSnappedUpValue(double value)
+    public static double computeSnappedUpValue(double value)
     {
         return computeSnappedUpValue(value, DEFAULT_SNAP_VALUES);
     }
@@ -147,7 +147,7 @@ class Axes
      * @param value The value
      * @return The snapped value
      */
-    static double computeSnappedDownValue(double value)
+    public static double computeSnappedDownValue(double value)
     {
         return computeSnappedDownValue(value, DEFAULT_SNAP_VALUES);
     }
