@@ -9,7 +9,6 @@ import Core.BasePlace;
 import Viewer.Painter;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
 
 /**
  *
@@ -23,15 +22,13 @@ public class ActionField extends BaseField implements Painter {
     }
 
     @Override
-    public void paint(Graphics2D g, AffineTransform worldToScreen, double w, double h) {
-        Rectangle2D border = new Rectangle2D.Double(xOffset, yOffset, width, hight);
+    public void paint(Graphics2D g, AffineTransform worldToScreen, double w, double h) {       
         AffineTransform oldAT = g.getTransform();
         g.transform(worldToScreen);
-        g.draw(border);
-        g.drawString(super._place.toString(), xOffset + 10, yOffset + 30);
-        g.rotate((Math.PI / 2) * rotate);
+        super.paint(g, worldToScreen, w, h);
+        SetText(g);               
+        
         g.setTransform(oldAT);
-
     }
 
 }

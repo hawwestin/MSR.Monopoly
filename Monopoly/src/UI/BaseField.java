@@ -7,10 +7,12 @@ package UI;
 
 import Core.BasePlace;
 import Viewer.Painter;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
-import java.util.ArrayList;
-import javax.swing.JPanel;
+import java.awt.geom.Rectangle2D;
 
 /**
  *
@@ -21,7 +23,7 @@ public class BaseField implements Painter {
     protected BasePlace _place;
     protected int _number;
     protected int width;
-    protected int hight;
+    protected int height;
     protected int xOffset;
     protected int yOffset;
     protected String _align;
@@ -35,10 +37,11 @@ public class BaseField implements Painter {
         yOffset = y;
         _align = align;
 
+        width = 175;
+        height = 280;
+
 //        setToolTipText(place.toString());       
         if (_align.equals("up") || _align.equals("down")) {
-            width = 175;
-            hight = 280;
             if (_align.equals("up")) {
                 rotate = 0;
             } else {
@@ -46,8 +49,6 @@ public class BaseField implements Painter {
             }
 
         } else if (_align.equals("left") || _align.equals("right")) {
-            width = 280;
-            hight = 175;
             if (_align.equals("left")) {
                 rotate = 1;
             } else {
@@ -55,12 +56,24 @@ public class BaseField implements Painter {
             }
 
         }
+    }
 
+    protected void SetText(Graphics2D g) {
+        Font fText = new Font("Arial", Font.PLAIN, 20);
+        Font oldFont = g.getFont();
+
+        g.setColor(Color.BLACK);
+        g.setFont(fText);
+        g.drawString(_place.toString(), xOffset + 20, yOffset + 95);
+        g.setFont(oldFont);
     }
 
     @Override
     public void paint(Graphics2D g, AffineTransform worldToScreen, double w, double h) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Rectangle2D border = new Rectangle2D.Double(xOffset, yOffset, width, height);
+        g.rotate((Math.PI / 2) * rotate, xOffset, yOffset);
+        g.setStroke(new BasicStroke(3));
+        g.draw(border);
     }
 
 }

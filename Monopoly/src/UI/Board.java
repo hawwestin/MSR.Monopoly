@@ -6,11 +6,7 @@
 package UI;
 
 import Core.BoardCore;
-import Core.CornerCore;
-
-import Core.StreetCore;
 import Viewer.Viewer;
-import java.awt.Color;
 
 /**
  *
@@ -25,7 +21,8 @@ public class Board {
         _viewer = view;
         _boardCore = new BoardCore();
 
-//        ImagePanel map = new ImagePanel(0, 0);
+        //szablon
+//        ImagePanel map = new ImagePanel(-1860, -1860);
 //        _viewer.addPainter(map, 0);
         
         make();
@@ -37,16 +34,19 @@ public class Board {
         
         for (int i = 0; i < 10; i++) {
             _viewer.addPainter( _boardCore.streets.get(i).makeField(i, x, y, "up"));
-            x-=200;
+            x-=175;
         }
+        x+=175;
         for (int i = 10; i < 20; i++) {
             _viewer.addPainter( _boardCore.streets.get(i).makeField(i, x, y, "left"));
             y-=175;
         }
+        y+=175;
         for (int i = 20; i <30; i++) {
             _viewer.addPainter( _boardCore.streets.get(i).makeField(i, x, y, "down"));
-            x+=200;
+            x+=175;
         }
+        x-=175;
         for (int i = 30; i <40; i++) {
             _viewer.addPainter( _boardCore.streets.get(i).makeField(i, x, y, "right"));
             y+=175;
