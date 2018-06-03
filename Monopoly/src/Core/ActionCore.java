@@ -13,7 +13,7 @@ import java.awt.Color;
  *
  * @author michal
  */
-public class ActionCore extends BasePlace{
+public class ActionCore extends BasePlace {
 
     public ActionCore(String name) {
         super(name);
@@ -36,7 +36,13 @@ public class ActionCore extends BasePlace{
 
     @Override
     public BaseField makeField(int number, int x, int y, String align) {
-        return new ActionField(this, number, x, y, align);        
+        if (_baseFiled == null) {
+            _baseFiled = new ActionField(this, number, x, y, align);
+
+            return _baseFiled;
+        } else {
+            return _baseFiled;
+        }
     }
-    
+
 }

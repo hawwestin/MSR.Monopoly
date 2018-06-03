@@ -35,7 +35,7 @@ public class Corner extends BaseField implements Painter {
         g.transform(worldToScreen);
         g.draw(border);
         g.drawString(_place.toString(), xOffset + 10, yOffset + 10);
-        g.rotate(90*rotate, super.SeedCorner().get(0), super.SeedCorner().get(1));
+        g.rotate((Math.PI / 2) * rotate);
         g.setTransform(oldAT);
 
     }

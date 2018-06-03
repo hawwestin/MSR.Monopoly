@@ -14,11 +14,11 @@ public class StreetCore extends BasePlace {
     private Player owner;
     private int _price;
     private int _rent;
-    private Color _color;
+    public Color color;
 
     public StreetCore(String name, Color color) {
         super(name);
-        _color = color;
+        this.color = color;
     }
 
     @Override
@@ -69,6 +69,13 @@ public class StreetCore extends BasePlace {
 
     @Override
     public BaseField makeField(int number, int x, int y, String align) {
-        return new StreetField(this, number, x, y, align);
+        if (_baseFiled == null) {
+            _baseFiled = new StreetField(this, number, x, y, align);
+
+            return _baseFiled;
+        } else {
+            return _baseFiled;
+        }
+
     }
 }

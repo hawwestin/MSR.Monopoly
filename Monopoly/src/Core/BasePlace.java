@@ -20,6 +20,7 @@ public abstract class BasePlace {
     //jak ktos sprzeda parcele 
     protected ArrayList<Player> guests = new ArrayList<Player>();
     private String _name;    
+    protected BaseField _baseFiled;
 
     public BasePlace(String name) {
         _name = name;

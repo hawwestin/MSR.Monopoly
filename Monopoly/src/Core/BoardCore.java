@@ -57,16 +57,16 @@ public class BoardCore implements Iterable<BasePlace> {
         map.put(35, new UtielietiesCore("RailRoad 4"));
 
         //chance & others
-        map.put(2, new UtielietiesCore("Comunity Chest"));
-        map.put(4, new UtielietiesCore("Income Tax"));
-        map.put(7, new UtielietiesCore("Chance"));
-        map.put(12, new UtielietiesCore("Electric"));
-        map.put(17, new UtielietiesCore("Comunity Chest"));
-        map.put(22, new UtielietiesCore("Chance"));
-        map.put(28, new UtielietiesCore("Water"));
-        map.put(33, new UtielietiesCore("Comunity Chest"));
-        map.put(36, new UtielietiesCore("Chance"));
-        map.put(38, new UtielietiesCore("TAX"));
+        map.put(2, new ActionCore("Comunity Chest"));
+        map.put(4, new ActionCore("Income Tax"));
+        map.put(7, new ActionCore("Chance"));
+        map.put(12, new ActionCore("Electric"));
+        map.put(17, new ActionCore("Comunity Chest"));
+        map.put(22, new ActionCore("Chance"));
+        map.put(28, new ActionCore("Water"));
+        map.put(33, new ActionCore("Comunity Chest"));
+        map.put(36, new ActionCore("Chance"));
+        map.put(38, new ActionCore("TAX"));
         
         
         //Brown street

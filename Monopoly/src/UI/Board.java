@@ -28,25 +28,28 @@ public class Board {
 //        ImagePanel map = new ImagePanel(0, 0);
 //        _viewer.addPainter(map, 0);
         
+        make();
     }
 
     private void make() {
         int x = 0;
         int y = 0;
-
+        
         for (int i = 0; i < 10; i++) {
-            if (i % 10 == 0) {
-                Corner tmp = new Corner(_boardCore.streets.get(i), i, x, y, "up");
-                x -=tmp.width;                
-                _viewer.addPainter(tmp, 1);
-                continue;
-            }
-            if(i<10){
-                
-            }
-            
-
-            
+            _viewer.addPainter( _boardCore.streets.get(i).makeField(i, x, y, "up"));
+            x-=200;
+        }
+        for (int i = 10; i < 20; i++) {
+            _viewer.addPainter( _boardCore.streets.get(i).makeField(i, x, y, "left"));
+            y-=175;
+        }
+        for (int i = 20; i <30; i++) {
+            _viewer.addPainter( _boardCore.streets.get(i).makeField(i, x, y, "down"));
+            x+=200;
+        }
+        for (int i = 30; i <40; i++) {
+            _viewer.addPainter( _boardCore.streets.get(i).makeField(i, x, y, "right"));
+            y+=175;
         }
 
     }

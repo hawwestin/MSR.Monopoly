@@ -40,8 +40,14 @@ public class UtielietiesCore extends BasePlace{
     }
 
     @Override
-    public BaseField makeField(int number, int x, int y, String align) {
-        return new UtilitiesPlace(this, number, x, y, align);        
+    public BaseField makeField(int number, int x, int y, String align) {        
+        if (_baseFiled == null) {
+            _baseFiled = new UtilitiesPlace(this, number, x, y, align);
+
+            return _baseFiled;
+        } else {
+            return _baseFiled;
+        }
     }
     
 }

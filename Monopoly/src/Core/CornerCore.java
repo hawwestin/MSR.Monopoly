@@ -32,9 +32,13 @@ public class CornerCore extends BasePlace {
 
     @Override
     public BaseField makeField(int number, int x, int y, String align) {
-        return new Corner(this, number, x, y, align);       
-    }
+        if (_baseFiled == null) {
+            _baseFiled = new Corner(this, number, x, y, align);
 
-    
+            return _baseFiled;
+        } else {
+            return _baseFiled;
+        }
+    }
 
 }
