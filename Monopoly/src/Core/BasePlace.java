@@ -33,6 +33,8 @@ public abstract class BasePlace {
     public abstract Color BorderColor();
     
     public abstract BaseField makeField(int number, int x, int y, String align);
+    
+    public abstract int Price();
 
     @Override
     public String toString() {

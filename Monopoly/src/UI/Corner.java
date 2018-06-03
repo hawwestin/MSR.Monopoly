@@ -30,7 +30,7 @@ public class Corner extends BaseField implements Painter {
         AffineTransform oldAT = g.getTransform();
         g.transform(worldToScreen);
         super.paint(g, worldToScreen, w, h);
-        SetText(g);
+        SetFieldName(g);
         
         g.setTransform(oldAT);
     }

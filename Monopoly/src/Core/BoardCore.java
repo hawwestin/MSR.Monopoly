@@ -7,8 +7,8 @@ package Core;
 
 import java.util.HashMap;
 import java.util.Iterator;
-import Core.StreetsNames;
 import java.awt.Color;
+
 
 /**
  *
@@ -16,14 +16,13 @@ import java.awt.Color;
  */
 public class BoardCore implements Iterable<BasePlace> {
 
-    private StreetsNames game;
     //board hold info about player possition.
     //Lista ulic na zasadzie pętlii. po powrocie na poczatek petli inkasacja kasy 
     public final HashMap<Integer, BasePlace> streets = MakeStreets();
     //make Each Border like JumpManager hashmap () One list with lota constructors . 
 
     public BoardCore() {
-        game = new StreetsNames();
+
     }
 
     @Override
@@ -51,63 +50,62 @@ public class BoardCore implements Iterable<BasePlace> {
         map.put(30, new CornerCore("Go to Jail"));
 
         //railroad
-        map.put(5, new UtielietiesCore("RailRoad 1"));
-        map.put(15, new UtielietiesCore("RailRoad 2"));
-        map.put(25, new UtielietiesCore("RailRoad 3"));
-        map.put(35, new UtielietiesCore("RailRoad 4"));
+        map.put(5, new UtielietiesCore("RailRoad 1", 200));
+        map.put(15, new UtielietiesCore("RailRoad 2", 200));
+        map.put(25, new UtielietiesCore("RailRoad 3", 200));
+        map.put(35, new UtielietiesCore("RailRoad 4", 200));
+
+        map.put(12, new UtielietiesCore("Electric", 150));
+        map.put(28, new UtielietiesCore("Water", 150));
 
         //chance & others
         map.put(2, new ActionCore("Comunity Chest"));
         map.put(4, new ActionCore("Income Tax"));
         map.put(7, new ActionCore("Chance"));
-        map.put(12, new ActionCore("Electric"));
         map.put(17, new ActionCore("Comunity Chest"));
         map.put(22, new ActionCore("Chance"));
-        map.put(28, new ActionCore("Water"));
         map.put(33, new ActionCore("Comunity Chest"));
         map.put(36, new ActionCore("Chance"));
         map.put(38, new ActionCore("TAX"));
-        
-        
+
         //Brown street
-        map.put(1,new StreetCore("mediter", Color.darkGray));
-        map.put(3,new StreetCore("Balitc", Color.darkGray));
+        map.put(1, new StreetCore("mediter", Color.darkGray, 60));
+        map.put(3, new StreetCore("Balitc", Color.darkGray, 60));
 
         //white 
-        map.put(6,new StreetCore("Ortinal", Color.WHITE));
-        map.put(8,new StreetCore("Vermount", Color.WHITE));
-        map.put(9,new StreetCore("Connect", Color.WHITE));
-        
+        map.put(6, new StreetCore("Ortinal", Color.GRAY, 100));
+        map.put(8, new StreetCore("Vermount", Color.GRAY, 100));
+        map.put(9, new StreetCore("Connect", Color.GRAY, 120));
+
         //purple
-        map.put(11,new StreetCore("St.Charles", Color.PINK));
-        map.put(13,new StreetCore("States", Color.PINK));
-        map.put(14,new StreetCore("Virginia", Color.PINK));
-        
+        map.put(11, new StreetCore("St.Charles", Color.PINK, 140));
+        map.put(13, new StreetCore("States", Color.PINK, 140));
+        map.put(14, new StreetCore("Virginia", Color.PINK, 160));
+
         //orange
-        map.put(16,new StreetCore("St. James", Color.ORANGE));
-        map.put(18,new StreetCore("Tennessee", Color.ORANGE));
-        map.put(19,new StreetCore("New York", Color.ORANGE));
-        
+        map.put(16, new StreetCore("St. James", Color.ORANGE, 180));
+        map.put(18, new StreetCore("Tennessee", Color.ORANGE, 180));
+        map.put(19, new StreetCore("New York", Color.ORANGE, 200));
+
         //red
-        map.put(21,new StreetCore("Kentucky", Color.RED));
-        map.put(23,new StreetCore("Indiana", Color.RED));
-        map.put(24,new StreetCore("Illinois", Color.RED));
-        
+        map.put(21, new StreetCore("Kentucky", Color.RED, 220));
+        map.put(23, new StreetCore("Indiana", Color.RED, 220));
+        map.put(24, new StreetCore("Illinois", Color.RED, 240));
+
         //yellow
-        map.put(26,new StreetCore("Atlantic", Color.YELLOW));
-        map.put(27,new StreetCore("Venteor", Color.YELLOW));
-        map.put(29,new StreetCore("Marvin", Color.YELLOW));
-        
+        map.put(26, new StreetCore("Atlantic", Color.YELLOW, 260));
+        map.put(27, new StreetCore("Venteor", Color.YELLOW, 260));
+        map.put(29, new StreetCore("Marvin", Color.YELLOW, 280));
+
         //green
-        map.put(31,new StreetCore("Pacific", Color.GREEN));
-        map.put(32,new StreetCore("N Cor", Color.GREEN));
-        map.put(34,new StreetCore("Pennsylvania", Color.GREEN));
-        
+        map.put(31, new StreetCore("Pacific", Color.GREEN, 300));
+        map.put(32, new StreetCore("N Cor", Color.GREEN, 300));
+        map.put(34, new StreetCore("Pennsylvania", Color.GREEN, 320));
+
         //blue
-        map.put(37,new StreetCore("Park", Color.BLUE));
-        map.put(39,new StreetCore("Board", Color.BLUE));
-        
-        
+        map.put(37, new StreetCore("Park", Color.BLUE, 350));
+        map.put(39, new StreetCore("Board", Color.BLUE, 400));
+
         return map;
     }
 

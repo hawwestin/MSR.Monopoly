@@ -40,7 +40,6 @@ public class BaseField implements Painter {
         width = 175;
         height = 280;
 
-//        setToolTipText(place.toString());       
         if (_align.equals("up") || _align.equals("down")) {
             if (_align.equals("up")) {
                 rotate = 0;
@@ -58,7 +57,7 @@ public class BaseField implements Painter {
         }
     }
 
-    protected void SetText(Graphics2D g) {
+    protected void SetFieldName(Graphics2D g) {
         Font fText = new Font("Arial", Font.PLAIN, 20);
         Font oldFont = g.getFont();
 
@@ -67,6 +66,18 @@ public class BaseField implements Painter {
         g.drawString(_place.toString(), xOffset + 20, yOffset + 95);
         g.setFont(oldFont);
     }
+    
+    protected void SetPrice(Graphics2D g) {
+        Font fText = new Font("Arial", Font.PLAIN, 20);
+        Font oldFont = g.getFont();
+
+        g.setColor(Color.BLACK);
+        g.setFont(fText);
+        String price = "cena $" + _place.Price();
+        g.drawString(price , xOffset + 20, yOffset + 260);
+        g.setFont(oldFont);
+    }
+
 
     @Override
     public void paint(Graphics2D g, AffineTransform worldToScreen, double w, double h) {

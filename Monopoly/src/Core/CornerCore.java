@@ -41,4 +41,9 @@ public class CornerCore extends BasePlace {
         }
     }
 
+    @Override
+    public int Price() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

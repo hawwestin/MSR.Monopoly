@@ -13,15 +13,17 @@ import java.awt.Color;
  *
  * @author michal
  */
-public class UtielietiesCore extends BasePlace{
+public class UtielietiesCore extends BasePlace {
 
     //todo lista kart Chance i comunity chest. 
     // dworce 
     //obrazek
     // elektrownia/ wodociągi. 
-        
-    public UtielietiesCore(String name) {
+    private int _price;
+
+    public UtielietiesCore(String name, int price) {
         super(name);
+        _price = price;
     }
 
     @Override
@@ -40,7 +42,7 @@ public class UtielietiesCore extends BasePlace{
     }
 
     @Override
-    public BaseField makeField(int number, int x, int y, String align) {        
+    public BaseField makeField(int number, int x, int y, String align) {
         if (_baseFiled == null) {
             _baseFiled = new UtilitiesPlace(this, number, x, y, align);
 
@@ -49,5 +51,10 @@ public class UtielietiesCore extends BasePlace{
             return _baseFiled;
         }
     }
-    
+
+    @Override
+    public int Price() {
+        return _price;
+    }
+
 }

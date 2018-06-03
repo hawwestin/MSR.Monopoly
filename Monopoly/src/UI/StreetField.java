@@ -35,7 +35,8 @@ public class StreetField extends BaseField implements Painter {
         g.setColor(_place.color);
         g.fillRect(xOffset+1, yOffset+1, width-2, 48);
 
-        SetText(g);
+        SetFieldName(g);
+        SetPrice(g);
 
         g.setTransform(oldAT);
         

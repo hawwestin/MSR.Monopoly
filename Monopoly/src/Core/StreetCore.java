@@ -16,9 +16,10 @@ public class StreetCore extends BasePlace {
     private int _rent;
     public Color color;
 
-    public StreetCore(String name, Color color) {
+    public StreetCore(String name, Color color, int price) {
         super(name);
         this.color = color;
+        _price = price;
     }
 
     @Override
@@ -39,6 +40,7 @@ public class StreetCore extends BasePlace {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
     public int Price() {
         return _price;
     }
