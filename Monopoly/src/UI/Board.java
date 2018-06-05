@@ -6,7 +6,14 @@
 package UI;
 
 import Core.BoardCore;
+import Viewer.Painter;
 import Viewer.Viewer;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 
 /**
  *
@@ -24,33 +31,75 @@ public class Board {
         //szablon
 //        ImagePanel map = new ImagePanel(-1860, -1860);
 //        _viewer.addPainter(map, 0);
-        
-        make();
+        makeTiles();
+        makeInnerBoard();
+
+        _viewer.setDisplayedWorldArea(-1000, -1000, 500, 500);
     }
 
-    private void make() {
+    private void makeTiles() {
         int x = 0;
         int y = 0;
-        
+
         for (int i = 0; i < 10; i++) {
-            _viewer.addPainter( _boardCore.streets.get(i).makeField(i, x, y, "up"));
-            x-=175;
+            _viewer.addPainter(_boardCore.streets.get(i).makeField(i, x, y, "up"));
+            x -= 175;
         }
-        x+=175;
+        x += 175;
         for (int i = 10; i < 20; i++) {
-            _viewer.addPainter( _boardCore.streets.get(i).makeField(i, x, y, "left"));
-            y-=175;
+            _viewer.addPainter(_boardCore.streets.get(i).makeField(i, x, y, "left"));
+            y -= 175;
         }
-        y+=175;
-        for (int i = 20; i <30; i++) {
-            _viewer.addPainter( _boardCore.streets.get(i).makeField(i, x, y, "down"));
-            x+=175;
+        y += 175;
+        for (int i = 20; i < 30; i++) {
+            _viewer.addPainter(_boardCore.streets.get(i).makeField(i, x, y, "down"));
+            x += 175;
         }
-        x-=175;
-        for (int i = 30; i <40; i++) {
-            _viewer.addPainter( _boardCore.streets.get(i).makeField(i, x, y, "right"));
-            y+=175;
+        x -= 175;
+        for (int i = 30; i < 40; i++) {
+            _viewer.addPainter(_boardCore.streets.get(i).makeField(i, x, y, "right"));
+            y += 175;
         }
+
+    }
+
+    private void makeInnerBoard() {
+        _viewer.addPainter(new Painter() {
+            @Override
+            public void paint(Graphics2D g, AffineTransform worldToScreen, double w, double h) {
+                Rectangle2D innerField = new Rectangle2D.Double(-1575, -1575, 1575, 1575);
+                Rectangle2D innerFieldCommunity = new Rectangle2D.Double(-1575, -1575, 787.5, 787.5);
+                Rectangle2D innerFieldChance = new Rectangle2D.Double(-787.5, -787.5, 787.5, 787.5);
+
+                AffineTransform oldAT = g.getTransform();
+
+                g.setColor(Color.BLACK);
+                g.setRenderingHint(
+                        RenderingHints.KEY_FRACTIONALMETRICS,
+                        RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+                g.setRenderingHint(
+                        RenderingHints.KEY_ANTIALIASING,
+                        RenderingHints.VALUE_ANTIALIAS_ON);
+                g.transform(worldToScreen);
+
+                g.setStroke(new BasicStroke(5));
+                g.draw(innerField);
+                
+                g.rotate((Math.PI / 2) * -0.5, -787.5, -787.5);
+                BaseField.drawCenteredString(g, "Monopoly", innerField, BaseField.DEFAULT_FONT.deriveFont(250.0f));
+                g.setTransform(worldToScreen);
+                g.rotate((Math.PI / 2) * 1.5, -1182, -1182);
+//                g.draw(innerFieldCommunity);
+                BaseField.drawCenteredString(g, "COMMUNITY CHEST", innerFieldCommunity, BaseField.DEFAULT_FONT.deriveFont(40.0f));
+                g.setTransform(worldToScreen);
+                g.rotate((Math.PI / 2) * -0.5, -394, -394);
+//                g.draw(innerFieldChance);
+                BaseField.drawCenteredString(g, "CHANCE", innerFieldChance, BaseField.DEFAULT_FONT.deriveFont(40.0f));
+                
+                g.setTransform(oldAT);
+            }
+
+        });
 
     }
 }
