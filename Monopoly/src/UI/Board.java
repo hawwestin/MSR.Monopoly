@@ -23,6 +23,7 @@ public class Board {
 
     private Viewer _viewer;
     private BoardCore _boardCore;
+    private int _innerBoardLength;
 
     public Board(Viewer view) {
         _viewer = view;
@@ -46,6 +47,7 @@ public class Board {
             x -= 175;
         }
         x += 175;
+        _innerBoardLength = x;
         for (int i = 10; i < 20; i++) {
             _viewer.addPainter(_boardCore.streets.get(i).makeField(i, x, y, "left"));
             y -= 175;
@@ -67,9 +69,9 @@ public class Board {
         _viewer.addPainter(new Painter() {
             @Override
             public void paint(Graphics2D g, AffineTransform worldToScreen, double w, double h) {
-                Rectangle2D innerField = new Rectangle2D.Double(-1575, -1575, 1575, 1575);
-                Rectangle2D innerFieldCommunity = new Rectangle2D.Double(-1575, -1575, 787.5, 787.5);
-                Rectangle2D innerFieldChance = new Rectangle2D.Double(-787.5, -787.5, 787.5, 787.5);
+                Rectangle2D innerField = new Rectangle2D.Double(_innerBoardLength, _innerBoardLength, -_innerBoardLength, -_innerBoardLength);
+                Rectangle2D innerFieldCommunity = new Rectangle2D.Double(_innerBoardLength, _innerBoardLength, -_innerBoardLength/2, -_innerBoardLength/2);
+                Rectangle2D innerFieldChance = new Rectangle2D.Double(_innerBoardLength/2, _innerBoardLength/2, -_innerBoardLength/2, -_innerBoardLength/2);
 
                 AffineTransform oldAT = g.getTransform();
 
@@ -85,16 +87,16 @@ public class Board {
                 g.setStroke(new BasicStroke(5));
                 g.draw(innerField);
                 
-                g.rotate((Math.PI / 2) * -0.5, -787.5, -787.5);
-                BaseField.drawCenteredString(g, "Monopoly", innerField, BaseField.DEFAULT_FONT.deriveFont(250.0f));
+                g.rotate((Math.PI / 2) * -0.5, _innerBoardLength/2, _innerBoardLength/2);
+                BaseField.DrawCenteredString(g, "MONOPOLY", innerField, BaseField.DEFAULT_FONT.deriveFont(250.0f));
                 g.setTransform(worldToScreen);
-                g.rotate((Math.PI / 2) * 1.5, -1182, -1182);
-//                g.draw(innerFieldCommunity);
-                BaseField.drawCenteredString(g, "COMMUNITY CHEST", innerFieldCommunity, BaseField.DEFAULT_FONT.deriveFont(40.0f));
+                
+                g.rotate((Math.PI / 2) * 1.5, _innerBoardLength - _innerBoardLength/4, _innerBoardLength - _innerBoardLength/4);
+                BaseField.DrawCenteredString(g, "COMMUNITY CHEST", innerFieldCommunity, BaseField.DEFAULT_FONT.deriveFont(40.0f));
                 g.setTransform(worldToScreen);
-                g.rotate((Math.PI / 2) * -0.5, -394, -394);
-//                g.draw(innerFieldChance);
-                BaseField.drawCenteredString(g, "CHANCE", innerFieldChance, BaseField.DEFAULT_FONT.deriveFont(40.0f));
+                
+                g.rotate((Math.PI / 2) * -0.5, _innerBoardLength/4, _innerBoardLength/4);
+                BaseField.DrawCenteredString(g, "CHANCE", innerFieldChance, BaseField.DEFAULT_FONT.deriveFont(40.0f));
                 
                 g.setTransform(oldAT);
             }

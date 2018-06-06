@@ -9,6 +9,7 @@ import Core.BasePlace;
 import Viewer.Painter;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 
 /**
  *
@@ -27,10 +28,12 @@ public class Corner extends BaseField implements Painter {
 
     @Override
     public void paint(Graphics2D g, AffineTransform worldToScreen, double w, double h) {
+        Rectangle2D border = new Rectangle2D.Double(xOffset, yOffset, width, height);
         AffineTransform oldAT = g.getTransform();
         g.transform(worldToScreen);
         super.paint(g, worldToScreen, w, h);
-        SetFieldName(g);
+        g.rotate((Math.PI / 2) * -0.5, xOffset+width/2, yOffset+height/2);
+        DrawCenteredString(g, _place.toString(), border, DEFAULT_FONT.deriveFont(50f));
         
         g.setTransform(oldAT);
     }

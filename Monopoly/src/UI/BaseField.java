@@ -61,7 +61,7 @@ public class BaseField implements Painter {
         }
     }
 
-    protected void SetFieldName(Graphics2D g) {         
+    protected void SetFieldName(Graphics2D g) {
         Font oldFont = g.getFont();
         g.setRenderingHint(
                 RenderingHints.KEY_FRACTIONALMETRICS,
@@ -71,11 +71,11 @@ public class BaseField implements Painter {
                 RenderingHints.VALUE_ANTIALIAS_ON);
         g.setColor(Color.BLACK);
         g.setFont(DEFAULT_FONT);
-        g.drawString(_place.toString(), xOffset + 20, yOffset + 95);
+        DrawMultiLineString(g, _place.toString(), xOffset + 20, yOffset + 95);
         g.setFont(oldFont);
     }
 
-    protected void SetPrice(Graphics2D g) {        
+    protected void SetPrice(Graphics2D g) {
         Font oldFont = g.getFont();
         g.setRenderingHint(
                 RenderingHints.KEY_FRACTIONALMETRICS,
@@ -98,20 +98,32 @@ public class BaseField implements Painter {
      * @param rect The Rectangle2D to center the text in.
      * @param font The Font class for text.
      */
-    public static void drawCenteredString(Graphics2D g, String text, Rectangle2D rect, Font font) {
+    public static void DrawCenteredString(Graphics2D g, String text, Rectangle2D rect, Font font) {
         FontRenderContext frc = new FontRenderContext(null, true, true);
+        g.setRenderingHint(
+                RenderingHints.KEY_FRACTIONALMETRICS,
+                RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+        g.setRenderingHint(
+                RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
 
-        Rectangle2D r2D = font.getStringBounds(text, frc);
-        int rWidth = (int) Math.round(r2D.getWidth());
-        int rHeight = (int) Math.round(r2D.getHeight());
-        int rX = (int) Math.round(r2D.getX());
-        int rY = (int) Math.round(r2D.getY());
+        Rectangle2D textBoundry = font.getStringBounds(text, frc);
+        int textBoundryWidth = (int) Math.round(textBoundry.getWidth());
+        int textBoundryHeight = (int) Math.round(textBoundry.getHeight());
+        int textBoundryX = (int) Math.round(textBoundry.getX());
+        int textBoundryY = (int) Math.round(textBoundry.getY());
 
-        int a = (int) Math.round((rect.getWidth() / 2) - (rWidth / 2) - rX);
-        int b = (int) Math.round((rect.getHeight() / 2) - (rHeight / 2) - rY);
+        int xOffset = (int) Math.round((rect.getWidth() / 2) - (textBoundryWidth / 2) - textBoundryX);
+        int yOffset = (int) Math.round((rect.getHeight() / 2) - (textBoundryHeight / 2) - textBoundryY);
 
         g.setFont(font);
-        g.drawString(text, Math.round(rect.getX() + a), Math.round(rect.getY() + b));
+        g.drawString(text, Math.round(rect.getX() + xOffset), Math.round(rect.getY() + yOffset));
+    }
+
+    void DrawMultiLineString(Graphics2D g, String text, int x, int y) {
+        for (String line : text.split(" ")) {
+            g.drawString(line, x, y += g.getFontMetrics().getHeight());
+        }
     }
 
     @Override
