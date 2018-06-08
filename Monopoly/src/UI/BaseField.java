@@ -34,6 +34,15 @@ public class BaseField implements Painter {
     protected int rotate;
 
     //Ractangel Dimension
+
+    /**
+     *
+     * @param place
+     * @param number
+     * @param x
+     * @param y
+     * @param align
+     */
     public BaseField(BasePlace place, int number, int x, int y, String align) {
         _place = place;
         _number = number;

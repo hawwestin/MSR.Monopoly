@@ -29,13 +29,18 @@ public class Board {
         _viewer = view;
         _boardCore = new BoardCore();
 
-        //szablon
-//        ImagePanel map = new ImagePanel(-1860, -1860);
-//        _viewer.addPainter(map, 0);
         makeTiles();
         makeInnerBoard();
+        //szablon
+//        ImagePanel map = new ImagePanel(_innerBoardLength-280, _innerBoardLength-280);
+//        _viewer.addPainter(map, 0); //ToDO Board Image as option as thing to by played or clean graphics.
+        // Player Icons should be top layer np 9.  All graphics is 1 so to board by on to set 2
 
-        _viewer.setDisplayedWorldArea(-1000, -1000, 500, 500);
+        _viewer.setDisplayedWorldArea(_innerBoardLength, _innerBoardLength, 1000, 1000);
+    }
+
+    public int InnerBoardLength() {
+        return _innerBoardLength;
     }
 
     private void makeTiles() {
@@ -43,23 +48,23 @@ public class Board {
         int y = 0;
 
         for (int i = 0; i < 10; i++) {
-            _viewer.addPainter(_boardCore.streets.get(i).makeField(i, x, y, "up"));
+            _viewer.addPainter(_boardCore.streets.get(i).makeField(i, x, y, "up"), 1);
             x -= 175;
         }
         x += 175;
         _innerBoardLength = x;
         for (int i = 10; i < 20; i++) {
-            _viewer.addPainter(_boardCore.streets.get(i).makeField(i, x, y, "left"));
+            _viewer.addPainter(_boardCore.streets.get(i).makeField(i, x, y, "left"), 1);
             y -= 175;
         }
         y += 175;
         for (int i = 20; i < 30; i++) {
-            _viewer.addPainter(_boardCore.streets.get(i).makeField(i, x, y, "down"));
+            _viewer.addPainter(_boardCore.streets.get(i).makeField(i, x, y, "down"), 1);
             x += 175;
         }
         x -= 175;
         for (int i = 30; i < 40; i++) {
-            _viewer.addPainter(_boardCore.streets.get(i).makeField(i, x, y, "right"));
+            _viewer.addPainter(_boardCore.streets.get(i).makeField(i, x, y, "right"), 1);
             y += 175;
         }
 
@@ -70,8 +75,8 @@ public class Board {
             @Override
             public void paint(Graphics2D g, AffineTransform worldToScreen, double w, double h) {
                 Rectangle2D innerField = new Rectangle2D.Double(_innerBoardLength, _innerBoardLength, -_innerBoardLength, -_innerBoardLength);
-                Rectangle2D innerFieldCommunity = new Rectangle2D.Double(_innerBoardLength, _innerBoardLength, -_innerBoardLength/2, -_innerBoardLength/2);
-                Rectangle2D innerFieldChance = new Rectangle2D.Double(_innerBoardLength/2, _innerBoardLength/2, -_innerBoardLength/2, -_innerBoardLength/2);
+                Rectangle2D innerFieldCommunity = new Rectangle2D.Double(_innerBoardLength, _innerBoardLength, -_innerBoardLength / 2, -_innerBoardLength / 2);
+                Rectangle2D innerFieldChance = new Rectangle2D.Double(_innerBoardLength / 2, _innerBoardLength / 2, -_innerBoardLength / 2, -_innerBoardLength / 2);
 
                 AffineTransform oldAT = g.getTransform();
 
@@ -86,22 +91,22 @@ public class Board {
 
                 g.setStroke(new BasicStroke(5));
                 g.draw(innerField);
-                
-                g.rotate((Math.PI / 2) * -0.5, _innerBoardLength/2, _innerBoardLength/2);
+
+                g.rotate((Math.PI / 2) * -0.5, _innerBoardLength / 2, _innerBoardLength / 2);
                 BaseField.DrawCenteredString(g, "MONOPOLY", innerField, BaseField.DEFAULT_FONT.deriveFont(250.0f));
                 g.setTransform(worldToScreen);
-                
-                g.rotate((Math.PI / 2) * 1.5, _innerBoardLength - _innerBoardLength/4, _innerBoardLength - _innerBoardLength/4);
+
+                g.rotate((Math.PI / 2) * 1.5, _innerBoardLength - _innerBoardLength / 4, _innerBoardLength - _innerBoardLength / 4);
                 BaseField.DrawCenteredString(g, "COMMUNITY CHEST", innerFieldCommunity, BaseField.DEFAULT_FONT.deriveFont(40.0f));
                 g.setTransform(worldToScreen);
-                
-                g.rotate((Math.PI / 2) * -0.5, _innerBoardLength/4, _innerBoardLength/4);
+
+                g.rotate((Math.PI / 2) * -0.5, _innerBoardLength / 4, _innerBoardLength / 4);
                 BaseField.DrawCenteredString(g, "CHANCE", innerFieldChance, BaseField.DEFAULT_FONT.deriveFont(40.0f));
-                
+
                 g.setTransform(oldAT);
             }
 
-        });
+        }, 1);
 
     }
 }
