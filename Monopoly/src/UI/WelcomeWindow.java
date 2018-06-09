@@ -24,6 +24,18 @@
 package UI;
 
 import Core.GameState;
+import Core.Player;
+import Core.Settings;
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -31,7 +43,42 @@ import Core.GameState;
  */
 public class WelcomeWindow extends javax.swing.JPanel {
 
+    private ArrayList<Player> players = new ArrayList<>();
     private final Start game;
+    private final HashMap<String, BufferedImage> iconMap = makeMap();
+    private final DefaultComboBoxModel<String> cbm = new DefaultComboBoxModel<>();
+
+    private int _currentPlayerIndex = 0;
+
+    public int getCurrentPlayerIndex() {
+        return _currentPlayerIndex;
+    }
+
+    public void setCurrentPlayerIndex(int currentPlayerIndex) {
+        if (_currentPlayerIndex > 0 || _currentPlayerIndex < Settings.PlayersLimit) {
+            _currentPlayerIndex = currentPlayerIndex;
+            JBPrevPlayer.setEnabled(true);
+            JBNextPlayer.setEnabled(true);
+        }
+        if (_currentPlayerIndex == 0) {
+            JBPrevPlayer.setEnabled(false);
+        }
+        if (_currentPlayerIndex == Settings.PlayersLimit) {
+            JBNextPlayer.setEnabled(false);
+        }
+
+    }
+
+    private HashMap<String, BufferedImage> makeMap() {
+        HashMap<String, BufferedImage> map = new HashMap<String, BufferedImage>();
+        try {
+            map.put("Laptop", ImageIO.read(new File("img/laptop.gif")));
+            map.put("mouse", ImageIO.read(new File("img/mouse.gif")));
+        } catch (IOException ex) {
+            Logger.getLogger(WelcomeWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return map;
+    }
 
     /**
      * Creates new form WelcomeWindow
@@ -39,6 +86,12 @@ public class WelcomeWindow extends javax.swing.JPanel {
     public WelcomeWindow(Start game) {
         initComponents();
         this.game = game;
+
+        JCBIcon.setModel(cbm);
+        iconMap.keySet().forEach((String kind) -> cbm.addElement(kind));
+
+        JBPrevPlayer.setEnabled(false);
+
     }
 
     /**
@@ -51,41 +104,49 @@ public class WelcomeWindow extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        JTFName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        JBPrevPlayer = new javax.swing.JButton();
+        JBNextPlayer = new javax.swing.JButton();
+        JBStart = new javax.swing.JButton();
         jColorChooser1 = new javax.swing.JColorChooser();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        JCBIcon = new javax.swing.JComboBox<>();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Witaj w Monopoly!");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        JTFName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                JTFNameActionPerformed(evt);
             }
         });
 
         jLabel2.setText("Nazwa gracza");
 
-        jButton1.setText("Poprzedni gracz");
-
-        jButton2.setText("Kolejny gracz");
-
-        jButton3.setText("Start");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        JBPrevPlayer.setText("Poprzedni gracz");
+        JBPrevPlayer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                JBPrevPlayerActionPerformed(evt);
+            }
+        });
+
+        JBNextPlayer.setText("Kolejny gracz");
+        JBNextPlayer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBNextPlayerActionPerformed(evt);
+            }
+        });
+
+        JBStart.setText("Start");
+        JBStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBStartActionPerformed(evt);
             }
         });
 
         jLabel3.setText("Pionek");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -96,18 +157,18 @@ public class WelcomeWindow extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JBPrevPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JBNextPlayer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(JBStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JTFName, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(JCBIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jColorChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -116,42 +177,82 @@ public class WelcomeWindow extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(JTFName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)
+                        .addComponent(JCBIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jColorChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(JBPrevPlayer)
+                    .addComponent(JBNextPlayer))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(JBStart)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void JTFNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFNameActionPerformed
         // TODO add your handling code here:        
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_JTFNameActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+    private void JBStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBStartActionPerformed
+
         Start.changeState(GameState.GAME_STATE);
-    }//GEN-LAST:event_jButton3ActionPerformed
+        //todo przekarz gdzeieś listę utworzonych graczy i ich wyborów... 
+    }//GEN-LAST:event_JBStartActionPerformed
+
+    private void JBPrevPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBPrevPlayerActionPerformed
+        if (players.size() > _currentPlayerIndex) {
+            players.get(_currentPlayerIndex).setColor(jColorChooser1.getColor());
+            players.get(_currentPlayerIndex).setName(JTFName.getText());
+        }
+        setCurrentPlayerIndex(_currentPlayerIndex -= 1);
+        JTFName.setText(players.get(_currentPlayerIndex).toString());
+        jColorChooser1.setColor(players.get(_currentPlayerIndex).color);
+    }//GEN-LAST:event_JBPrevPlayerActionPerformed
+
+    private void JBNextPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBNextPlayerActionPerformed
+        if (players.size() > _currentPlayerIndex) {
+            players.get(_currentPlayerIndex).setColor(jColorChooser1.getColor());
+            players.get(_currentPlayerIndex).setName(JTFName.getText());
+        }
+        setCurrentPlayerIndex(_currentPlayerIndex += 1);
+        if (players.size() < _currentPlayerIndex) {
+            players.add(new Player(players.size(),
+                    JTFName.getText(),
+                    jColorChooser1.getColor(),
+                    iconMap.get(JCBIcon.getSelectedItem())));
+            if (players.size() < Settings.PlayersLimit) {
+                JTFName.setText("");
+                jColorChooser1.setColor(Color.WHITE);
+                JCBIcon.setSelectedIndex(0);
+            }
+        } else if (players.size() > _currentPlayerIndex) {
+            JTFName.setText(players.get(_currentPlayerIndex).toString());
+            jColorChooser1.setColor(players.get(_currentPlayerIndex).color);
+        } else {
+            JTFName.setText("");
+            jColorChooser1.setColor(Color.WHITE);
+            JCBIcon.setSelectedIndex(0);
+        }
+
+
+    }//GEN-LAST:event_JBNextPlayerActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton JBNextPlayer;
+    private javax.swing.JButton JBPrevPlayer;
+    private javax.swing.JButton JBStart;
+    private javax.swing.JComboBox<String> JCBIcon;
+    private javax.swing.JTextField JTFName;
     private javax.swing.JColorChooser jColorChooser1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,6 +9,9 @@ package Core;
  *
  * @author Michal
  */
-public class WelcomeSettings {
+public class Settings {
+    //todo read settings from file
+    
+    public static int PlayersLimit = 4;
     
 }

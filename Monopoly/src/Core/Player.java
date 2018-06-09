@@ -6,6 +6,7 @@
 package Core;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
@@ -17,15 +18,32 @@ public class Player {
     private int money;
     public Color color;
     private ArrayList<BasePlace> posse = new ArrayList<BasePlace>();
-    //Symbol
-    //Colot of the player  
-    private int _playerNumber;
 
-    public Player(int number, Color color) {
-        money = 1500; //todo Some Config FIle to setup Base amount of money
-        _playerNumber = number;
+    public void setColor(Color color) {
         this.color = color;
     }
+
+    public void setName(String _name) {
+        this._name = _name;
+    }
+    //Symbol    
+    private final int _playerNumber;
+    private String _name;    
+    private BufferedImage playerIcon;
+
+    public Player(int number,String name, Color color, BufferedImage icon) {
+        money = 1500; 
+        _playerNumber = number;
+        playerIcon = icon;
+        _name= name;
+        this.color = color;
+    }
+
+    @Override
+    public String toString() {
+        return _name;
+    }
+    
 
     public int GetMoney() {
         return money;
@@ -48,5 +66,13 @@ public class Player {
     public void Pay(int amount) {
         money -= amount;
     }
+
+    public BufferedImage getPlayerIcon() {
+        return playerIcon;
+    }
+
+    public void setPlayerIcon(BufferedImage playerIcon) {
+        this.playerIcon = playerIcon;
+    }       
 
 }
