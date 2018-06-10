@@ -21,8 +21,8 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="JBPrevPlayer" min="-2" pref="373" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="JBPrevPlayer" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="JBNextPlayer" max="32767" attributes="0"/>
                   </Group>
                   <Component id="JBStart" max="32767" attributes="0"/>
@@ -30,7 +30,7 @@
                       <Component id="jLabel2" min="-2" pref="109" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="JTFName" min="-2" pref="186" max="-2" attributes="0"/>
-                      <EmptySpace pref="32" max="32767" attributes="0"/>
+                      <EmptySpace pref="71" max="32767" attributes="0"/>
                       <Component id="jLabel3" min="-2" pref="66" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="JCBIcon" min="-2" pref="294" max="-2" attributes="0"/>

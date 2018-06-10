@@ -79,6 +79,7 @@ public class WelcomeWindow extends javax.swing.JPanel {
         JCBIcon.setModel(cbm);
 
         JBPrevPlayer.setEnabled(false);
+        JBStart.setEnabled(false);
 
     }
 
@@ -145,15 +146,15 @@ public class WelcomeWindow extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(JBPrevPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(JBPrevPlayer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(JBNextPlayer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(JBStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(JTFName, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(JCBIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -198,6 +199,12 @@ public class WelcomeWindow extends javax.swing.JPanel {
             players.get(_currentPlayerIndex).setColor(jColorChooser1.getColor());
             players.get(_currentPlayerIndex).setName(JTFName.getText());
         }
+        else if(players.size()==Settings.PlayersLimit)
+        {
+            setCurrentPlayerIndex(_currentPlayerIndex -= 1);
+            players.get(_currentPlayerIndex).setColor(jColorChooser1.getColor());
+            players.get(_currentPlayerIndex).setName(JTFName.getText());
+        }
         setCurrentPlayerIndex(_currentPlayerIndex -= 1);
         JTFName.setText(players.get(_currentPlayerIndex).toString());
         jColorChooser1.setColor(players.get(_currentPlayerIndex).getColor());
@@ -207,7 +214,7 @@ public class WelcomeWindow extends javax.swing.JPanel {
         if (players.size() > _currentPlayerIndex) {
             players.get(_currentPlayerIndex).setColor(jColorChooser1.getColor());
             players.get(_currentPlayerIndex).setName(JTFName.getText());
-        }
+        }        
         setCurrentPlayerIndex(_currentPlayerIndex += 1);
         if (players.size() < _currentPlayerIndex) {
             players.add(new Player(players.size(),
@@ -219,10 +226,13 @@ public class WelcomeWindow extends javax.swing.JPanel {
                 jColorChooser1.setColor(Color.WHITE);
                 JCBIcon.setSelectedIndex(0);
             }
+            if (players.size() > 1) {
+                JBStart.setEnabled(true);
+            }
         } else if (players.size() > _currentPlayerIndex) {
             JTFName.setText(players.get(_currentPlayerIndex).toString());
             jColorChooser1.setColor(players.get(_currentPlayerIndex).getColor());
-        } else {
+        } else if (players.size() !=Settings.PlayersLimit){
             JTFName.setText("");
             jColorChooser1.setColor(Color.WHITE);
             JCBIcon.setSelectedIndex(0);
