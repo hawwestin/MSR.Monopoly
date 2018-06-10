@@ -8,7 +8,8 @@ package Core;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.awt.Color;
-
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -18,11 +19,10 @@ public class BoardCore implements Iterable<BasePlace> {
 
     //board hold info about player possition.
     //Lista ulic na zasadzie pętlii. po powrocie na poczatek petli inkasacja kasy 
-    public final HashMap<Integer, BasePlace> streets = MakeStreets();
-    //make Each Border like JumpManager hashmap () One list with lota constructors . 
+    private static final HashMap<Integer, BasePlace> streets = MakeStreets();
 
-    public BoardCore() {
-
+    public static HashMap<Integer, BasePlace> getStreets() {
+        return streets;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class BoardCore implements Iterable<BasePlace> {
 
     }
 
-    private HashMap<Integer, BasePlace> MakeStreets() {
+    private static HashMap<Integer, BasePlace> MakeStreets() {
         HashMap<Integer, BasePlace> map = new HashMap<Integer, BasePlace>();
 
         map.put(0, new CornerCore("Go"));
@@ -107,6 +107,78 @@ public class BoardCore implements Iterable<BasePlace> {
         map.put(39, new StreetCore("Board", Color.BLUE, 400));
 
         return map;
+    }
+
+    private List<BasePlace> Make() {
+        List<BasePlace> list = new ArrayList<>(40);
+
+        for (int i = 0; i < 40; i++) {
+            list.add(i, new CornerCore("PlaceHolder"));
+        }
+
+        list.set(0, new CornerCore("Go"));
+        list.set(10, new CornerCore("In Jail"));
+        list.set(20, new CornerCore("Free"));
+        list.set(30, new CornerCore("Go to Jail"));
+
+        //railroad
+        list.set(5, new UtielietiesCore("RailRoad 1", 200));
+        list.set(15, new UtielietiesCore("RailRoad 2", 200));
+        list.set(25, new UtielietiesCore("RailRoad 3", 200));
+        list.set(35, new UtielietiesCore("RailRoad 4", 200));
+
+        list.set(12, new UtielietiesCore("Electric", 150));
+        list.set(28, new UtielietiesCore("Water", 150));
+
+        //chance & others
+        list.set(2, new ActionCore("Comunity Chest"));
+        list.set(4, new ActionCore("Income Tax"));
+        list.set(7, new ActionCore("Chance"));
+        list.set(17, new ActionCore("Comunity Chest"));
+        list.set(22, new ActionCore("Chance"));
+        list.set(33, new ActionCore("Comunity Chest"));
+        list.set(36, new ActionCore("Chance"));
+        list.set(38, new ActionCore("TAX"));
+
+        //Brown street
+        list.set(1, new StreetCore("mediter", Color.darkGray, 60));
+        list.set(3, new StreetCore("Balitc", Color.darkGray, 60));
+
+        //white 
+        list.set(6, new StreetCore("Ortinal", Color.GRAY, 100));
+        list.set(8, new StreetCore("Vermount", Color.GRAY, 100));
+        list.set(9, new StreetCore("Connect", Color.GRAY, 120));
+
+        //purple
+        list.set(11, new StreetCore("St.Charles", Color.PINK, 140));
+        list.set(13, new StreetCore("States", Color.PINK, 140));
+        list.set(14, new StreetCore("Virginia", Color.PINK, 160));
+
+        //orange
+        list.set(16, new StreetCore("St. James", Color.ORANGE, 180));
+        list.set(18, new StreetCore("Tennessee", Color.ORANGE, 180));
+        list.set(19, new StreetCore("New York", Color.ORANGE, 200));
+
+        //red
+        list.set(21, new StreetCore("Kentucky", Color.RED, 220));
+        list.set(23, new StreetCore("Indiana", Color.RED, 220));
+        list.set(24, new StreetCore("Illinois", Color.RED, 240));
+
+        //yellow
+        list.set(26, new StreetCore("Atlantic", Color.YELLOW, 260));
+        list.set(27, new StreetCore("Venteor", Color.YELLOW, 260));
+        list.set(29, new StreetCore("Marvin", Color.YELLOW, 280));
+
+        //green
+        list.set(31, new StreetCore("Pacific", Color.GREEN, 300));
+        list.set(32, new StreetCore("N Cor", Color.GREEN, 300));
+        list.set(34, new StreetCore("Pennsylvania", Color.GREEN, 320));
+
+        //blue
+        list.set(37, new StreetCore("Park", Color.BLUE, 350));
+        list.set(39, new StreetCore("Board", Color.BLUE, 400));
+
+        return list;
     }
 
 }

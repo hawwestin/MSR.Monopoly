@@ -11,7 +11,6 @@ import Viewer.Viewer;
 import Viewer.ViewerInfoHandler;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import javax.swing.JLabel;
 
 /**
@@ -20,16 +19,14 @@ import javax.swing.JLabel;
  */
 public class GameWindow extends javax.swing.JPanel {
 
-    private static Viewer ViewerBoard;
-    private static Board board;
-    private static Start _game;
+    private final Viewer ViewerBoard;
+    private final Board board;    
     
     /**
      * Creates new form GameWindow
      */
-    public GameWindow(Start game) {
-        initComponents();
-        _game = game;
+    public GameWindow() {
+        initComponents();        
 
         ViewerBoard = new Viewer();
         ViewerBoard.setPreferredSize(new Dimension(1000, 1000));

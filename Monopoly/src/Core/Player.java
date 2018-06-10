@@ -16,12 +16,17 @@ import java.util.ArrayList;
 public class Player {
 
     private int money;
-    public Color color;
-    private ArrayList<BasePlace> posse = new ArrayList<BasePlace>();
+    private Color _color;
+    private ArrayList<BasePlace> possession = new ArrayList<BasePlace>();
 
     public void setColor(Color color) {
-        this.color = color;
+        _color = color;
     }
+
+    public Color getColor() {
+        return _color;
+    }
+    
 
     public void setName(String _name) {
         this._name = _name;
@@ -36,7 +41,7 @@ public class Player {
         _playerNumber = number;
         playerIcon = icon;
         _name= name;
-        this.color = color;
+        _color = color;
     }
 
     @Override
@@ -54,12 +59,12 @@ public class Player {
     }
 
     public void Buy(BasePlace place, int price) {
-        posse.add(place);
+        possession.add(place);
         money -= price;
     }
 
     public void Sell(BasePlace place, int income) {
-        posse.remove(place);
+        possession.remove(place);
         money += income;
     }
 

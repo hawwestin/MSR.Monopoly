@@ -21,13 +21,12 @@ import java.awt.geom.Rectangle2D;
  */
 public class Board {
 
-    private Viewer _viewer;
-    private BoardCore _boardCore;
+    private Viewer _viewer;    
+
     private int _innerBoardLength;
 
     public Board(Viewer view) {
-        _viewer = view;
-        _boardCore = new BoardCore();
+        _viewer = view;        
 
         makeTiles();
         makeInnerBoard();
@@ -36,35 +35,35 @@ public class Board {
 //        _viewer.addPainter(map, 0); //ToDO Board Image as option as thing to by played or clean graphics.
         // Player Icons should be top layer np 9.  All graphics is 1 so to board by on to set 2
 
-        _viewer.setDisplayedWorldArea(_innerBoardLength, _innerBoardLength, 1000, 1000);
-    }
+        _viewer.setDisplayedWorldArea(_innerBoardLength, _innerBoardLength, -_innerBoardLength, -_innerBoardLength);
+    }    
 
-    public int InnerBoardLength() {
+    public int getInnerBoardLength() {
         return _innerBoardLength;
-    }
+    }   
 
     private void makeTiles() {
         int x = 0;
         int y = 0;
 
         for (int i = 0; i < 10; i++) {
-            _viewer.addPainter(_boardCore.streets.get(i).makeField(i, x, y, "up"), 1);
+            _viewer.addPainter(BoardCore.getStreets().get(i).makeField(i, x, y, "up"), 1);
             x -= 175;
         }
         x += 175;
         _innerBoardLength = x;
         for (int i = 10; i < 20; i++) {
-            _viewer.addPainter(_boardCore.streets.get(i).makeField(i, x, y, "left"), 1);
+            _viewer.addPainter(BoardCore.getStreets().get(i).makeField(i, x, y, "left"), 1);
             y -= 175;
         }
         y += 175;
         for (int i = 20; i < 30; i++) {
-            _viewer.addPainter(_boardCore.streets.get(i).makeField(i, x, y, "down"), 1);
+            _viewer.addPainter(BoardCore.getStreets().get(i).makeField(i, x, y, "down"), 1);
             x += 175;
         }
         x -= 175;
         for (int i = 30; i < 40; i++) {
-            _viewer.addPainter(_boardCore.streets.get(i).makeField(i, x, y, "right"), 1);
+            _viewer.addPainter(BoardCore.getStreets().get(i).makeField(i, x, y, "right"), 1);
             y += 175;
         }
 

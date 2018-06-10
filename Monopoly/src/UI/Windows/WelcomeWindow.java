@@ -24,6 +24,7 @@
 package UI.Windows;
 
 import Core.GameState;
+import Core.Icon;
 import Core.Player;
 import Core.Settings;
 import UI.Start;
@@ -45,8 +46,6 @@ import javax.swing.DefaultComboBoxModel;
 public class WelcomeWindow extends javax.swing.JPanel {
 
     private ArrayList<Player> players = new ArrayList<>();
-    private final Start game;
-    private final HashMap<String, BufferedImage> iconMap = makeMap();
     private final DefaultComboBoxModel<String> cbm = new DefaultComboBoxModel<>();
 
     private int _currentPlayerIndex = 0;
@@ -70,26 +69,14 @@ public class WelcomeWindow extends javax.swing.JPanel {
 
     }
 
-    private HashMap<String, BufferedImage> makeMap() {
-        HashMap<String, BufferedImage> map = new HashMap<String, BufferedImage>();
-        try {
-            map.put("Laptop", ImageIO.read(new File("img/laptop.gif")));
-            map.put("mouse", ImageIO.read(new File("img/mouse.gif")));
-        } catch (IOException ex) {
-            Logger.getLogger(WelcomeWindow.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return map;
-    }
-
     /**
      * Creates new form WelcomeWindow
      */
-    public WelcomeWindow(Start game) {
+    public WelcomeWindow() {
         initComponents();
-        this.game = game;
 
+        Icon.getIconMap().keySet().forEach((String kind) -> cbm.addElement(kind));
         JCBIcon.setModel(cbm);
-        iconMap.keySet().forEach((String kind) -> cbm.addElement(kind));
 
         JBPrevPlayer.setEnabled(false);
 
@@ -201,8 +188,8 @@ public class WelcomeWindow extends javax.swing.JPanel {
     }//GEN-LAST:event_JTFNameActionPerformed
 
     private void JBStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBStartActionPerformed
-
-        Start.changeState(GameState.GAME_STATE);
+        Start.InitGame(players);
+        Start.changeGameState(GameState.GAME_STATE);
         //todo przekarz gdzeieś listę utworzonych graczy i ich wyborów... 
     }//GEN-LAST:event_JBStartActionPerformed
 
@@ -213,7 +200,7 @@ public class WelcomeWindow extends javax.swing.JPanel {
         }
         setCurrentPlayerIndex(_currentPlayerIndex -= 1);
         JTFName.setText(players.get(_currentPlayerIndex).toString());
-        jColorChooser1.setColor(players.get(_currentPlayerIndex).color);
+        jColorChooser1.setColor(players.get(_currentPlayerIndex).getColor());
     }//GEN-LAST:event_JBPrevPlayerActionPerformed
 
     private void JBNextPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBNextPlayerActionPerformed
@@ -226,7 +213,7 @@ public class WelcomeWindow extends javax.swing.JPanel {
             players.add(new Player(players.size(),
                     JTFName.getText(),
                     jColorChooser1.getColor(),
-                    iconMap.get(JCBIcon.getSelectedItem())));
+                    Icon.getIconMap().get(JCBIcon.getSelectedItem())));
             if (players.size() < Settings.PlayersLimit) {
                 JTFName.setText("");
                 jColorChooser1.setColor(Color.WHITE);
@@ -234,7 +221,7 @@ public class WelcomeWindow extends javax.swing.JPanel {
             }
         } else if (players.size() > _currentPlayerIndex) {
             JTFName.setText(players.get(_currentPlayerIndex).toString());
-            jColorChooser1.setColor(players.get(_currentPlayerIndex).color);
+            jColorChooser1.setColor(players.get(_currentPlayerIndex).getColor());
         } else {
             JTFName.setText("");
             jColorChooser1.setColor(Color.WHITE);

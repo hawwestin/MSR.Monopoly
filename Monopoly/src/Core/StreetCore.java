@@ -68,7 +68,7 @@ public class StreetCore extends BasePlace {
     @Override
     public Color BorderColor() {
         if (owner != null) {
-            return owner.color;
+            return owner.getColor();
         } else {
             return Color.BLACK;
         }
