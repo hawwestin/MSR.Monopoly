@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UI;
+package UI.Windows;
 
+import UI.Board;
+import UI.Start;
 import Viewer.Viewer;
 import Viewer.ViewerInfoHandler;
 import java.awt.BorderLayout;
@@ -20,12 +22,14 @@ public class GameWindow extends javax.swing.JPanel {
 
     private static Viewer ViewerBoard;
     private static Board board;
-
+    private static Start _game;
+    
     /**
      * Creates new form GameWindow
      */
-    public GameWindow() {
+    public GameWindow(Start game) {
         initComponents();
+        _game = game;
 
         ViewerBoard = new Viewer();
         ViewerBoard.setPreferredSize(new Dimension(1000, 1000));

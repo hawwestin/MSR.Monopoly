@@ -6,7 +6,7 @@
 package Core;
 
 import UI.BaseField;
-import UI.Corner;
+import UI.CornerField;
 import java.awt.Color;
 
 public class CornerCore extends BasePlace {
@@ -33,7 +33,7 @@ public class CornerCore extends BasePlace {
     @Override
     public BaseField makeField(int number, int x, int y, String align) {
         if (_baseFiled == null) {
-            _baseFiled = new Corner(this, number, x, y, align);
+            _baseFiled = new CornerField(this, number, x, y, align);
 
             return _baseFiled;
         } else {

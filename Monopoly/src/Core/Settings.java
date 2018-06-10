@@ -13,5 +13,6 @@ public class Settings {
     //todo read settings from file
     
     public static int PlayersLimit = 4;
+    public static int StartAmountOfMoney = 1500;
     
 }

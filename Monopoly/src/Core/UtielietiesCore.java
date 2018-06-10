@@ -6,7 +6,7 @@
 package Core;
 
 import UI.BaseField;
-import UI.UtilitiesPlace;
+import UI.UtilitiesField;
 import java.awt.Color;
 
 /**
@@ -44,7 +44,7 @@ public class UtielietiesCore extends BasePlace {
     @Override
     public BaseField makeField(int number, int x, int y, String align) {
         if (_baseFiled == null) {
-            _baseFiled = new UtilitiesPlace(this, number, x, y, align);
+            _baseFiled = new UtilitiesField(this, number, x, y, align);
 
             return _baseFiled;
         } else {

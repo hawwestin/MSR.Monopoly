@@ -14,9 +14,9 @@ import java.awt.geom.AffineTransform;
  *
  * @author michal
  */
-public class UtilitiesPlace extends BaseField implements Painter{
+public class UtilitiesField extends BaseField implements Painter{
     
-    public UtilitiesPlace(BasePlace place, int number, int x, int y, String align) {
+    public UtilitiesField(BasePlace place, int number, int x, int y, String align) {
         super(place, number, x, y, align);
     }
 

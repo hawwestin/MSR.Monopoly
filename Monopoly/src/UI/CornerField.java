@@ -15,11 +15,11 @@ import java.awt.geom.Rectangle2D;
  *
  * @author Michal
  */
-public class Corner extends BaseField implements Painter {
+public class CornerField extends BaseField implements Painter {
 
     private int rotate;
 
-    public Corner(BasePlace place, int number, int x, int y, String align) {
+    public CornerField(BasePlace place, int number, int x, int y, String align) {
         super(place, number, x, y, align);
         width = 280;
         height = 280;

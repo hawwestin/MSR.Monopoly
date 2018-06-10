@@ -23,14 +23,22 @@ public class ImagePanel extends JPanel implements Painter {
 
     private BufferedImage image;
     private int _xOffset;
+
+    public void setxOffset(int _xOffset) {
+        this._xOffset = _xOffset;
+    }
+
+    public void setyOffset(int _yOffset) {
+        this._yOffset = _yOffset;
+    }
     private int _yOffset;
 
-    public ImagePanel(int xOffset, int yOffset) {
+    public ImagePanel(int xOffset, int yOffset, String imagePath) {
         _xOffset = xOffset;
         _yOffset = yOffset;
 
         try {
-            image = ImageIO.read(new File("Monopoly-Board.jpg"));
+            image = ImageIO.read(new File(imagePath));
         } catch (IOException e) {
 
         }

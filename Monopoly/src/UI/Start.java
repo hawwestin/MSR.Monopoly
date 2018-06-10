@@ -5,6 +5,8 @@
  */
 package UI;
 
+import UI.Windows.WelcomeWindow;
+import UI.Windows.GameWindow;
 import Core.GameState;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -36,7 +38,7 @@ public class Start extends JFrame {
 
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
-        game = new GameWindow();
+        game = new GameWindow(this);
         welcome = new WelcomeWindow(this);
 
         changeState(GameState.START_STATE);

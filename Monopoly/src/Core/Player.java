@@ -32,7 +32,7 @@ public class Player {
     private BufferedImage playerIcon;
 
     public Player(int number,String name, Color color, BufferedImage icon) {
-        money = 1500; 
+        money = Settings.StartAmountOfMoney; 
         _playerNumber = number;
         playerIcon = icon;
         _name= name;

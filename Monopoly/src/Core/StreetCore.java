@@ -8,18 +8,23 @@ package Core;
 import UI.BaseField;
 import UI.StreetField;
 import java.awt.Color;
+import java.util.HashMap;
+
+
 
 public class StreetCore extends BasePlace {
 
     private Player owner;
     private int _price;
-    private int _rent;
+    private final HashMap<Pricing, Integer> _pricing;
+    private int _rent; // IF PLAYER OWN COLOR SET BASIC RENT X2 WITHOUT HOUSES
     public Color color;
 
     public StreetCore(String name, Color color, int price) {
         super(name);
         this.color = color;
         _price = price;
+        _pricing = new HashMap<Pricing,Integer>();
     }
 
     @Override

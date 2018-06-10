@@ -21,11 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package UI;
+package UI.Windows;
 
 import Core.GameState;
 import Core.Player;
 import Core.Settings;
+import UI.Start;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
