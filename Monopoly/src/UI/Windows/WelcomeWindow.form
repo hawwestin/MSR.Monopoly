@@ -90,7 +90,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="JBPrevPlayer">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Poprzedni gracz"/>
+        <Property name="text" type="java.lang.String" value="Zapisz i wczytaj poprzedniego gracza"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBPrevPlayerActionPerformed"/>
@@ -98,7 +98,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="JBNextPlayer">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Kolejny gracz"/>
+        <Property name="text" type="java.lang.String" value="Zapisz i wczytaj kolejnego gracza"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBNextPlayerActionPerformed"/>

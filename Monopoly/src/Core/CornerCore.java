@@ -21,8 +21,8 @@ public class CornerCore extends BasePlace {
     }
 
     @Override
-    public void MoveOver(Player guest, int distance) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void MoveOver(Player guest) {
+        _baseFiled.DrawPlayer(guest);
     }
 
     @Override

@@ -28,7 +28,7 @@ public abstract class BasePlace {
 
     public abstract void StepAction(Player guest);
 
-    public abstract void MoveOver(Player guest, int distance);
+    public abstract void MoveOver(Player guest);
 
     public abstract Color BorderColor();
     

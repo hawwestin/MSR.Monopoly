@@ -25,7 +25,7 @@ public class ActionCore extends BasePlace {
     }
 
     @Override
-    public void MoveOver(Player guest, int distance) {
+    public void MoveOver(Player guest) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

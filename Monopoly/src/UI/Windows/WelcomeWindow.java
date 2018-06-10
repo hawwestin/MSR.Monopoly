@@ -29,14 +29,7 @@ import Core.Player;
 import Core.Settings;
 import UI.Start;
 import java.awt.Color;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 
 /**
@@ -45,7 +38,7 @@ import javax.swing.DefaultComboBoxModel;
  */
 public class WelcomeWindow extends javax.swing.JPanel {
 
-    private ArrayList<Player> players = new ArrayList<>();
+    private ArrayList<Player> players = new ArrayList<Player>();
     private final DefaultComboBoxModel<String> cbm = new DefaultComboBoxModel<>();
 
     private int _currentPlayerIndex = 0;
@@ -114,14 +107,14 @@ public class WelcomeWindow extends javax.swing.JPanel {
 
         jLabel2.setText("Nazwa gracza");
 
-        JBPrevPlayer.setText("Poprzedni gracz");
+        JBPrevPlayer.setText("Zapisz i wczytaj poprzedniego gracza");
         JBPrevPlayer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JBPrevPlayerActionPerformed(evt);
             }
         });
 
-        JBNextPlayer.setText("Kolejny gracz");
+        JBNextPlayer.setText("Zapisz i wczytaj kolejnego gracza");
         JBNextPlayer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JBNextPlayerActionPerformed(evt);
@@ -198,6 +191,7 @@ public class WelcomeWindow extends javax.swing.JPanel {
         if (players.size() > _currentPlayerIndex) {
             players.get(_currentPlayerIndex).setColor(jColorChooser1.getColor());
             players.get(_currentPlayerIndex).setName(JTFName.getText());
+            players.get(_currentPlayerIndex).setPlayerIcon(Icon.getIconMap().get(JCBIcon.getSelectedItem()));
         }
         else if(players.size()==Settings.PlayersLimit)
         {
@@ -214,6 +208,7 @@ public class WelcomeWindow extends javax.swing.JPanel {
         if (players.size() > _currentPlayerIndex) {
             players.get(_currentPlayerIndex).setColor(jColorChooser1.getColor());
             players.get(_currentPlayerIndex).setName(JTFName.getText());
+            players.get(_currentPlayerIndex).setPlayerIcon(Icon.getIconMap().get(JCBIcon.getSelectedItem()));
         }        
         setCurrentPlayerIndex(_currentPlayerIndex += 1);
         if (players.size() < _currentPlayerIndex) {

@@ -6,6 +6,8 @@
 package UI;
 
 import Core.BoardCore;
+import Core.Player;
+import GameMechanics.GameLoop;
 import Viewer.Painter;
 import Viewer.Viewer;
 import java.awt.BasicStroke;
@@ -21,55 +23,54 @@ import java.awt.geom.Rectangle2D;
  */
 public class Board {
 
-    private Viewer _viewer;    
-
+    private Viewer _viewer;
     private int _innerBoardLength;
 
     public Board(Viewer view) {
-        _viewer = view;        
+        _viewer = view;
 
-        makeTiles();
-        makeInnerBoard();
+        makeTiles(1);
+        makeInnerBoard(1);
         //szablon
-//        ImagePanel map = new ImagePanel(_innerBoardLength-280, _innerBoardLength-280);
+//        ImagePanel map = new ImagePanel(_innerBoardLength - 280, _innerBoardLength - 280, "img/Monopoly-Board.jpg");
 //        _viewer.addPainter(map, 0); //ToDO Board Image as option as thing to by played or clean graphics.
         // Player Icons should be top layer np 9.  All graphics is 1 so to board by on to set 2
 
         _viewer.setDisplayedWorldArea(_innerBoardLength, _innerBoardLength, -_innerBoardLength, -_innerBoardLength);
-    }    
+    }
 
     public int getInnerBoardLength() {
         return _innerBoardLength;
-    }   
+    }
 
-    private void makeTiles() {
+    private void makeTiles(int layer) {
         int x = 0;
         int y = 0;
 
         for (int i = 0; i < 10; i++) {
-            _viewer.addPainter(BoardCore.getStreets().get(i).makeField(i, x, y, "up"), 1);
+            _viewer.addPainter(BoardCore.getStreets().get(i).makeField(i, x, y, "up"), layer);
             x -= 175;
         }
         x += 175;
         _innerBoardLength = x;
         for (int i = 10; i < 20; i++) {
-            _viewer.addPainter(BoardCore.getStreets().get(i).makeField(i, x, y, "left"), 1);
+            _viewer.addPainter(BoardCore.getStreets().get(i).makeField(i, x, y, "left"), layer);
             y -= 175;
         }
         y += 175;
         for (int i = 20; i < 30; i++) {
-            _viewer.addPainter(BoardCore.getStreets().get(i).makeField(i, x, y, "down"), 1);
+            _viewer.addPainter(BoardCore.getStreets().get(i).makeField(i, x, y, "down"), layer);
             x += 175;
         }
         x -= 175;
         for (int i = 30; i < 40; i++) {
-            _viewer.addPainter(BoardCore.getStreets().get(i).makeField(i, x, y, "right"), 1);
+            _viewer.addPainter(BoardCore.getStreets().get(i).makeField(i, x, y, "right"), layer);
             y += 175;
         }
 
     }
 
-    private void makeInnerBoard() {
+    private void makeInnerBoard(int layer) {
         _viewer.addPainter(new Painter() {
             @Override
             public void paint(Graphics2D g, AffineTransform worldToScreen, double w, double h) {
@@ -105,7 +106,13 @@ public class Board {
                 g.setTransform(oldAT);
             }
 
-        }, 1);
-
+        }, layer);
     }
+
+    public void makePlayersLayer(int layer) {
+        for (Player player : GameLoop.getPlayers()) {
+            _viewer.addPainter(player.getImagePanel(),layer);
+        }
+    }
+
 }

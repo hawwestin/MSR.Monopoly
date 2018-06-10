@@ -19,10 +19,23 @@ public class BoardCore implements Iterable<BasePlace> {
 
     //board hold info about player possition.
     //Lista ulic na zasadzie pętlii. po powrocie na poczatek petli inkasacja kasy 
+    private int _cursor;
     private static final HashMap<Integer, BasePlace> streets = MakeStreets();
+
+    public BoardCore(int cursor) {
+        _cursor = cursor;
+    }
 
     public static HashMap<Integer, BasePlace> getStreets() {
         return streets;
+    }
+
+    public int getCursor() {
+        return _cursor;
+    }
+
+    public void setCursor(int cursor) {
+        _cursor = cursor;
     }
 
     @Override
@@ -30,12 +43,15 @@ public class BoardCore implements Iterable<BasePlace> {
         return new Iterator<BasePlace>() {
             @Override
             public boolean hasNext() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                return true;
             }
 
             @Override
-            public BasePlace next() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            public BasePlace next() {                
+                _cursor++;
+                if(_cursor > getStreets().size())
+                    _cursor = 0;
+                return getStreets().get(_cursor);
             }
         };
 

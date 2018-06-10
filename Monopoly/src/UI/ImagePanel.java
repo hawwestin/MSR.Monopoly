@@ -21,8 +21,9 @@ import javax.swing.JPanel;
  */
 public class ImagePanel extends JPanel implements Painter {
 
-    private BufferedImage image;
+    private BufferedImage _image;
     private int _xOffset;
+    private int _yOffset;
 
     public void setxOffset(int _xOffset) {
         this._xOffset = _xOffset;
@@ -31,30 +32,35 @@ public class ImagePanel extends JPanel implements Painter {
     public void setyOffset(int _yOffset) {
         this._yOffset = _yOffset;
     }
-    private int _yOffset;
 
     public ImagePanel(int xOffset, int yOffset, String imagePath) {
         _xOffset = xOffset;
         _yOffset = yOffset;
 
         try {
-            image = ImageIO.read(new File(imagePath));
+            _image = ImageIO.read(new File(imagePath));
         } catch (IOException e) {
 
         }
     }
 
+    public ImagePanel(int xOffset, int yOffset, BufferedImage image) {
+        _xOffset = xOffset;
+        _yOffset = yOffset;
+        _image = image;
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(image, 0, 0, this);
+        g.drawImage(_image, _xOffset, _yOffset, this);
     }
 
     @Override
     public void paint(Graphics2D g, AffineTransform worldToScreen, double w, double h) {
         AffineTransform oldAT = g.getTransform();
         g.transform(worldToScreen);
-        g.drawImage(image, _xOffset, _yOffset, this);
+        g.drawImage(_image, _xOffset, _yOffset, this);
         g.setTransform(oldAT);
     }
 }

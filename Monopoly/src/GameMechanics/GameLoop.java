@@ -23,25 +23,36 @@
  */
 package GameMechanics;
 
+import Core.BoardCore;
 import Core.Player;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  *
  * @author Michal
  */
 public class GameLoop {
-    //todo re order players after initial Dice throw.
-    private static List<Player> _players;
-    private static HashMap<Player, Integer> _positions;
-    
 
-    public static void setPlayers(List<Player> _players) {
-        GameLoop._players = _players;
-        _players.forEach((Player player) -> _positions.put(player, 0));
+    //todo re order players after initial Dice throw.
+    private static ArrayList<Player> _players;
+    private static HashMap<Player, Integer> _positions = new HashMap<>();
+
+    public static void setPlayers(ArrayList<Player> players) {
+        GameLoop._players =  players;        
+        players.forEach(player -> _positions.put(player, 0));
         
+        //todo display players icon on board
+//        BoardCore.getStreets()
+    }
+
+    public static ArrayList<Player> getPlayers() {
+        return _players;
+    }        
+    
+    public static HashMap<Player, Integer> getPositions() {
+        return _positions;
     }
     
-    
+
 }

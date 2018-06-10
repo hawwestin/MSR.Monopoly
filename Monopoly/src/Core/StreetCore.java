@@ -40,7 +40,7 @@ public class StreetCore extends BasePlace {
     }
 
     @Override
-    public void MoveOver(Player guest, int distance) {
+    public void MoveOver(Player guest) {
         //display circle of a player over field . 
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

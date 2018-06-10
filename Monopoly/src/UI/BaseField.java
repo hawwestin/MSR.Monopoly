@@ -6,6 +6,7 @@
 package UI;
 
 import Core.BasePlace;
+import Core.Player;
 import Viewer.Painter;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -20,7 +21,7 @@ import java.awt.geom.Rectangle2D;
  *
  * @author Michal
  */
-public class BaseField implements Painter {
+public abstract class BaseField implements Painter {
 
     public static final Font DEFAULT_FONT = new Font("Arial", Font.PLAIN, 20);
 
@@ -68,6 +69,11 @@ public class BaseField implements Painter {
             }
 
         }
+    }
+    
+    public void DrawPlayer(Player player){
+        player.getImagePanel().setxOffset(xOffset); //todo player offset bas on number. 
+        player.getImagePanel().setyOffset(yOffset);
     }
 
     protected void SetFieldName(Graphics2D g) {

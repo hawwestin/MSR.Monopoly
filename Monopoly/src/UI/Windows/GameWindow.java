@@ -21,6 +21,10 @@ public class GameWindow extends javax.swing.JPanel {
 
     private final Viewer ViewerBoard;
     private final Board board;    
+
+    public Board getBoard() {
+        return board;
+    }
     
     /**
      * Creates new form GameWindow

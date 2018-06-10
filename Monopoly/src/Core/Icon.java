@@ -43,7 +43,7 @@ public class Icon {
         HashMap<String, BufferedImage> map = new HashMap<String, BufferedImage>();
         try {
             map.put("Laptop", ImageIO.read(new File("img/laptop.gif")));
-            map.put("mouse", ImageIO.read(new File("img/mouse.gif")));
+            map.put("Mouse", ImageIO.read(new File("img/mouse.gif")));
         } catch (IOException ex) {
             Logger.getLogger(WelcomeWindow.class.getName()).log(Level.SEVERE, null, ex);
         }

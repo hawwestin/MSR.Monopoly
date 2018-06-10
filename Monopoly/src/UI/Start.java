@@ -12,6 +12,7 @@ import Core.Player;
 import GameMechanics.GameLoop;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -45,6 +46,7 @@ public class Start extends JFrame {
         mainPanel.setLayout(new BorderLayout());
         _gameWindow = new GameWindow();
         _welcome = new WelcomeWindow();
+        _gameLoop = new GameLoop();
 
         changeGameState(GameState.START_STATE);
 
@@ -78,9 +80,12 @@ public class Start extends JFrame {
         }
     }
 
-    public static void InitGame(List<Player> players) {
+    public static void InitGame(ArrayList<Player> players) {
         _gameLoop.setPlayers(players);
+        _gameWindow.getBoard().makePlayersLayer(5);
+        //todo Move TO GO 
         
+        // todo Dice player order 
 
     }
 }
