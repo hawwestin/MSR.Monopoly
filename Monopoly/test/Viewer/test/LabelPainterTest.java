@@ -60,9 +60,9 @@ public class LabelPainterTest
      */
     private static void createAndShowGUI()
     {
-        JFrame f = new JFrame("Viewer");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.getContentPane().setLayout(new BorderLayout());
+        JFrame frame = new JFrame("Viewer");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setLayout(new BorderLayout());
        
         Viewer viewer = new Viewer();
         LabelPainter labelPainter = new LabelPainter();
@@ -85,17 +85,17 @@ public class LabelPainterTest
         viewer.addPainter(labelObjectPainter);
         viewer.addPainter(new LabelPainterPainter(labelPainter, labelObjectPainter));
         
-        f.getContentPane().add(viewer, BorderLayout.CENTER);
+        frame.getContentPane().add(viewer, BorderLayout.CENTER);
         
-        f.getContentPane().add(
+        frame.getContentPane().add(
             createControlPanel(viewer, labelPainter, labelObjectPainter), BorderLayout.SOUTH);
 
         viewer.setPreferredSize(new Dimension(500,500));
         viewer.setDisplayedWorldArea(-5,-5,10,10);
-        f.pack();
+        frame.pack();
         viewer.setPreferredSize(null);
-        f.setLocationRelativeTo(null);
-        f.setVisible(true);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
     
     private static JPanel createControlPanel(

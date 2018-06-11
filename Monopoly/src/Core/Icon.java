@@ -44,6 +44,14 @@ public class Icon {
         try {
             map.put("Laptop", ImageIO.read(new File("img/laptop.gif")));
             map.put("Mouse", ImageIO.read(new File("img/mouse.gif")));
+            map.put("Car", ImageIO.read(new File("img/car.png")));
+            map.put("Iron", ImageIO.read(new File("img/iron.png")));
+            map.put("Horse", ImageIO.read(new File("img/horseman.png")));
+            map.put("Shoe", ImageIO.read(new File("img/shoe.png")));
+            map.put("Bowler hat", ImageIO.read(new File("img/bowler_hat.png")));
+            map.put("Canon", ImageIO.read(new File("img/canon.png")));
+            map.put("Barrow", ImageIO.read(new File("img/barrow.png")));
+            map.put("Ship", ImageIO.read(new File("img/ship.png")));
         } catch (IOException ex) {
             Logger.getLogger(WelcomeWindow.class.getName()).log(Level.SEVERE, null, ex);
         }

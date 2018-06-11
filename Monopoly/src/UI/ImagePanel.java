@@ -8,18 +8,19 @@ package UI;
 import Viewer.Painter;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
+import javax.swing.JComponent;
 
 /**
  *
  * @author Michal
  */
-public class ImagePanel extends JPanel implements Painter {
+public class ImagePanel extends JComponent implements Painter {
 
     private BufferedImage _image;
     private int _xOffset;
@@ -33,6 +34,14 @@ public class ImagePanel extends JPanel implements Painter {
         this._yOffset = _yOffset;
     }
 
+    public int getxOffset() {
+        return _xOffset;
+    }
+
+    public int getyOffset() {
+        return _yOffset;
+    }       
+
     public ImagePanel(int xOffset, int yOffset, String imagePath) {
         _xOffset = xOffset;
         _yOffset = yOffset;
@@ -44,10 +53,21 @@ public class ImagePanel extends JPanel implements Painter {
         }
     }
 
-    public ImagePanel(int xOffset, int yOffset, BufferedImage image) {
+    public ImagePanel(int xOffset, int yOffset, BufferedImage image, String toolTipText) {
         _xOffset = xOffset;
         _yOffset = yOffset;
         _image = image;
+        setToolTipText(toolTipText);
+    }
+
+    public void Resize(int width, int height) {
+        BufferedImage result = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Image tmp = _image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+
+        Graphics2D transform = result.createGraphics();
+        transform.drawImage(tmp, 0, 0, null);
+        transform.dispose();
+        _image = result;
     }
 
     @Override

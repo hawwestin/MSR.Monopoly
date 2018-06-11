@@ -39,7 +39,7 @@ public class Player {
 
     public ImagePanel getImagePanel() {
         return _imagePanel;
-    }       
+    }
 
     public Player(int number, String name, Color color, BufferedImage icon) {
         money = Settings.StartAmountOfMoney;
@@ -48,7 +48,9 @@ public class Player {
         _name = name;
         _color = color;
         _boardCore = new BoardCore(0);
-        _imagePanel = new ImagePanel(number*10, number*10, icon);
+        _imagePanel = new ImagePanel(0, 0, icon, name);
+        _imagePanel.Resize(55, 55);
+        _imagePanel.setyOffset(number*55);
     }
 
     @Override
