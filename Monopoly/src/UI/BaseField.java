@@ -7,6 +7,7 @@ package UI;
 
 import Core.BasePlace;
 import Core.Player;
+import GameMechanics.Settings;
 import Viewer.Painter;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -35,7 +36,6 @@ public abstract class BaseField implements Painter {
     protected int rotate;
 
     //Ractangel Dimension
-
     /**
      *
      * @param place
@@ -70,10 +70,32 @@ public abstract class BaseField implements Painter {
 
         }
     }
-    
-    public void DrawPlayer(Player player){
-        player.getImagePanel().setxOffset(xOffset); //todo player offset bas on number. 
-        player.getImagePanel().setyOffset(yOffset);
+
+    //todo movement animation
+    public void DrawPlayer(Player player) {
+        player.getImagePanel().setRotate(rotate);
+        switch (rotate) {
+            case 0:
+                player.getImagePanel().setxOffset(xOffset);
+                //HOTFIX potrzeba okreśłić matematykę w zależności od położenia  _align
+                player.getImagePanel().setyOffset(yOffset + player.getPlayerNumber() * Settings.SizeOfIconOnBoard + 50);
+                break;
+            case 1:
+                player.getImagePanel().setxOffset(xOffset - player.getPlayerNumber() * Settings.SizeOfIconOnBoard - 50);
+                //HOTFIX potrzeba okreśłić matematykę w zależności od położenia  _align
+                player.getImagePanel().setyOffset(yOffset );
+                break;
+            case 2:
+                player.getImagePanel().setxOffset(xOffset);
+                //HOTFIX potrzeba okreśłić matematykę w zależności od położenia  _align
+                player.getImagePanel().setyOffset(yOffset - player.getPlayerNumber() * Settings.SizeOfIconOnBoard - 50);
+                break;
+            case 3:
+                player.getImagePanel().setxOffset(xOffset + player.getPlayerNumber() * Settings.SizeOfIconOnBoard + 50);
+                //HOTFIX potrzeba okreśłić matematykę w zależności od położenia  _align
+                player.getImagePanel().setyOffset(yOffset );
+                break;
+        }
     }
 
     protected void SetFieldName(Graphics2D g) {

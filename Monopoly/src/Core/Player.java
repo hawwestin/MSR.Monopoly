@@ -5,6 +5,7 @@
  */
 package Core;
 
+import GameMechanics.Settings;
 import UI.ImagePanel;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -41,6 +42,12 @@ public class Player {
         return _imagePanel;
     }
 
+    public int getPlayerNumber() {
+        return _playerNumber;
+    }
+    
+    
+
     public Player(int number, String name, Color color, BufferedImage icon) {
         money = Settings.StartAmountOfMoney;
         _playerNumber = number;
@@ -49,8 +56,8 @@ public class Player {
         _color = color;
         _boardCore = new BoardCore(0);
         _imagePanel = new ImagePanel(0, 0, icon, name);
-        _imagePanel.Resize(55, 55);
-        _imagePanel.setyOffset(number*55);
+        _imagePanel.Resize(Settings.SizeOfIconOnBoard, Settings.SizeOfIconOnBoard);
+        _imagePanel.setyOffset(number*Settings.SizeOfIconOnBoard);
     }
 
     @Override

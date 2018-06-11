@@ -25,6 +25,11 @@ public class ImagePanel extends JComponent implements Painter {
     private BufferedImage _image;
     private int _xOffset;
     private int _yOffset;
+    private int _rotate;
+
+    public void setRotate(int _rotate) {
+        this._rotate = _rotate;
+    }
 
     public void setxOffset(int _xOffset) {
         this._xOffset = _xOffset;
@@ -40,11 +45,12 @@ public class ImagePanel extends JComponent implements Painter {
 
     public int getyOffset() {
         return _yOffset;
-    }       
+    }
 
     public ImagePanel(int xOffset, int yOffset, String imagePath) {
         _xOffset = xOffset;
         _yOffset = yOffset;
+        _rotate = 0;
 
         try {
             _image = ImageIO.read(new File(imagePath));
@@ -57,6 +63,7 @@ public class ImagePanel extends JComponent implements Painter {
         _xOffset = xOffset;
         _yOffset = yOffset;
         _image = image;
+        _rotate = 0;
         setToolTipText(toolTipText);
     }
 
@@ -80,6 +87,7 @@ public class ImagePanel extends JComponent implements Painter {
     public void paint(Graphics2D g, AffineTransform worldToScreen, double w, double h) {
         AffineTransform oldAT = g.getTransform();
         g.transform(worldToScreen);
+        g.rotate((Math.PI / 2) * _rotate, _xOffset, _yOffset);
         g.drawImage(_image, _xOffset, _yOffset, this);
         g.setTransform(oldAT);
     }

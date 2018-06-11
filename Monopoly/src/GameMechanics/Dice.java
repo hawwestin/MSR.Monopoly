@@ -28,5 +28,29 @@ package GameMechanics;
  * @author Michal
  */
 public class Dice {
+    private static boolean throwed;
+    private static int strikeCounter;
+
+    public static boolean isThrowed() {
+        return throwed;
+    }
+
+    public static void setThrowed(boolean throwed) {
+        Dice.throwed = throwed;
+    }
+
+    public static int getStrikeCounter() {
+        return strikeCounter;
+    }
+
+    public static void setStrikeCounter(int strikeCounter) {
+        Dice.strikeCounter = strikeCounter;
+    }
     
+    
+    
+    public static int Throw(){
+        //todo dice Logic. 
+        return 1;
+    }
 }

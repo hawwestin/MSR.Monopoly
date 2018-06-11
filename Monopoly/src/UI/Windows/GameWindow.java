@@ -5,8 +5,10 @@
  */
 package UI.Windows;
 
+import GameMechanics.Dice;
+import GameMechanics.GameLoop;
 import UI.Board;
-import UI.Start;
+import GameMechanics.Start;
 import Viewer.Viewer;
 import Viewer.ViewerInfoHandler;
 import java.awt.BorderLayout;
@@ -20,17 +22,17 @@ import javax.swing.JLabel;
 public class GameWindow extends javax.swing.JPanel {
 
     private final Viewer ViewerBoard;
-    private final Board board;    
+    private final Board board;  
 
     public Board getBoard() {
         return board;
     }
-    
+
     /**
      * Creates new form GameWindow
      */
     public GameWindow() {
-        initComponents();        
+        initComponents();
 
         ViewerBoard = new Viewer();
         ViewerBoard.setPreferredSize(new Dimension(1000, 1000));
@@ -43,6 +45,8 @@ public class GameWindow extends javax.swing.JPanel {
         ViewerBoard.addMouseMotionListener(
                 new ViewerInfoHandler(infoLabel, ViewerBoard));
         JPboard.setVisible(true);
+
+        JTALog.setEditable(false);
     }
 
 //    @Override
@@ -55,7 +59,6 @@ public class GameWindow extends javax.swing.JPanel {
 //        return (new Dimension(600, 600));
 ////        return ViewerBoard.getSize();
 //    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -68,13 +71,13 @@ public class GameWindow extends javax.swing.JPanel {
         JPboard = new javax.swing.JPanel();
         JPMenu = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        JTALog = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        JBThrow = new javax.swing.JButton();
+        JBBuy = new javax.swing.JButton();
+        JBEndTour = new javax.swing.JButton();
+        JBShowFieldInfo = new javax.swing.JButton();
+        JBResetView = new javax.swing.JButton();
 
         JPboard.setPreferredSize(new java.awt.Dimension(498, 100));
 
@@ -93,22 +96,47 @@ public class GameWindow extends javax.swing.JPanel {
 
         jScrollPane1.setMaximumSize(new java.awt.Dimension(200, 32767));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setMaximumSize(new java.awt.Dimension(140, 140));
-        jScrollPane1.setViewportView(jTextArea1);
+        JTALog.setColumns(20);
+        JTALog.setRows(5);
+        JTALog.setMaximumSize(new java.awt.Dimension(140, 140));
+        jScrollPane1.setViewportView(JTALog);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jButton1.setText("Rzut koścmi");
+        JBThrow.setText("Rzut koścmi");
+        JBThrow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBThrowActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Kup");
+        JBBuy.setText("Kup");
+        JBBuy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBBuyActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Zakończ turę");
+        JBEndTour.setText("Zakończ turę");
+        JBEndTour.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBEndTourActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Pokarz kartę");
+        JBShowFieldInfo.setText("Pokarz kartę");
+        JBShowFieldInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBShowFieldInfoActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Plansza");
+        JBResetView.setText("Plansza");
+        JBResetView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBResetViewActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -117,15 +145,15 @@ public class GameWindow extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JBEndTour, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(JBThrow)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)))
+                        .addComponent(JBBuy)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(JBShowFieldInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JBResetView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -133,13 +161,13 @@ public class GameWindow extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton4))
+                    .addComponent(JBThrow)
+                    .addComponent(JBBuy)
+                    .addComponent(JBShowFieldInfo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton5))
+                    .addComponent(JBEndTour)
+                    .addComponent(JBResetView))
                 .addContainerGap())
         );
 
@@ -180,17 +208,44 @@ public class GameWindow extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void JBThrowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBThrowActionPerformed
+        // TODO add your handling code here:        
+        int way = Dice.Throw();
+        JTALog.setText(String.format("Throwed %d", way));
+        GameLoop.getCurrentPlayer().Move(way);
+        GameLoop.getPositions().put(GameLoop.getCurrentPlayer(), way);
+        board.Repaint();
+    }//GEN-LAST:event_JBThrowActionPerformed
+
+    private void JBEndTourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEndTourActionPerformed
+        // TODO add your handling code here:        
+        GameLoop.iterator().next();
+        JTALog.setText(String.format("Current player %s", GameLoop.getCurrentPlayer().toString()));
+    }//GEN-LAST:event_JBEndTourActionPerformed
+
+    private void JBResetViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBResetViewActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JBResetViewActionPerformed
+
+    private void JBBuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBBuyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JBBuyActionPerformed
+
+    private void JBShowFieldInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBShowFieldInfoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JBShowFieldInfoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JBBuy;
+    private javax.swing.JButton JBEndTour;
+    private javax.swing.JButton JBResetView;
+    private javax.swing.JButton JBShowFieldInfo;
+    private javax.swing.JButton JBThrow;
     private javax.swing.JPanel JPMenu;
     private javax.swing.JPanel JPboard;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JTextArea JTALog;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

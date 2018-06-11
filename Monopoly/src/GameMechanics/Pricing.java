@@ -21,12 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package Core;
+package GameMechanics;
 
 /**
  *
  * @author Michal
  */
-public enum GameState {
-    START_STATE, GAME_STATE
+public enum Pricing {
+    PRICE, HOUSE1, HOUSE2, HOUSE3, HOUSE4, HOTEL
 }
+

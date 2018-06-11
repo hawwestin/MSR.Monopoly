@@ -17,7 +17,7 @@ public class CornerCore extends BasePlace {
 
     @Override
     public void StepAction(Player guest) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
     }
 
     @Override

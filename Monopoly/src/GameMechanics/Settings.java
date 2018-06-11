@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Core;
+package GameMechanics;
 
 /**
  *
@@ -14,5 +14,6 @@ public class Settings {
     
     public static int PlayersLimit = 4;
     public static int StartAmountOfMoney = 1500;
+    public static int SizeOfIconOnBoard = 55;
     
 }

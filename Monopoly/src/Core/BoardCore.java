@@ -30,6 +30,11 @@ public class BoardCore implements Iterable<BasePlace> {
         return streets;
     }
 
+    /**
+     * Get Current player postion.
+     *
+     * @return
+     */
     public int getCursor() {
         return _cursor;
     }
@@ -47,10 +52,11 @@ public class BoardCore implements Iterable<BasePlace> {
             }
 
             @Override
-            public BasePlace next() {                
+            public BasePlace next() {
                 _cursor++;
-                if(_cursor > getStreets().size())
+                if (_cursor == getStreets().size()) {
                     _cursor = 0;
+                }
                 return getStreets().get(_cursor);
             }
         };

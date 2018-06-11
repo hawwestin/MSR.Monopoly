@@ -23,11 +23,11 @@
  */
 package UI.Windows;
 
-import Core.GameState;
-import Core.Icon;
+import GameMechanics.GameState;
+import GameMechanics.Icon;
 import Core.Player;
-import Core.Settings;
-import UI.Start;
+import GameMechanics.Settings;
+import GameMechanics.Start;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;

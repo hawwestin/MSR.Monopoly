@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UI;
+package GameMechanics;
 
 import UI.Windows.WelcomeWindow;
 import UI.Windows.GameWindow;
-import Core.GameState;
+import GameMechanics.GameState;
 import Core.Player;
 import GameMechanics.GameLoop;
 import java.awt.BorderLayout;
@@ -83,7 +83,7 @@ public class Start extends JFrame {
     public static void InitGame(ArrayList<Player> players) {
         _gameLoop.setPlayers(players);
         _gameWindow.getBoard().makePlayersLayer(5);
-        //todo Move TO GO 
+        GameLoop.setCurrentPlayer(players.get(0));        
         
         // todo Dice player order 
 

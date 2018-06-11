@@ -43,6 +43,10 @@ public class Board {
         return _innerBoardLength;
     }
 
+    public void Repaint(){
+        _viewer.repaint();
+    }
+    
     private void makeTiles(int layer) {
         int x = 0;
         int y = 0;

@@ -5,12 +5,11 @@
  */
 package Core;
 
+import GameMechanics.Pricing;
 import UI.BaseField;
 import UI.StreetField;
 import java.awt.Color;
 import java.util.HashMap;
-
-
 
 public class StreetCore extends BasePlace {
 
@@ -24,7 +23,7 @@ public class StreetCore extends BasePlace {
         super(name);
         this.color = color;
         _price = price;
-        _pricing = new HashMap<Pricing,Integer>();
+        _pricing = new HashMap<Pricing, Integer>();
     }
 
     @Override
@@ -33,7 +32,6 @@ public class StreetCore extends BasePlace {
             guest.Pay(_rent);
             owner.EarnMoney(_rent);
         }
-        guests.add(guest);
         //todo after dice throw have to be removed
 
         //todo make Buttons Availabele for Boy etc. 
@@ -41,8 +39,7 @@ public class StreetCore extends BasePlace {
 
     @Override
     public void MoveOver(Player guest) {
-        //display circle of a player over field . 
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        _baseFiled.DrawPlayer(guest);
     }
 
     @Override
