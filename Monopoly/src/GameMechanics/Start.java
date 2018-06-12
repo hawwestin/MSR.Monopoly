@@ -84,7 +84,7 @@ public class Start extends JFrame {
         _gameLoop.setPlayers(players);
         _gameWindow.getBoard().makePlayersLayer(5);
         GameLoop.setCurrentPlayer(players.get(0));        
-        
+        Dice.Reset();
         // todo Dice player order 
 
     }

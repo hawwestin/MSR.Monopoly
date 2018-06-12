@@ -124,7 +124,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="JBEndTour" max="32767" attributes="0"/>
+                          <Component id="JBEndTurn" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="JBThrow" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -151,7 +151,7 @@
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="JBEndTour" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="JBEndTurn" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="JBResetView" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -176,12 +176,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBBuyActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="JBEndTour">
+            <Component class="javax.swing.JButton" name="JBEndTurn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Zako&#x144;cz tur&#x119;"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBEndTourActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBEndTurnActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="JBShowFieldInfo">

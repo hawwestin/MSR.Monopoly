@@ -6,9 +6,10 @@
 package UI.Windows;
 
 import GameMechanics.Dice;
+import GameMechanics.DiceJail;
+import GameMechanics.DiceThrowed;
 import GameMechanics.GameLoop;
 import UI.Board;
-import GameMechanics.Start;
 import Viewer.Viewer;
 import Viewer.ViewerInfoHandler;
 import java.awt.BorderLayout;
@@ -22,7 +23,7 @@ import javax.swing.JLabel;
 public class GameWindow extends javax.swing.JPanel {
 
     private final Viewer ViewerBoard;
-    private final Board board;  
+    private final Board board;
 
     public Board getBoard() {
         return board;
@@ -75,7 +76,7 @@ public class GameWindow extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         JBThrow = new javax.swing.JButton();
         JBBuy = new javax.swing.JButton();
-        JBEndTour = new javax.swing.JButton();
+        JBEndTurn = new javax.swing.JButton();
         JBShowFieldInfo = new javax.swing.JButton();
         JBResetView = new javax.swing.JButton();
 
@@ -117,10 +118,10 @@ public class GameWindow extends javax.swing.JPanel {
             }
         });
 
-        JBEndTour.setText("Zakończ turę");
-        JBEndTour.addActionListener(new java.awt.event.ActionListener() {
+        JBEndTurn.setText("Zakończ turę");
+        JBEndTurn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBEndTourActionPerformed(evt);
+                JBEndTurnActionPerformed(evt);
             }
         });
 
@@ -145,7 +146,7 @@ public class GameWindow extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(JBEndTour, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JBEndTurn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(JBThrow)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -166,7 +167,7 @@ public class GameWindow extends javax.swing.JPanel {
                     .addComponent(JBShowFieldInfo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JBEndTour)
+                    .addComponent(JBEndTurn)
                     .addComponent(JBResetView))
                 .addContainerGap())
         );
@@ -210,18 +211,38 @@ public class GameWindow extends javax.swing.JPanel {
 
     private void JBThrowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBThrowActionPerformed
         // TODO add your handling code here:        
-        int way = Dice.Throw();
-        JTALog.setText(String.format("Throwed %d", way));
+        int way;
+        try {
+            way = Dice.Throw();
+        } catch (DiceThrowed ex) {
+            JTALog.append(ex.getMessage());
+            return;
+        } catch (DiceJail ex) {
+            JTALog.append(ex.getMessage());
+            return;
+            //todo go to Jail
+        }
+        // if _d1=d2 dublet!
+        if (Dice.getDice1() == Dice.getDice2()) {
+            JTALog.append(String.format("Throwed %d and %d -> %d DUBEL!\n", Dice.getDice1(), Dice.getDice2(), way));
+        } else {
+            JTALog.append(String.format("Throwed %d and %d -> %d\n",Dice.getDice1(), Dice.getDice2(), way));
+        }
         GameLoop.getCurrentPlayer().Move(way);
         GameLoop.getPositions().put(GameLoop.getCurrentPlayer(), way);
         board.Repaint();
     }//GEN-LAST:event_JBThrowActionPerformed
 
-    private void JBEndTourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEndTourActionPerformed
+    private void JBEndTurnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEndTurnActionPerformed
         // TODO add your handling code here:        
+        if (!Dice.isThrowed()) {
+            JTALog.append("You have to throw the dice\n");
+            return;
+        }
         GameLoop.iterator().next();
-        JTALog.setText(String.format("Current player %s", GameLoop.getCurrentPlayer().toString()));
-    }//GEN-LAST:event_JBEndTourActionPerformed
+        JTALog.append(String.format("Current player %s (%d$)\n", GameLoop.getCurrentPlayer().toString(), GameLoop.getCurrentPlayer().GetMoney()));
+        Dice.Reset();
+    }//GEN-LAST:event_JBEndTurnActionPerformed
 
     private void JBResetViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBResetViewActionPerformed
         // TODO add your handling code here:
@@ -238,7 +259,7 @@ public class GameWindow extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBBuy;
-    private javax.swing.JButton JBEndTour;
+    private javax.swing.JButton JBEndTurn;
     private javax.swing.JButton JBResetView;
     private javax.swing.JButton JBShowFieldInfo;
     private javax.swing.JButton JBThrow;

@@ -23,20 +23,33 @@
  */
 package GameMechanics;
 
+import java.util.Random;
+
 /**
  *
  * @author Michal
  */
 public class Dice {
-    private static boolean throwed;
+
+    private static boolean _throwed;
     private static int strikeCounter;
+    private static int _dice1;
+    private static int _dice2;
+
+    public static int getDice1() {
+        return _dice1;
+    }
+
+    public static int getDice2() {
+        return _dice2;
+    }
 
     public static boolean isThrowed() {
-        return throwed;
+        return _throwed;
     }
 
     public static void setThrowed(boolean throwed) {
-        Dice.throwed = throwed;
+        _throwed = throwed;
     }
 
     public static int getStrikeCounter() {
@@ -44,13 +57,36 @@ public class Dice {
     }
 
     public static void setStrikeCounter(int strikeCounter) {
-        Dice.strikeCounter = strikeCounter;
+        strikeCounter = strikeCounter;
     }
-    
-    
-    
-    public static int Throw(){
+
+    public static int Throw() throws DiceThrowed, DiceJail {
         //todo dice Logic. 
-        return 1;
+        if (isThrowed()) {
+            throw new DiceThrowed("You have already throw the dice in turn\n");
+        }
+
+        Random rand = new Random();
+        _dice1 = rand.nextInt(6) + 1;
+        _dice2 = rand.nextInt(6) + 1;
+        if (_dice1 == _dice2) {
+            setStrikeCounter(getStrikeCounter() + 1);
+            if (getStrikeCounter() == 3) {
+                setThrowed(true);
+                throw new DiceJail("Bad Luck with three dublets in a row\n");
+            }
+            setThrowed(false);
+            return _dice1 + _dice2;
+        }
+        setThrowed(true);
+        return _dice1 + _dice2;
+    }
+
+    public static void Reset() {
+
+        setThrowed(false);
+        setStrikeCounter(0);
+        _dice1 = 0;
+        _dice2 = 0;
     }
 }

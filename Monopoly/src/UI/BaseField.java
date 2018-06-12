@@ -77,23 +77,19 @@ public abstract class BaseField implements Painter {
         switch (rotate) {
             case 0:
                 player.getImagePanel().setxOffset(xOffset);
-                //HOTFIX potrzeba okreśłić matematykę w zależności od położenia  _align
                 player.getImagePanel().setyOffset(yOffset + player.getPlayerNumber() * Settings.SizeOfIconOnBoard + 50);
                 break;
             case 1:
                 player.getImagePanel().setxOffset(xOffset - player.getPlayerNumber() * Settings.SizeOfIconOnBoard - 50);
-                //HOTFIX potrzeba okreśłić matematykę w zależności od położenia  _align
-                player.getImagePanel().setyOffset(yOffset );
+                player.getImagePanel().setyOffset(yOffset);
                 break;
             case 2:
                 player.getImagePanel().setxOffset(xOffset);
-                //HOTFIX potrzeba okreśłić matematykę w zależności od położenia  _align
                 player.getImagePanel().setyOffset(yOffset - player.getPlayerNumber() * Settings.SizeOfIconOnBoard - 50);
                 break;
             case 3:
                 player.getImagePanel().setxOffset(xOffset + player.getPlayerNumber() * Settings.SizeOfIconOnBoard + 50);
-                //HOTFIX potrzeba okreśłić matematykę w zależności od położenia  _align
-                player.getImagePanel().setyOffset(yOffset );
+                player.getImagePanel().setyOffset(yOffset);
                 break;
         }
     }
