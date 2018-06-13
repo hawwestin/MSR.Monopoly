@@ -81,14 +81,14 @@ public class BoardCore implements Iterable<BasePlace> {
         map.put(28, new UtilitiesCoreImpl("Water", 150));
 
         //chance & others
-        map.put(2, new ActionCore("Comunity Chest"));
-        map.put(4, new ActionCore("Income Tax"));
-        map.put(7, new ActionCore("Chance"));
-        map.put(17, new ActionCore("Comunity Chest"));
-        map.put(22, new ActionCore("Chance"));
-        map.put(33, new ActionCore("Comunity Chest"));
-        map.put(36, new ActionCore("Chance"));
-        map.put(38, new ActionCore("TAX"));
+        map.put(2, new CardActionCoreImpl("Comunity Chest"));
+        map.put(4, new TaxActionCoreImpl("Income Tax 200", 200));
+        map.put(7, new CardActionCoreImpl("Chance"));
+        map.put(17, new CardActionCoreImpl("Comunity Chest"));
+        map.put(22, new CardActionCoreImpl("Chance"));
+        map.put(33, new CardActionCoreImpl("Comunity Chest"));
+        map.put(36, new CardActionCoreImpl("Chance"));
+        map.put(38, new TaxActionCoreImpl("TAX 100",100));
 
         //todo move pricing init to csv config or some Json
         //Brown street        

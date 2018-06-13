@@ -13,7 +13,7 @@ import java.awt.Color;
  *
  * @author michal
  */
-public class ActionCore extends BasePlace {
+public abstract class ActionCore extends BasePlace {
 
     public ActionCore(String name) {
         super(name);
