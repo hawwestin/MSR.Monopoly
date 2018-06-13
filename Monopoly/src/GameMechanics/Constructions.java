@@ -27,7 +27,6 @@ package GameMechanics;
  *
  * @author Michal
  */
-public enum Pricing {
-    PRICE, HOUSE1, HOUSE2, HOUSE3, HOUSE4, HOTEL
+public enum Constructions {
+    GROUND, HOUSE1, HOUSE2, HOUSE3, HOUSE4, HOTEL
 }
-

@@ -48,8 +48,8 @@ public abstract class BasePlace {
      * @param align
      * @return
      */
-    public abstract BaseField makeField(int number, int x, int y, String align);
-
+    public abstract BaseField makeField(int number, int x, int y, String align);    
+    
     @Override
     public String toString() {
         return _name;

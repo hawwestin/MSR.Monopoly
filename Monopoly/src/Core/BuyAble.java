@@ -31,11 +31,6 @@ import java.awt.Color;
  */
 public interface BuyAble {
     
-    /**
-     * Set rent value 
-     * @param value
-     */
-    public void SetRent(int value);
     
     /**
      * Get current value of rent on field
@@ -62,9 +57,9 @@ public interface BuyAble {
     public void Buy(Player buyer);
 
     /**
-     * Return Price
+     * Return getPrice
      * @return
      */
-    public int Price();    
+    public int getPrice();    
     
 }

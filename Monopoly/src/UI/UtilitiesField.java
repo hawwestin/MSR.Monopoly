@@ -30,7 +30,7 @@ public class UtilitiesField extends BaseField implements Painter{
         g.transform(worldToScreen);
         super.paint(g, worldToScreen, w, h);
         SetFieldName(g);
-        SetPrice(g,_place.Price());
+        SetPrice(g,_place.getPrice());
         
         g.setTransform(oldAT);
     }

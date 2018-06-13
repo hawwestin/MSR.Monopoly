@@ -71,6 +71,7 @@ public class Player {
 
     public void EarnMoney(int salary) {
         money += salary;
+        //todo end game if money<0;
     }
 
     public void Buy(BasePlace place, int price) {
@@ -99,6 +100,6 @@ public class Player {
         for (int i = 0; i < diceValue; i++) {
             _boardCore.iterator().next().MoveOver(this);
         }
-        BoardCore.getStreets().get(_boardCore.getCursor()).StepAction(this);
+        BoardCore.getFieldsOnBoard().get(_boardCore.getCursor()).StepAction(this);
     }
 }

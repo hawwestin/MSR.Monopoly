@@ -23,25 +23,27 @@
  */
 package Core;
 
-import GameMechanics.Pricing;
+import GameMechanics.Constructions;
 import UI.BaseField;
 import UI.StreetField;
 import java.awt.Color;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
-public class StreetCore extends BasePlace implements BuyAble{
+public class StreetCore extends BasePlace implements BuyAble {
 
     private Player owner;
-    private int _price;
-    private final HashMap<Pricing, Integer> _pricing;
-    private int _rent; // IF PLAYER OWN COLOR SET BASIC RENT X2 WITHOUT HOUSES
+    private final FieldInit _pricing;
     public Color color;
+    private static List<StreetCore> _streets = new ArrayList<>();
+    private Constructions _construction;
 
-    public StreetCore(String name, Color color, int price) {
+    public StreetCore(String name, Color color, FieldInit pricing) {
         super(name);
         this.color = color;
-        _price = price;
-        _pricing = new HashMap<Pricing, Integer>();
+        _pricing = pricing;
+        _streets.add(this);
+        _construction = Constructions.GROUND;
     }
 
     @Override
@@ -58,31 +60,37 @@ public class StreetCore extends BasePlace implements BuyAble{
     }
 
     @Override
-    public int Price() {
-        return _price;
+    public int getPrice() {
+        return _pricing.getPrice();
     }
 
     @Override
     public void Buy(Player buyer) {
         owner = buyer;
-        buyer.Buy(this, _price);
+        buyer.Buy(this, getPrice());
     }
 
     @Override
-    public void SetRent(int value) {
-        _rent += value;
-    }
-    
-    @Override
     public int getRent() {
-        return _rent;
+        if (HasColorSet()) {
+            return _pricing.getRentMap().get(_construction);
+        }
+        return _pricing.getRent();
+    }
+
+    private boolean HasColorSet() {
+        for (StreetCore street : _streets) {
+            if (street.color == this.color && street.owner != this.owner) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public void Sell() {
-        owner.Sell(this, _price);
+        owner.Sell(this, getPrice());
         owner = null;
-        _rent = 0; //todo set to Default rent value
     }
 
     @Override
@@ -103,8 +111,7 @@ public class StreetCore extends BasePlace implements BuyAble{
         } else {
             return _baseFiled;
         }
-
-    }
+    }    
 
     @Override
     public void Sell(Player buyer, int price) {

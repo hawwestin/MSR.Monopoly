@@ -58,13 +58,8 @@ public abstract class UtilitiesCore extends BasePlace implements BuyAble {
     }
 
     @Override
-    public int Price() {
+    public int getPrice() {
         return _price;
-    }
-
-    @Override
-    public void SetRent(int value) {
-        _rent += value;
     }
 
     @Override

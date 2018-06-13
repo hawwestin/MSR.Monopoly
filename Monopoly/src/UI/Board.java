@@ -52,23 +52,23 @@ public class Board {
         int y = 0;
 
         for (int i = 0; i < 10; i++) {
-            _viewer.addPainter(BoardCore.getStreets().get(i).makeField(i, x, y, "up"), layer);
+            _viewer.addPainter(BoardCore.getFieldsOnBoard().get(i).makeField(i, x, y, "up"), layer);
             x -= 175;
         }
         x += 175;
         _innerBoardLength = x;
         for (int i = 10; i < 20; i++) {
-            _viewer.addPainter(BoardCore.getStreets().get(i).makeField(i, x, y, "left"), layer);
+            _viewer.addPainter(BoardCore.getFieldsOnBoard().get(i).makeField(i, x, y, "left"), layer);
             y -= 175;
         }
         y += 175;
         for (int i = 20; i < 30; i++) {
-            _viewer.addPainter(BoardCore.getStreets().get(i).makeField(i, x, y, "down"), layer);
+            _viewer.addPainter(BoardCore.getFieldsOnBoard().get(i).makeField(i, x, y, "down"), layer);
             x += 175;
         }
         x -= 175;
         for (int i = 30; i < 40; i++) {
-            _viewer.addPainter(BoardCore.getStreets().get(i).makeField(i, x, y, "right"), layer);
+            _viewer.addPainter(BoardCore.getFieldsOnBoard().get(i).makeField(i, x, y, "right"), layer);
             y += 175;
         }
 
