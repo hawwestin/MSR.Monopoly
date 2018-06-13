@@ -21,7 +21,7 @@ public class ActionCore extends BasePlace {
 
     @Override
     public void StepAction(Player guest) {
-        
+
     }
 
     @Override
@@ -31,7 +31,7 @@ public class ActionCore extends BasePlace {
 
     @Override
     public Color BorderColor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return Color.BLACK;
     }
 
     @Override
@@ -43,11 +43,6 @@ public class ActionCore extends BasePlace {
         } else {
             return _baseFiled;
         }
-    }
-
-    @Override
-    public int Price() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

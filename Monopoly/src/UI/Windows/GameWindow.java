@@ -8,7 +8,7 @@ package UI.Windows;
 import GameMechanics.Dice;
 import GameMechanics.DiceJail;
 import GameMechanics.DiceThrowed;
-import GameMechanics.GameLoop;
+import GameMechanics.PlayersLoop;
 import UI.Board;
 import Viewer.Viewer;
 import Viewer.ViewerInfoHandler;
@@ -228,8 +228,8 @@ public class GameWindow extends javax.swing.JPanel {
         } else {
             JTALog.append(String.format("Throwed %d and %d -> %d\n",Dice.getDice1(), Dice.getDice2(), way));
         }
-        GameLoop.getCurrentPlayer().Move(way);
-        GameLoop.getPositions().put(GameLoop.getCurrentPlayer(), way);
+        PlayersLoop.getCurrentPlayer().Move(way);
+        PlayersLoop.getPositions().put(PlayersLoop.getCurrentPlayer(), way);
         board.Repaint();
     }//GEN-LAST:event_JBThrowActionPerformed
 
@@ -239,8 +239,8 @@ public class GameWindow extends javax.swing.JPanel {
             JTALog.append("You have to throw the dice\n");
             return;
         }
-        GameLoop.iterator().next();
-        JTALog.append(String.format("Current player %s (%d$)\n", GameLoop.getCurrentPlayer().toString(), GameLoop.getCurrentPlayer().GetMoney()));
+        PlayersLoop.iterator().next();
+        JTALog.append(String.format("Current player %s (%d$)\n", PlayersLoop.getCurrentPlayer().toString(), PlayersLoop.getCurrentPlayer().GetMoney()));
         Dice.Reset();
     }//GEN-LAST:event_JBEndTurnActionPerformed
 

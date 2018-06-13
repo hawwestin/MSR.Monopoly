@@ -108,7 +108,7 @@ public abstract class BaseField implements Painter {
         g.setFont(oldFont);
     }
 
-    protected void SetPrice(Graphics2D g) {
+    protected void SetPrice(Graphics2D g, int price) {
         Font oldFont = g.getFont();
         g.setRenderingHint(
                 RenderingHints.KEY_FRACTIONALMETRICS,
@@ -117,9 +117,8 @@ public abstract class BaseField implements Painter {
                 RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
         g.setColor(Color.BLACK);
-        g.setFont(DEFAULT_FONT);
-        String price = "cena $" + _place.Price();
-        g.drawString(price, xOffset + 20, yOffset + 260);
+        g.setFont(DEFAULT_FONT);        
+        g.drawString(String.format("cena %s$" , price), xOffset + 20, yOffset + 260);
         g.setFont(oldFont);
     }
 
@@ -164,6 +163,7 @@ public abstract class BaseField implements Painter {
         Rectangle2D border = new Rectangle2D.Double(xOffset, yOffset, width, height);
         g.rotate((Math.PI / 2) * rotate, xOffset, yOffset);
         g.setStroke(new BasicStroke(3));
+        g.setColor(_place.BorderColor());
         g.draw(border);
     }
 

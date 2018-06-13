@@ -9,7 +9,7 @@ import UI.Windows.WelcomeWindow;
 import UI.Windows.GameWindow;
 import GameMechanics.GameState;
 import Core.Player;
-import GameMechanics.GameLoop;
+import GameMechanics.PlayersLoop;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ public class Start extends JFrame {
     private static GameState gameState;
     private static JPanel mainPanel;
     private static WelcomeWindow _welcome;
-    private static GameLoop _gameLoop;
+    private static PlayersLoop _gameLoop;
 
     public static GameWindow getGame() {
         return _gameWindow;
@@ -46,7 +46,7 @@ public class Start extends JFrame {
         mainPanel.setLayout(new BorderLayout());
         _gameWindow = new GameWindow();
         _welcome = new WelcomeWindow();
-        _gameLoop = new GameLoop();
+        _gameLoop = new PlayersLoop();
 
         changeGameState(GameState.START_STATE);
 
@@ -83,7 +83,7 @@ public class Start extends JFrame {
     public static void InitGame(ArrayList<Player> players) {
         _gameLoop.setPlayers(players);
         _gameWindow.getBoard().makePlayersLayer(5);
-        GameLoop.setCurrentPlayer(players.get(0));        
+        PlayersLoop.setCurrentPlayer(players.get(0));        
         Dice.Reset();
         // todo Dice player order 
 

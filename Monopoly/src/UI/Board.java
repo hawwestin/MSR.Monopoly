@@ -7,7 +7,7 @@ package UI;
 
 import Core.BoardCore;
 import Core.Player;
-import GameMechanics.GameLoop;
+import GameMechanics.PlayersLoop;
 import Viewer.Painter;
 import Viewer.Viewer;
 import java.awt.BasicStroke;
@@ -114,7 +114,7 @@ public class Board {
     }
 
     public void makePlayersLayer(int layer) {
-        for (Player player : GameLoop.getPlayers()) {
+        for (Player player : PlayersLoop.getPlayers()) {
             _viewer.addPainter(player.getImagePanel(),layer);
         }
     }

@@ -23,17 +23,16 @@
  */
 package GameMechanics;
 
-import Core.BoardCore;
 import Core.Player;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
 /**
- *
+ * Iteration over players list
  * @author Michal
  */
-public class GameLoop {
+public class PlayersLoop {
 
     //todo re order players after initial Dice throw.
     private static ArrayList<Player> _players;
@@ -41,7 +40,7 @@ public class GameLoop {
     private static Player currentPlayer;
 
     public static void setPlayers(ArrayList<Player> players) {
-        GameLoop._players = players;
+        PlayersLoop._players = players;
         players.forEach(player -> _positions.put(player, 0));
 
         //todo display players icon on board
@@ -61,7 +60,7 @@ public class GameLoop {
     }
 
     public static void setCurrentPlayer(Player currentPlayer) {
-        GameLoop.currentPlayer = currentPlayer;
+        PlayersLoop.currentPlayer = currentPlayer;
     }
 
     public static void ShufflePlayersOrder() {

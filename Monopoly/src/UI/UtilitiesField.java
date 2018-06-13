@@ -6,6 +6,7 @@
 package UI;
 
 import Core.BasePlace;
+import Core.UtilitiesCore;
 import Viewer.Painter;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -16,8 +17,11 @@ import java.awt.geom.AffineTransform;
  */
 public class UtilitiesField extends BaseField implements Painter{
     
-    public UtilitiesField(BasePlace place, int number, int x, int y, String align) {
+    private UtilitiesCore _place;
+    
+    public UtilitiesField(UtilitiesCore place, int number, int x, int y, String align) {
         super(place, number, x, y, align);
+        this._place = place;
     }
 
     @Override
@@ -26,7 +30,7 @@ public class UtilitiesField extends BaseField implements Painter{
         g.transform(worldToScreen);
         super.paint(g, worldToScreen, w, h);
         SetFieldName(g);
-        SetPrice(g);
+        SetPrice(g,_place.Price());
         
         g.setTransform(oldAT);
     }

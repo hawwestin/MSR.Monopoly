@@ -7,34 +7,48 @@ package Core;
 
 import UI.BaseField;
 import java.awt.Color;
-import java.util.ArrayList;
 
 /**
  *
- * @author Michal aka street or other monument to by own by a player
+ * @author Michal 
  *
  */
 public abstract class BasePlace {
 
-    //Decorator of IPLaces ... jakos obkleic place budynkami.. i jakos je zdjac 
-    //jak ktos sprzeda parcele 
-    protected ArrayList<Player> guests = new ArrayList<Player>();
-    private String _name;    
+    private final String _name;
     protected BaseField _baseFiled;
 
     public BasePlace(String name) {
         _name = name;
     }
 
+    /**
+     * When a player ends his movement on the field run individual field action.
+     * @param guest
+     */
     public abstract void StepAction(Player guest);
 
+    /**
+     * Action when player crossing over the field.
+     * @param guest
+     */
     public abstract void MoveOver(Player guest);
 
+    /**
+     * If field is owned by a player it's border is painted in players color.
+     * @return
+     */
     public abstract Color BorderColor();
-    
+
+    /**
+     * Create graphics of this field.
+     * @param number
+     * @param x
+     * @param y
+     * @param align
+     * @return
+     */
     public abstract BaseField makeField(int number, int x, int y, String align);
-    
-    public abstract int Price();
 
     @Override
     public String toString() {

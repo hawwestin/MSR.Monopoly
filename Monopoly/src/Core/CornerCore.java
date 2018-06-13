@@ -9,7 +9,7 @@ import UI.BaseField;
 import UI.CornerField;
 import java.awt.Color;
 
-public class CornerCore extends BasePlace {
+public abstract class CornerCore extends BasePlace {
 
     public CornerCore(String name) {
         super(name);
@@ -41,9 +41,5 @@ public class CornerCore extends BasePlace {
         }
     }
 
-    @Override
-    public int Price() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }

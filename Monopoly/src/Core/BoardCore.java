@@ -66,19 +66,19 @@ public class BoardCore implements Iterable<BasePlace> {
     private static HashMap<Integer, BasePlace> MakeStreets() {
         HashMap<Integer, BasePlace> map = new HashMap<Integer, BasePlace>();
 
-        map.put(0, new CornerCore("Go"));
-        map.put(10, new CornerCore("In Jail"));
-        map.put(20, new CornerCore("Free"));
-        map.put(30, new CornerCore("Go to Jail"));
+        map.put(0, new GoCornerCoreImpl("Go"));
+        map.put(10, new CornerCoreImpl("In Jail"));
+        map.put(20, new CornerCoreImpl("Free"));
+        map.put(30, new GoToJailCornerCoreImpl("Go to Jail"));
 
         //railroad
-        map.put(5, new UtielietiesCore("RailRoad 1", 200));
-        map.put(15, new UtielietiesCore("RailRoad 2", 200));
-        map.put(25, new UtielietiesCore("RailRoad 3", 200));
-        map.put(35, new UtielietiesCore("RailRoad 4", 200));
+        map.put(5, new RailRoadUtilitiesCoreImpl("RailRoad 1", 200));
+        map.put(15, new RailRoadUtilitiesCoreImpl("RailRoad 2", 200));
+        map.put(25, new RailRoadUtilitiesCoreImpl("RailRoad 3", 200));
+        map.put(35, new RailRoadUtilitiesCoreImpl("RailRoad 4", 200));
 
-        map.put(12, new UtielietiesCore("Electric", 150));
-        map.put(28, new UtielietiesCore("Water", 150));
+        map.put(12, new UtilitiesCoreImpl("Electric", 150));
+        map.put(28, new UtilitiesCoreImpl("Water", 150));
 
         //chance & others
         map.put(2, new ActionCore("Comunity Chest"));
@@ -135,22 +135,22 @@ public class BoardCore implements Iterable<BasePlace> {
         List<BasePlace> list = new ArrayList<>(40);
 
         for (int i = 0; i < 40; i++) {
-            list.add(i, new CornerCore("PlaceHolder"));
+            list.add(i, new CornerCoreImpl("PlaceHolder"));
         }
 
-        list.set(0, new CornerCore("Go"));
-        list.set(10, new CornerCore("In Jail"));
-        list.set(20, new CornerCore("Free"));
-        list.set(30, new CornerCore("Go to Jail"));
+        list.set(0, new GoCornerCoreImpl("Go"));
+        list.set(10, new CornerCoreImpl("In Jail"));
+        list.set(20, new CornerCoreImpl("Free"));
+        list.set(30, new GoToJailCornerCoreImpl("Go to Jail"));
 
         //railroad
-        list.set(5, new UtielietiesCore("RailRoad 1", 200));
-        list.set(15, new UtielietiesCore("RailRoad 2", 200));
-        list.set(25, new UtielietiesCore("RailRoad 3", 200));
-        list.set(35, new UtielietiesCore("RailRoad 4", 200));
+        list.set(5, new RailRoadUtilitiesCoreImpl("RailRoad 1", 200));
+        list.set(15, new RailRoadUtilitiesCoreImpl("RailRoad 2", 200));
+        list.set(25, new RailRoadUtilitiesCoreImpl("RailRoad 3", 200));
+        list.set(35, new RailRoadUtilitiesCoreImpl("RailRoad 4", 200));
 
-        list.set(12, new UtielietiesCore("Electric", 150));
-        list.set(28, new UtielietiesCore("Water", 150));
+        list.set(12, new UtilitiesCoreImpl("Electric", 150));
+        list.set(28, new UtilitiesCoreImpl("Water", 150));
 
         //chance & others
         list.set(2, new ActionCore("Comunity Chest"));
