@@ -16,8 +16,12 @@ public class StreetsNames {
     /**
      * Street names array for order
      */
-    public static final ArrayList<String> StreetName = InitNameList();    
+    private static final ArrayList<String> StreetName = InitNameList();    
 
+    public static ArrayList<String> getStreetName() {
+        return StreetName;
+    }    
+    
     private static ArrayList<String> InitNameList() {
         ArrayList<String> list = new ArrayList<>();
         list.add("Go");

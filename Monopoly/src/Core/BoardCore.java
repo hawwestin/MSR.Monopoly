@@ -5,11 +5,12 @@
  */
 package Core;
 
+import GameMechanics.ChanceCards;
+import GameMechanics.ComunityCard;
+import GameMechanics.ICard;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -21,11 +22,11 @@ public class BoardCore implements Iterable<BasePlace> {
     //Lista ulic na zasadzie pętlii. po powrocie na poczatek petli inkasacja kasy 
     private int _cursor;
     private static final HashMap<Integer, BasePlace> fieldsOnBoard = MakeStreets();
-    
+
     public BoardCore(int cursor) {
         _cursor = cursor;
     }
-    
+
     public static HashMap<Integer, BasePlace> getFieldsOnBoard() {
         return fieldsOnBoard;
     }
@@ -38,11 +39,11 @@ public class BoardCore implements Iterable<BasePlace> {
     public int getCursor() {
         return _cursor;
     }
-    
+
     public void setCursor(int cursor) {
         _cursor = cursor;
     }
-    
+
     @Override
     public Iterator<BasePlace> iterator() {
         return new Iterator<BasePlace>() {
@@ -50,22 +51,22 @@ public class BoardCore implements Iterable<BasePlace> {
             public boolean hasNext() {
                 return true;
             }
-            
+
             @Override
             public BasePlace next() {
                 _cursor++;
-                if (_cursor == getFieldsOnBoard().size()) {
+                if (_cursor >= getFieldsOnBoard().size()) {
                     _cursor = 0;
                 }
                 return getFieldsOnBoard().get(_cursor);
             }
         };
-        
+
     }
-    
+
     private static HashMap<Integer, BasePlace> MakeStreets() {
         HashMap<Integer, BasePlace> map = new HashMap<Integer, BasePlace>();
-        
+
         map.put(0, new GoCornerCoreImpl("Go"));
         map.put(10, new CornerCoreImpl("In Jail"));
         map.put(20, new CornerCoreImpl("Free"));
@@ -76,19 +77,21 @@ public class BoardCore implements Iterable<BasePlace> {
         map.put(15, new RailRoadUtilitiesCoreImpl("RailRoad 2", 200));
         map.put(25, new RailRoadUtilitiesCoreImpl("RailRoad 3", 200));
         map.put(35, new RailRoadUtilitiesCoreImpl("RailRoad 4", 200));
-        
+
         map.put(12, new UtilitiesCoreImpl("Electric", 150));
         map.put(28, new UtilitiesCoreImpl("Water", 150));
 
+        ICard comunityCard = new ComunityCard();
+        ICard chanceCard = new ChanceCards();
         //chance & others
-        map.put(2, new CardActionCoreImpl("Comunity Chest"));
+        map.put(2, new CardActionCoreImpl("Comunity Chest", comunityCard));
         map.put(4, new TaxActionCoreImpl("Income Tax 200", 200));
-        map.put(7, new CardActionCoreImpl("Chance"));
-        map.put(17, new CardActionCoreImpl("Comunity Chest"));
-        map.put(22, new CardActionCoreImpl("Chance"));
-        map.put(33, new CardActionCoreImpl("Comunity Chest"));
-        map.put(36, new CardActionCoreImpl("Chance"));
-        map.put(38, new TaxActionCoreImpl("TAX 100",100));
+        map.put(7, new CardActionCoreImpl("Chance",chanceCard));
+        map.put(17, new CardActionCoreImpl("Comunity Chest", comunityCard));
+        map.put(22, new CardActionCoreImpl("Chance",chanceCard));
+        map.put(33, new CardActionCoreImpl("Comunity Chest", comunityCard));
+        map.put(36, new CardActionCoreImpl("Chance",chanceCard));
+        map.put(38, new TaxActionCoreImpl("TAX 100", 100));
 
         //todo move pricing init to csv config or some Json
         //Brown street        
@@ -141,10 +144,10 @@ public class BoardCore implements Iterable<BasePlace> {
         //blue
         map.put(37, new StreetCore("Park", Color.BLUE, new FieldInit(350, 35, 175, 500, 1100, 1300, 1500, 200)));
         map.put(39, new StreetCore("Board", Color.BLUE, new FieldInit(400, 50, 200, 600, 1400, 1700, 2000, 200)));
-        
+
         return map;
     }
-    
+
 //    private List<BasePlace> Make() {
 //        List<BasePlace> list = new ArrayList<>(40);
 //        
@@ -216,5 +219,4 @@ public class BoardCore implements Iterable<BasePlace> {
 //        
 //        return list;
 //    }
-    
 }

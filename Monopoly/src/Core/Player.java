@@ -95,6 +95,12 @@ public class Player {
     public void setPlayerIcon(BufferedImage playerIcon) {
         this.playerIcon = playerIcon;
     }
+    
+    public void MoveToField(int placeId){
+        _boardCore.setCursor(placeId);
+        BoardCore.getFieldsOnBoard().get(placeId).MoveOver(this);
+        BoardCore.getFieldsOnBoard().get(_boardCore.getCursor()).StepAction(this);
+    }
 
     public void Move(int diceValue) {
         for (int i = 0; i < diceValue; i++) {

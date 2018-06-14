@@ -60,8 +60,7 @@ public class Dice {
         strikeCounter = strikeCounter;
     }
 
-    public static int Throw() throws DiceThrowed, DiceJail {
-        //todo dice Logic. 
+    public static int Throw() throws DiceThrowed, DiceJail {        
         if (isThrowed()) {
             throw new DiceThrowed("You have already throw the dice in turn\n");
         }

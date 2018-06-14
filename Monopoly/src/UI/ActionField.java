@@ -20,7 +20,7 @@ public class ActionField extends BaseField implements Painter {
         super(place, number, x, y, align);
         
     }
-
+        
     @Override
     public void paint(Graphics2D g, AffineTransform worldToScreen, double w, double h) {       
         AffineTransform oldAT = g.getTransform();

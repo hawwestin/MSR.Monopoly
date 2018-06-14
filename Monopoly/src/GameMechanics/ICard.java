@@ -21,23 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package Core;
+package GameMechanics;
 
-import GameMechanics.ICard;
+import Core.Player;
 
-public class CardActionCoreImpl extends ActionCore {
-
-    private final ICard _cards;
-
-    public CardActionCoreImpl(String name, ICard cards) {
-        super(name);
-        _cards = cards;
-    }
-
-    @Override
-    public void StepAction(Player guest) {
-        super.StepAction(guest); //To change body of generated methods, choose Tools | Templates.
-        _cards.MakeAction(guest);
-    }
-
+/**
+ *
+ * @author Michal
+ */
+public interface ICard {
+    public void MakeAction(Player guest);
+    
 }
