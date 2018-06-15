@@ -33,9 +33,9 @@ public class TaxActionCoreImpl extends ActionCore {
     }
 
     @Override
-    public void StepAction(Player guest) {
-        super.StepAction(guest); //To change body of generated methods, choose Tools | Templates.
+    public String StepAction(Player guest) {        
         guest.Pay(_tax);
+        return String.format("You have to Pay %d$ Tax\n" , _tax);
     }
 
 }

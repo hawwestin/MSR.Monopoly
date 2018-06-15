@@ -47,11 +47,13 @@ public class StreetCore extends BasePlace implements BuyAble {
     }
 
     @Override
-    public void StepAction(Player guest) {
+    public String StepAction(Player guest) {
         if (owner != guest && owner != null) {
             guest.Pay(getRent());
             owner.EarnMoney(getRent());
+            return String.format("Pay %d to player %s who owns %s", getRent(), owner.toString(), this.toString());
         }
+        return String.format("Steped on unowned %s", this.toString());
     }
 
     @Override
@@ -111,7 +113,7 @@ public class StreetCore extends BasePlace implements BuyAble {
         } else {
             return _baseFiled;
         }
-    }    
+    }
 
     @Override
     public void Sell(Player buyer, int price) {

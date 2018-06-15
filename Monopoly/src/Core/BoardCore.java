@@ -1,32 +1,57 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The MIT License
+ *
+ * Copyright 2018 Michal.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 package Core;
 
 import GameMechanics.ChanceCards;
 import GameMechanics.ComunityCard;
-import GameMechanics.ICard;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.awt.Color;
+import GameMechanics.ICardCollection;
 
 /**
+ * Aggregate all board tiles. Board hold info about player possition.
  *
  * @author Michal
  */
 public class BoardCore implements Iterable<BasePlace> {
 
-    //board hold info about player possition.
-    //Lista ulic na zasadzie pętlii. po powrocie na poczatek petli inkasacja kasy 
     private int _cursor;
     private static final HashMap<Integer, BasePlace> fieldsOnBoard = MakeStreets();
 
+    /**
+     * Create new BoardCore for player movement in a loop over the fields.
+     * @param cursor starting position of the player
+     */
     public BoardCore(int cursor) {
         _cursor = cursor;
     }
 
+    /**
+     * Return ordered board tiles objects.
+     * @return
+     */
     public static HashMap<Integer, BasePlace> getFieldsOnBoard() {
         return fieldsOnBoard;
     }
@@ -40,6 +65,10 @@ public class BoardCore implements Iterable<BasePlace> {
         return _cursor;
     }
 
+    /**
+     * Set new player position
+     * @param cursor
+     */
     public void setCursor(int cursor) {
         _cursor = cursor;
     }
@@ -81,16 +110,16 @@ public class BoardCore implements Iterable<BasePlace> {
         map.put(12, new UtilitiesCoreImpl("Electric", 150));
         map.put(28, new UtilitiesCoreImpl("Water", 150));
 
-        ICard comunityCard = new ComunityCard();
-        ICard chanceCard = new ChanceCards();
+        ICardCollection comunityCard = new ComunityCard();
+        ICardCollection chanceCard = new ChanceCards();
         //chance & others
         map.put(2, new CardActionCoreImpl("Comunity Chest", comunityCard));
         map.put(4, new TaxActionCoreImpl("Income Tax 200", 200));
-        map.put(7, new CardActionCoreImpl("Chance",chanceCard));
+        map.put(7, new CardActionCoreImpl("Chance", chanceCard));
         map.put(17, new CardActionCoreImpl("Comunity Chest", comunityCard));
-        map.put(22, new CardActionCoreImpl("Chance",chanceCard));
+        map.put(22, new CardActionCoreImpl("Chance", chanceCard));
         map.put(33, new CardActionCoreImpl("Comunity Chest", comunityCard));
-        map.put(36, new CardActionCoreImpl("Chance",chanceCard));
+        map.put(36, new CardActionCoreImpl("Chance", chanceCard));
         map.put(38, new TaxActionCoreImpl("TAX 100", 100));
 
         //todo move pricing init to csv config or some Json

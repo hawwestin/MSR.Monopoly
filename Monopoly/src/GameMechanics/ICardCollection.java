@@ -21,46 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package Core;
+package GameMechanics;
 
-import UI.ActionField;
-import UI.BaseField;
-import java.awt.Color;
+import Core.Player;
 
 /**
- * Base Class for special fields that players cannot buy.
  *
- * @author michal
+ * @author Michal
  */
-public abstract class ActionCore extends BasePlace {
-
-    /**
-     * Create new core mechanics for special field
-     * @param name Place display name. 
-     */
-    public ActionCore(String name) {
-        super(name);
-    }
-
-    @Override
-    public void MoveOver(Player guest) {
-        _baseFiled.DrawPlayer(guest);
-    }
-
-    @Override
-    public Color BorderColor() {
-        return Color.BLACK;
-    }
-
-    @Override
-    public BaseField makeField(int number, int x, int y, String align) {
-        if (_baseFiled == null) {
-            _baseFiled = new ActionField(this, number, x, y, align);
-
-            return _baseFiled;
-        } else {
-            return _baseFiled;
-        }
-    }
-
+public interface ICardCollection {
+    public String MakeAction(Player guest);
+    
 }

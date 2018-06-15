@@ -23,15 +23,25 @@
  */
 package Core;
 
+/**
+ * Go to Jail tail logic implementation
+ * @author Michal
+ */
 public class GoToJailCornerCoreImpl extends CornerCore {
 
+    /**
+     * Create new Go to Jail core object
+     * @param name
+     */
     public GoToJailCornerCoreImpl(String name) {
         super(name);
     }
 
     @Override
-    public void StepAction(Player guest) {
+    public String StepAction(Player guest) {
         //to  do go to jail
+        guest.MoveToField(10);
+        return "Go to jail!";
     }
 
 }

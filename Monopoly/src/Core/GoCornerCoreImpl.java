@@ -23,8 +23,16 @@
  */
 package Core;
 
+/**
+ * Go tail logic implementation
+ * @author Michal
+ */
 public class GoCornerCoreImpl extends CornerCore {
 
+    /**
+     * Create new Go core object
+     * @param name
+     */
     public GoCornerCoreImpl(String name) {
         super(name);
     }
@@ -32,8 +40,7 @@ public class GoCornerCoreImpl extends CornerCore {
     @Override
     public void MoveOver(Player guest) {
         super.MoveOver(guest); 
-        guest.EarnMoney(200);
-        //todo write to text log 
+        guest.EarnMoney(200);        
     }
 
 }

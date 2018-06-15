@@ -23,21 +23,20 @@
  */
 package GameMechanics;
 
+import Core.BoardCore;
 import Core.Player;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Random;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 
 /**
  *
  * @author Michal
  */
-public class ChanceCards implements ICard {
+public class ChanceCards implements ICardCollection {
 
-    private ArrayList<Action> list;
+    private ArrayList<ICard> list;
     private Random rand;
+    private final String name = "Chance";
 
     public ChanceCards() {
         this.list = makeList();
@@ -45,33 +44,59 @@ public class ChanceCards implements ICard {
     }
 
     @Override
-    public void MakeAction(Player guest) {
-        ActionEvent aaa = new ActionEvent(guest, 0, "");
+    public String MakeAction(Player guest) {
+
         int r = rand.nextInt(list.size());
-        list.get(r).actionPerformed(aaa);
+        return list.get(r).actionPerformed(guest);
+
     }
 
-    private ArrayList<Action> makeList() {
-        ArrayList<Action> innerList;
+    private ArrayList<ICard> makeList() {
+        ArrayList<ICard> innerList;
         innerList = new ArrayList<>();
 
         innerList.add(GoToGO);
-        innerList.add(GoToGO);
-        innerList.add(GoToGO);
+        innerList.add(GoToRandom);
+        innerList.add(GoToNextStation);
 
         return innerList;
     }
 
-    private final Action GoToGO = new AbstractAction() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (e.getSource() instanceof Player) {
-                Player player = (Player) e.getSource();
-                player.MoveToField(0);                
+    @Override
+    public String toString() {
+        return name;
+    }
 
+    private final ICard GoToGO = new ICard() {
+        @Override
+        public String actionPerformed(Player player) {
+            player.MoveToField(0);
+            return "Go to GO collect $$$\n";
+        }
+    };
+
+    private final ICard GoToRandom = new ICard() {
+        @Override
+        public String actionPerformed(Player player) {
+            int r = rand.nextInt(BoardCore.getFieldsOnBoard().size());
+            player.MoveToField(r);
+            return String.format("Go to %s\n", BoardCore.getFieldsOnBoard().get(r).toString());
+        }
+    };
+
+    private final ICard GoToNextStation = new ICard() {
+        @Override
+        public String actionPerformed(Player player) {
+            int remainder = Math.floorMod(player.getBoardPlace(), 10);
+            int modulo = Math.floorDiv(player.getBoardPlace(), 10);
+            int newPlace;
+            if (remainder < 5) {
+                newPlace = modulo * 10 + Math.abs(5 - remainder);
             } else {
-                throw new ClassCastException("Action has got not a player"); //To change body of generated methods, choose Tools | Templates.
+                newPlace = modulo * 10 + Math.abs(15 - remainder);
             }
+            player.Move(newPlace);
+            return String.format("Advance To %s", BoardCore.getFieldsOnBoard().get(newPlace).toString());
         }
     };
 

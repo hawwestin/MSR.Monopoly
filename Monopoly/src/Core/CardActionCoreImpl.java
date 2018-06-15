@@ -23,21 +23,31 @@
  */
 package Core;
 
-import GameMechanics.ICard;
+import GameMechanics.ICardCollection;
 
+/**
+ * Specialize implementation of ActionCore. This place holds list of cards for
+ * player to be randomly selected after playe Step on it. 
+ *
+ * @author Michal
+ */
 public class CardActionCoreImpl extends ActionCore {
 
-    private final ICard _cards;
+    private final ICardCollection _cards;
 
-    public CardActionCoreImpl(String name, ICard cards) {
+    /**
+     * Create new CardAction core logic class.
+     * @param name name to be displayed on board
+     * @param cards ICardCollcetion with cards list.
+     */
+    public CardActionCoreImpl(String name, ICardCollection cards) {
         super(name);
         _cards = cards;
     }
 
     @Override
-    public void StepAction(Player guest) {
-        super.StepAction(guest); //To change body of generated methods, choose Tools | Templates.
-        _cards.MakeAction(guest);
+    public String StepAction(Player guest) {
+        return String.format("%s: %s", _cards.toString(), _cards.MakeAction(guest));
     }
 
 }

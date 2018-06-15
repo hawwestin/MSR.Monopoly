@@ -50,16 +50,17 @@ public class GameWindow extends javax.swing.JPanel {
         JTALog.setEditable(false);
     }
 
-//    @Override
-//    protected void paintComponent(Graphics g) {
-//        super.paintComponent(g);
-//    }
-//
-//    @Override
-//    public Dimension getPreferredSize() {
-//        return (new Dimension(600, 600));
-////        return ViewerBoard.getSize();
-//    }
+    public void TextLog(String msg) {
+        if (msg.isEmpty()){
+            return;
+        }
+        if (msg.endsWith("\n")) {
+            JTALog.append(msg);
+        } else {
+            JTALog.append(msg + "\n");
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -210,37 +211,33 @@ public class GameWindow extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBThrowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBThrowActionPerformed
-        // TODO add your handling code here:        
         int way;
         try {
             way = Dice.Throw();
         } catch (DiceThrowed ex) {
-            JTALog.append(ex.getMessage());
+            TextLog(ex.getMessage());
             return;
         } catch (DiceJail ex) {
-            JTALog.append(ex.getMessage());
+            TextLog(ex.getMessage());
             return;
             //todo go to Jail
         }
-        // if _d1=d2 dublet!
         if (Dice.getDice1() == Dice.getDice2()) {
-            JTALog.append(String.format("Throwed %d and %d -> %d DUBEL!\n", Dice.getDice1(), Dice.getDice2(), way));
+            TextLog(String.format("Throwed %d and %d -> %d DUBEL!\n", Dice.getDice1(), Dice.getDice2(), way));
         } else {
-            JTALog.append(String.format("Throwed %d and %d -> %d\n",Dice.getDice1(), Dice.getDice2(), way));
+            TextLog(String.format("Throwed %d and %d -> %d\n", Dice.getDice1(), Dice.getDice2(), way));
         }
-        PlayersLoop.getCurrentPlayer().Move(way);
-        PlayersLoop.getPositions().put(PlayersLoop.getCurrentPlayer(), way);
+        TextLog(PlayersLoop.getCurrentPlayer().Move(way));
         board.Repaint();
     }//GEN-LAST:event_JBThrowActionPerformed
 
     private void JBEndTurnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEndTurnActionPerformed
-        // TODO add your handling code here:        
         if (!Dice.isThrowed()) {
-            JTALog.append("You have to throw the dice\n");
+            TextLog("You have to throw the dice\n");
             return;
         }
         PlayersLoop.iterator().next();
-        JTALog.append(String.format("Current player %s (%d$)\n", PlayersLoop.getCurrentPlayer().toString(), PlayersLoop.getCurrentPlayer().GetMoney()));
+        TextLog(String.format("Current player %s (%d$)\n", PlayersLoop.getCurrentPlayer().toString(), PlayersLoop.getCurrentPlayer().GetMoney()));
         Dice.Reset();
     }//GEN-LAST:event_JBEndTurnActionPerformed
 

@@ -30,6 +30,6 @@ import Core.Player;
  * @author Michal
  */
 public interface ICard {
-    public void MakeAction(Player guest);
     
+    public String actionPerformed(Player player);
 }

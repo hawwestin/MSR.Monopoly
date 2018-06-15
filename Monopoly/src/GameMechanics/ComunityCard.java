@@ -24,20 +24,18 @@
 package GameMechanics;
 
 import Core.Player;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Random;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 
 /**
  *
  * @author Michal
  */
-public class ComunityCard implements ICard {
+public class ComunityCard implements ICardCollection {
 
-    private ArrayList<Action> list;
+    private ArrayList<ICard> list;
     private Random rand;
+    private final String name = "Comunit Chest";
 
     public ComunityCard() {
         this.list = makeList();
@@ -45,33 +43,32 @@ public class ComunityCard implements ICard {
     }
 
     @Override
-    public void MakeAction(Player guest) {
-        ActionEvent aaa = new ActionEvent(guest, 0, "");
+    public String MakeAction(Player guest) {
         int r = rand.nextInt(list.size());
-        list.get(r).actionPerformed(aaa);
+        return list.get(r).actionPerformed(guest);
     }
 
-    private ArrayList<Action> makeList() {
-        ArrayList<Action> innerList;
+    private ArrayList<ICard> makeList() {
+        ArrayList<ICard> innerList;
         innerList = new ArrayList<>();
 
-        innerList.add(LotteryWiner);
-        innerList.add(LotteryWiner);
-        innerList.add(LotteryWiner);
+        innerList.add(LottoWiner);
+        innerList.add(LottoWiner);
+        innerList.add(LottoWiner);
 
         return innerList;
     }
 
-    private final Action LotteryWiner = new AbstractAction() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (e.getSource() instanceof Player) {
-                Player player = (Player) e.getSource();
-                player.EarnMoney(25);
+    @Override
+    public String toString() {
+        return name;
+    }
 
-            } else {
-                throw new ClassCastException("Action has got not a player"); //To change body of generated methods, choose Tools | Templates.
-            }
+    private final ICard LottoWiner = new ICard() {
+        @Override
+        public String actionPerformed(Player player) {
+            player.EarnMoney(25);
+            return "You won on Lottery 25$\n";
         }
     };
 

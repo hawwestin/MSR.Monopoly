@@ -25,6 +25,7 @@ public class Player {
     private String _name;
     private BufferedImage playerIcon;
     private ImagePanel _imagePanel;
+    private int _jailBreak;
 
     public void setColor(Color color) {
         _color = color;
@@ -45,8 +46,14 @@ public class Player {
     public int getPlayerNumber() {
         return _playerNumber;
     }
-    
-    
+
+    public int getJailBreak() {
+        return _jailBreak;
+    }
+
+    public void setJailBreak(int _jailBreak) {
+        this._jailBreak = _jailBreak;
+    }
 
     public Player(int number, String name, Color color, BufferedImage icon) {
         money = Settings.StartAmountOfMoney;
@@ -57,7 +64,7 @@ public class Player {
         _boardCore = new BoardCore(0);
         _imagePanel = new ImagePanel(0, 0, icon, name);
         _imagePanel.Resize(Settings.SizeOfIconOnBoard, Settings.SizeOfIconOnBoard);
-        _imagePanel.setyOffset(number*Settings.SizeOfIconOnBoard);
+        _imagePanel.setyOffset(number * Settings.SizeOfIconOnBoard);
     }
 
     @Override
@@ -96,16 +103,25 @@ public class Player {
         this.playerIcon = playerIcon;
     }
     
-    public void MoveToField(int placeId){
-        _boardCore.setCursor(placeId);
-        BoardCore.getFieldsOnBoard().get(placeId).MoveOver(this);
-        BoardCore.getFieldsOnBoard().get(_boardCore.getCursor()).StepAction(this);
+    public int getBoardPlace(){
+        return _boardCore.getCursor();
     }
 
-    public void Move(int diceValue) {
+    public String MoveToField(int placeId) {
+        _boardCore.setCursor(placeId);
+        BoardCore.getFieldsOnBoard().get(placeId).MoveOver(this);
+        return BoardCore.getFieldsOnBoard().get(_boardCore.getCursor()).StepAction(this);
+    }
+
+    public String Move(int diceValue) {
+        String msg = "";
         for (int i = 0; i < diceValue; i++) {
             _boardCore.iterator().next().MoveOver(this);
+            if(getBoardPlace()==0){
+                msg="Pass Go! Collect 200$\n";
+            }
         }
-        BoardCore.getFieldsOnBoard().get(_boardCore.getCursor()).StepAction(this);
+        msg = msg.concat(BoardCore.getFieldsOnBoard().get(_boardCore.getCursor()).StepAction(this));
+        return msg;
     }
 }

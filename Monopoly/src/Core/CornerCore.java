@@ -9,15 +9,23 @@ import UI.BaseField;
 import UI.CornerField;
 import java.awt.Color;
 
+/**
+ * Corner field logic Class. 
+ * @author Michal
+ */
 public abstract class CornerCore extends BasePlace {
 
+    /**
+     * Create new CornerCore object
+     * @param name
+     */
     public CornerCore(String name) {
         super(name);
     }
 
     @Override
-    public void StepAction(Player guest) {
-    
+    public String StepAction(Player guest) {
+     return "";
     }
 
     @Override
