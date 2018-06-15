@@ -73,23 +73,23 @@ public abstract class BaseField implements Painter {
 
     //todo movement animation
     public void DrawPlayer(Player player) {
-        player.getImagePanel().setRotate(rotate);
+        player.getCounterPanel().setRotate(rotate);
         switch (rotate) {
             case 0:
-                player.getImagePanel().setxOffset(xOffset);
-                player.getImagePanel().setyOffset(yOffset + player.getPlayerNumber() * Settings.SizeOfIconOnBoard + 50);
+                player.getCounterPanel().setxOffset(xOffset);
+                player.getCounterPanel().setyOffset(yOffset + player.getPlayerNumber() * Settings.SizeOfIconOnBoard + 50);
                 break;
             case 1:
-                player.getImagePanel().setxOffset(xOffset - player.getPlayerNumber() * Settings.SizeOfIconOnBoard - 50);
-                player.getImagePanel().setyOffset(yOffset);
+                player.getCounterPanel().setxOffset(xOffset - player.getPlayerNumber() * Settings.SizeOfIconOnBoard - 50);
+                player.getCounterPanel().setyOffset(yOffset);
                 break;
             case 2:
-                player.getImagePanel().setxOffset(xOffset);
-                player.getImagePanel().setyOffset(yOffset - player.getPlayerNumber() * Settings.SizeOfIconOnBoard - 50);
+                player.getCounterPanel().setxOffset(xOffset);
+                player.getCounterPanel().setyOffset(yOffset - player.getPlayerNumber() * Settings.SizeOfIconOnBoard - 50);
                 break;
             case 3:
-                player.getImagePanel().setxOffset(xOffset + player.getPlayerNumber() * Settings.SizeOfIconOnBoard + 50);
-                player.getImagePanel().setyOffset(yOffset);
+                player.getCounterPanel().setxOffset(xOffset + player.getPlayerNumber() * Settings.SizeOfIconOnBoard + 50);
+                player.getCounterPanel().setyOffset(yOffset);
                 break;
         }
     }

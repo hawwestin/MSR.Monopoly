@@ -10,15 +10,28 @@ import UI.UtilitiesField;
 import java.awt.Color;
 
 /**
+ * Special field on game board with difrent rent calculation.
  *
  * @author michal
  */
 public abstract class UtilitiesCore extends BasePlace implements BuyAble {
 
+    /**
+     * The owner of this game board field.
+     */
     protected Player owner;
     private int _price;
+
+    /**
+     * Value of field rent.
+     */
     protected int _rent;
 
+    /**
+     * Create new abstract object of utilites common logic.
+     * @param name
+     * @param price
+     */
     public UtilitiesCore(String name, int price) {
         super(name);
         _price = price;

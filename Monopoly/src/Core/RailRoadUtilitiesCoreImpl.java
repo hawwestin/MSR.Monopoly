@@ -36,6 +36,11 @@ public class RailRoadUtilitiesCoreImpl extends UtilitiesCore {
 
     private static ArrayList<RailRoadUtilitiesCoreImpl> _railroad = new ArrayList<RailRoadUtilitiesCoreImpl>();
 
+    /**
+     * create new Railroad object with given name and base price.
+     * @param name
+     * @param price
+     */
     public RailRoadUtilitiesCoreImpl(String name, int price) {
         super(name, price);
         _railroad.add(this);

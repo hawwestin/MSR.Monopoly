@@ -23,9 +23,16 @@
  */
 package Core;
 
-
+/**
+ * Basci Croner logic implementations for plain non action corners. 
+ * @author Michal
+ */
 public class CornerCoreImpl extends CornerCore {
 
+    /**
+     * create new object.
+     * @param name
+     */
     public CornerCoreImpl(String name) {
         super(name);
     }

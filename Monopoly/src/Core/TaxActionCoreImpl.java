@@ -23,19 +23,32 @@
  */
 package Core;
 
+/**
+ * Field on game board with action. When player step on the field fixed amount
+ * from the player's account will be deducted.
+ *
+ * @author Michal
+ */
 public class TaxActionCoreImpl extends ActionCore {
 
     private int _tax;
 
+    /**
+     * Create new field object. Given value will be taken from the account on
+     * player entrance
+     *
+     * @param name
+     * @param tax
+     */
     public TaxActionCoreImpl(String name, int tax) {
         super(name);
         _tax = tax;
     }
 
     @Override
-    public String StepAction(Player guest) {        
+    public String StepAction(Player guest) {
         guest.Pay(_tax);
-        return String.format("You have to Pay %d$ Tax\n" , _tax);
+        return String.format("You have to Pay %d$ Tax\n", _tax);
     }
 
 }

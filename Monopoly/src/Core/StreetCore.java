@@ -30,14 +30,28 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Street instance. Street can be buy and sold by a player form bank or other
+ * player. If player have color set of the street he can buy some houses or
+ * hotel on it. If other player step on the field he will pay rent to the onwer.
+ * Rent is calculated based on current construcion and street pricing 
+ *
+ * @author Michal
+ */
 public class StreetCore extends BasePlace implements BuyAble {
 
     private Player owner;
     private final FieldInit _pricing;
-    public Color color;
+    private Color color;
     private static List<StreetCore> _streets = new ArrayList<>();
     private Constructions _construction;
 
+    /**
+     * Create new object of streetCore 
+     * @param name
+     * @param color
+     * @param pricing
+     */
     public StreetCore(String name, Color color, FieldInit pricing) {
         super(name);
         this.color = color;
@@ -55,6 +69,24 @@ public class StreetCore extends BasePlace implements BuyAble {
         }
         return String.format("Steped on unowned %s", this.toString());
     }
+
+    /**
+     * Get street tile color 
+     * @return
+     */
+    public Color getColor() {
+        return color;
+    }        
+
+    /**
+     * Set street tile color
+     * @param color
+     */
+    public void setColor(Color color) {
+        this.color = color;
+    }
+    
+    
 
     @Override
     public void MoveOver(Player guest) {
@@ -82,7 +114,7 @@ public class StreetCore extends BasePlace implements BuyAble {
 
     private boolean HasColorSet() {
         for (StreetCore street : _streets) {
-            if (street.color == this.color && street.owner != this.owner) {
+            if (street.getColor() == this.color && street.owner != this.owner) {
                 return false;
             }
         }

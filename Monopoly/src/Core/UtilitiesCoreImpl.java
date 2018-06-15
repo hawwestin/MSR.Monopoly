@@ -29,7 +29,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Class for Fields like Water and electricity utilities
+ * Class for Fields like Water and electricity utilities Rent calculatiuon based
+ * on dice thrown value.
  *
  * @author Michal
  */
@@ -37,6 +38,11 @@ public class UtilitiesCoreImpl extends UtilitiesCore {
 
     private static ArrayList<UtilitiesCoreImpl> _utilities = new ArrayList<UtilitiesCoreImpl>();
 
+    /**
+     * create new utilities object
+     * @param name
+     * @param price
+     */
     public UtilitiesCoreImpl(String name, int price) {
         super(name, price);
         _utilities.add(this);

@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
+ * A set of values for payments that can be made on the.  
  * @author Michal
  */
 public class FieldInit {
@@ -43,6 +43,17 @@ public class FieldInit {
     private final int building;
     private final Map<Constructions, Integer> rentMap;
 
+    /**
+     * Init values of payments. 
+     * @param price
+     * @param groundRent
+     * @param house1
+     * @param house2
+     * @param house3
+     * @param house4
+     * @param hotel
+     * @param building
+     */
     public FieldInit(int price, int groundRent, int house1, int house2, int house3, int house4, int hotel, int building) {
         this.price = price;
         this.rent = groundRent;
@@ -65,38 +76,74 @@ public class FieldInit {
         };
     }
 
+    /**
+     * Get Agregated Payments map 
+     * @return
+     */
     public Map<Constructions, Integer> getRentMap() {
         return rentMap;
     }
 
+    /**
+     * Get Field price
+     * @return
+     */
     public int getPrice() {
         return price;
     }
 
+    /**
+     * get basic value of rent.
+     * @return
+     */
     public int getRent() {
         return rent;
     }
 
+    /**
+     * rent value with one house
+     * @return
+     */
     public int getHouse1() {
         return house1;
     }
 
+    /**
+     * rent value with two house
+     * @return
+     */
     public int getHouse2() {
         return house2;
     }
 
+    /**
+     * rent value with three house
+     * @return
+     */
     public int getHouse3() {
         return house3;
     }
 
+    /**
+     * rent value with four house
+     * @return
+     */
     public int getHouse4() {
         return house4;
     }
 
+    /**
+     * rent value with hotel
+     * @return
+     */
     public int getHotel() {
         return hotel;
     }
 
+    /**
+     * get price of single building construcion.
+     * @return
+     */
     public int getBuilding() {
         return building;
     }

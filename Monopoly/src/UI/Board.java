@@ -115,7 +115,7 @@ public class Board {
 
     public void makePlayersLayer(int layer) {
         for (Player player : PlayersLoop.getPlayers()) {
-            _viewer.addPainter(player.getImagePanel(),layer);
+            _viewer.addPainter(player.getCounterPanel(),layer);
         }
     }
 
