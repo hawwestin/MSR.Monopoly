@@ -60,7 +60,7 @@ public class StreetField extends BaseField implements Painter {
         g.setStroke(new BasicStroke(3));
         g.drawRect(xOffset, yOffset, width, 50);
         g.setColor(_place.getColor());
-        g.fillRect(xOffset + 1, yOffset + 1, width - 2, 48);
+        g.fillRect(xOffset + 1, yOffset + 1, width - 3, 48);
 
         SetFieldName(g);
         SetPrice(g, _place.getPrice());

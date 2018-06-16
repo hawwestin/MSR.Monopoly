@@ -67,6 +67,10 @@ public class Player {
         _counterPanel.setyOffset(number * Settings.SizeOfIconOnBoard);
     }
 
+    /**
+     * Return owned by player fields
+     * @return
+     */
     public ArrayList<BuyAble> getPossession() {
         return possession;
     }

@@ -83,6 +83,10 @@ public class PlayersLoop {
         //todo shuffle players order based on initial dice throw 
     }
 
+    /**
+     * Remove Player who run out of money
+     * @param player
+     */
     public static void RemoveBankrupt(Player player) {
         if (getPlayers().indexOf(player) > 0) {
             currentPlayer = getPlayers().get(getPlayers().indexOf(currentPlayer) - 1);

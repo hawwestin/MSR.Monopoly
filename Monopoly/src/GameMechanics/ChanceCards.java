@@ -95,7 +95,7 @@ public class ChanceCards implements ICardCollection {
     private final ICard GoToRandom = new ICard() {
         @Override
         public String actionPerformed(Player player) {
-            int r = rand.nextInt(BoardCore.getFieldsOnBoard().size() - 1) + 1;
+            int r = rand.nextInt(BoardCore.getFieldsOnBoard().size() -1) ;
             String msg = String.format("Go to %s\n", BoardCore.getFieldsOnBoard().get(r).toString());
             player.MoveToField(r);
             msg = msg.concat(BoardCore.getFieldsOnBoard().get(player.getBoardPlace()).StepAction(player));

@@ -61,7 +61,7 @@ public class Board {
 //        _viewer.addPainter(map, 0); //ToDO Board Image as option as thing to by played or clean graphics.
         // Player Icons should be top layer np 9.  All graphics is 1 so to board by on to set 2
 
-        _viewer.setDisplayedWorldArea(_innerBoardLength, _innerBoardLength, -_innerBoardLength, -_innerBoardLength);
+        ResetWorldView();        
     }
 
     /**
@@ -71,6 +71,14 @@ public class Board {
      */
     public int getInnerBoardLength() {
         return _innerBoardLength;
+    }
+    
+    /**
+     *
+     */
+    public void ResetWorldView(){
+        _viewer.resetTransform();
+        _viewer.setDisplayedWorldArea(_innerBoardLength-300, _innerBoardLength-300, 300-_innerBoardLength, 300-_innerBoardLength);
     }
 
     /**

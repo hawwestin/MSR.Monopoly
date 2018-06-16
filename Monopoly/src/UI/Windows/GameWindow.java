@@ -94,6 +94,9 @@ public class GameWindow extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * End the game by blocking buttons
+     */
     public void EndGame() {
         JBBuy.setEnabled(false);
         JBEndTurn.setEnabled(false);
@@ -316,6 +319,7 @@ public class GameWindow extends javax.swing.JPanel {
 
     private void JBResetViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBResetViewActionPerformed
         // TODO add your handling code here:
+        _board.ResetWorldView();
     }//GEN-LAST:event_JBResetViewActionPerformed
 
     private void JBBuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBBuyActionPerformed
