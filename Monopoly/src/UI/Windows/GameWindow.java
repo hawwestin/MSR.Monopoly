@@ -23,6 +23,9 @@
  */
 package UI.Windows;
 
+import Core.BasePlace;
+import Core.BoardCore;
+import Core.BuyAble;
 import GameMechanics.Dice;
 import GameMechanics.DiceJail;
 import GameMechanics.DiceThrowed;
@@ -35,20 +38,22 @@ import java.awt.Dimension;
 import javax.swing.JLabel;
 
 /**
- * Window with game board displayed for players to interact and play with it.
+ * Window with game _board displayed for players to interact and play with it.
+ *
  * @author Michal
  */
 public class GameWindow extends javax.swing.JPanel {
 
     private final Viewer ViewerBoard;
-    private final Board board;
+    private final Board _board;
 
     /**
-     * Return game board graphics managment class
+     * Return game _board graphics managment class
+     *
      * @return
      */
     public Board getBoard() {
-        return board;
+        return _board;
     }
 
     /**
@@ -59,7 +64,7 @@ public class GameWindow extends javax.swing.JPanel {
 
         ViewerBoard = new Viewer();
         ViewerBoard.setPreferredSize(new Dimension(1000, 1000));
-        board = new Board(ViewerBoard);
+        _board = new Board(ViewerBoard);
 
         JPboard.setLayout(new BorderLayout());
         JPboard.add(ViewerBoard, BorderLayout.CENTER);
@@ -70,14 +75,16 @@ public class GameWindow extends javax.swing.JPanel {
         JPboard.setVisible(true);
 
         JTALog.setEditable(false);
+        JBBuy.setEnabled(false);
     }
 
     /**
-     * Fix uup given message to be added to Text Log. 
+     * Fix uup given message to be added to Text Log.
+     *
      * @param msg
      */
     public void TextLog(String msg) {
-        if (msg.isEmpty()){
+        if (msg.isEmpty()) {
             return;
         }
         if (msg.endsWith("\n")) {
@@ -238,13 +245,16 @@ public class GameWindow extends javax.swing.JPanel {
 
     private void JBThrowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBThrowActionPerformed
         int way;
+
         try {
             way = Dice.Throw();
         } catch (DiceThrowed ex) {
             TextLog(ex.getMessage());
+            JBThrow.setEnabled(false);
             return;
         } catch (DiceJail ex) {
             TextLog(ex.getMessage());
+            JBThrow.setEnabled(false);
             return;
             //todo go to Jail
         }
@@ -254,7 +264,25 @@ public class GameWindow extends javax.swing.JPanel {
             TextLog(String.format("Throwed %d and %d -> %d\n", Dice.getDice1(), Dice.getDice2(), way));
         }
         TextLog(PlayersLoop.getCurrentPlayer().Move(way));
-        board.Repaint();
+        _board.Repaint();
+        
+        if (Dice.isThrowed()) {
+            JBThrow.setEnabled(false);
+        }
+
+        BasePlace tmpField = BoardCore.getFieldsOnBoard().get(PlayersLoop.getCurrentPlayer().getBoardPlace());
+        if (tmpField instanceof BuyAble) {
+            BuyAble baField = (BuyAble) tmpField;
+            if (baField.getOwner() == null) {
+                if (baField.getPrice() <= PlayersLoop.getCurrentPlayer().GetMoney()) {
+                    JBBuy.setEnabled(true);
+                }
+            }
+        } else {
+            JBBuy.setEnabled(false);
+        }
+
+
     }//GEN-LAST:event_JBThrowActionPerformed
 
     private void JBEndTurnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEndTurnActionPerformed
@@ -265,6 +293,7 @@ public class GameWindow extends javax.swing.JPanel {
         PlayersLoop.iterator().next();
         TextLog(String.format("Current player %s (%d$)\n", PlayersLoop.getCurrentPlayer().toString(), PlayersLoop.getCurrentPlayer().GetMoney()));
         Dice.Reset();
+        JBThrow.setEnabled(true);
     }//GEN-LAST:event_JBEndTurnActionPerformed
 
     private void JBResetViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBResetViewActionPerformed
@@ -272,7 +301,14 @@ public class GameWindow extends javax.swing.JPanel {
     }//GEN-LAST:event_JBResetViewActionPerformed
 
     private void JBBuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBBuyActionPerformed
-        // TODO add your handling code here:
+        BasePlace tmpField = BoardCore.getFieldsOnBoard().get(PlayersLoop.getCurrentPlayer().getBoardPlace());
+        if (tmpField instanceof BuyAble) {
+            BuyAble baField = (BuyAble) tmpField;
+            PlayersLoop.getCurrentPlayer().Buy(baField, baField.getPrice());
+            TextLog(String.format("%s bought %s for %d.", PlayersLoop.getCurrentPlayer().toString(), tmpField.toString(), baField.getPrice()));
+            _board.Repaint();
+            JBBuy.setEnabled(false);
+        }
     }//GEN-LAST:event_JBBuyActionPerformed
 
     private void JBShowFieldInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBShowFieldInfoActionPerformed

@@ -52,12 +52,19 @@ public interface BuyAble {
      * Charge funds from the player's account
      * @param buyer
      */
-    public void Buy(Player buyer);
+    public void setOwner(Player buyer);
 
     /**
      * Return getPrice
      * @return
      */
     public int getPrice();    
+    
+    /**
+     * Get Owner of current field or Null if unowned
+     * @return
+     */
+    public Player getOwner();
+    
     
 }

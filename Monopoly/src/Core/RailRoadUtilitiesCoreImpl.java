@@ -38,6 +38,7 @@ public class RailRoadUtilitiesCoreImpl extends UtilitiesCore {
 
     /**
      * create new Railroad object with given name and base price.
+     *
      * @param name
      * @param price
      */

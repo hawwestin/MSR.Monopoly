@@ -96,8 +96,10 @@ public class ChanceCards implements ICardCollection {
         @Override
         public String actionPerformed(Player player) {
             int r = rand.nextInt(BoardCore.getFieldsOnBoard().size() - 1) + 1;
+            String msg = String.format("Go to %s\n", BoardCore.getFieldsOnBoard().get(r).toString());
             player.MoveToField(r);
-            return String.format("Go to %s\n", BoardCore.getFieldsOnBoard().get(r).toString());
+            msg = msg.concat(BoardCore.getFieldsOnBoard().get(player.getBoardPlace()).StepAction(player));
+            return msg;
         }
     };
 

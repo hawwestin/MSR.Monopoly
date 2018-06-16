@@ -34,7 +34,7 @@ import java.util.List;
  * Street instance. Street can be buy and sold by a player form bank or other
  * player. If player have color set of the street he can buy some houses or
  * hotel on it. If other player step on the field he will pay rent to the onwer.
- * Rent is calculated based on current construcion and street pricing 
+ * Rent is calculated based on current construcion and street pricing
  *
  * @author Michal
  */
@@ -47,7 +47,8 @@ public class StreetCore extends BasePlace implements BuyAble {
     private Constructions _construction;
 
     /**
-     * Create new object of streetCore 
+     * Create new object of streetCore
+     *
      * @param name
      * @param color
      * @param pricing
@@ -65,28 +66,31 @@ public class StreetCore extends BasePlace implements BuyAble {
         if (owner != guest && owner != null) {
             guest.Pay(getRent());
             owner.EarnMoney(getRent());
-            return String.format("Pay %d to player %s who owns %s", getRent(), owner.toString(), this.toString());
+            return String.format("Pay %d$ to player %s who owns %s", getRent(), owner.toString(), this.toString());
+        }
+        if (owner == guest) {
+            return String.format("Steped on your property %s", this.toString());
         }
         return String.format("Steped on unowned %s", this.toString());
     }
 
     /**
-     * Get street tile color 
+     * Get street tile color
+     *
      * @return
      */
     public Color getColor() {
         return color;
-    }        
+    }
 
     /**
      * Set street tile color
+     *
      * @param color
      */
     public void setColor(Color color) {
         this.color = color;
     }
-    
-    
 
     @Override
     public void MoveOver(Player guest) {
@@ -99,9 +103,8 @@ public class StreetCore extends BasePlace implements BuyAble {
     }
 
     @Override
-    public void Buy(Player buyer) {
+    public void setOwner(Player buyer) {
         owner = buyer;
-        buyer.Buy(this, getPrice());
     }
 
     @Override
@@ -150,5 +153,10 @@ public class StreetCore extends BasePlace implements BuyAble {
     @Override
     public void Sell(Player buyer, int price) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Player getOwner() {
+        return owner;
     }
 }

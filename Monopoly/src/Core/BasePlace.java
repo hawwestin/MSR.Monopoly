@@ -34,7 +34,7 @@ import java.awt.Color;
  */
 public abstract class BasePlace {
 
-    private final String _name;
+    private final String _name;    
 
     /**
      * Object of painted tail graphics on board.

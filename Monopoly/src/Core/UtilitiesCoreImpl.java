@@ -40,6 +40,7 @@ public class UtilitiesCoreImpl extends UtilitiesCore {
 
     /**
      * create new utilities object
+     *
      * @param name
      * @param price
      */
@@ -60,7 +61,13 @@ public class UtilitiesCoreImpl extends UtilitiesCore {
                 map.put(util.owner, 1);
             }
         }
-        return (Dice.getDice1() + Dice.getDice2()) * map.get(owner) == 2 ? 10 : 4;
+        return ((Dice.getDice1() + Dice.getDice2()) *( map.get(owner) == 2 ? 10 : 4));
 
     }
+
+    @Override
+    public Player getOwner() {
+        return owner;
+    }
 }
+

@@ -23,6 +23,7 @@
  */
 package Core;
 
+import GameMechanics.PlayersLoop;
 import GameMechanics.Settings;
 import UI.ImagePanel;
 import java.awt.Color;
@@ -30,14 +31,15 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
- * Instance of a single player. 
+ * Instance of a single player.
+ *
  * @author Michal
  */
 public class Player {
 
     private int money;
     private Color _color;
-    private ArrayList<BasePlace> possession = new ArrayList<BasePlace>();
+    private ArrayList<BuyAble> possession = new ArrayList<BuyAble>();
     private BoardCore _boardCore;
     private final int _playerNumber;
     private String _name;
@@ -47,6 +49,7 @@ public class Player {
 
     /**
      * Give color to the player. Color should not be changed after game began
+     *
      * @param color
      */
     public void setColor(Color color) {
@@ -55,6 +58,7 @@ public class Player {
 
     /**
      * Pass current color of the player
+     *
      * @return
      */
     public Color getColor() {
@@ -62,7 +66,9 @@ public class Player {
     }
 
     /**
-     * Set new value of player name. Name should not be changed after game began.
+     * Set new value of player name. Name should not be changed after game
+     * began.
+     *
      * @param _name
      */
     public void setName(String _name) {
@@ -71,6 +77,7 @@ public class Player {
 
     /**
      * Get graphics instance of player counter
+     *
      * @return
      */
     public ImagePanel getCounterPanel() {
@@ -79,6 +86,7 @@ public class Player {
 
     /**
      * Return player number. This is may not be player order value.
+     *
      * @return
      */
     public int getPlayerNumber() {
@@ -87,6 +95,7 @@ public class Player {
 
     /**
      * Is player in Jail
+     *
      * @return
      */
     public boolean getJailBreak() {
@@ -95,6 +104,7 @@ public class Player {
 
     /**
      * Change the player's state of residence in Jail
+     *
      * @param _jailBreak
      */
     public void setJailBreak(boolean _jailBreak) {
@@ -103,6 +113,7 @@ public class Player {
 
     /**
      * Create new object of Player.
+     *
      * @param number
      * @param name
      * @param color
@@ -127,6 +138,7 @@ public class Player {
 
     /**
      * Return current value of player money
+     *
      * @return
      */
     public int GetMoney() {
@@ -134,44 +146,52 @@ public class Player {
     }
 
     /**
-     * Increase the value of player money
-     * @param salary
-     */
-    public void EarnMoney(int salary) {
-        money += salary;
-        //todo end game if money<0;
-    }
-
-    /**
      * Add place to player possesion list at a given price.
+     *
      * @param place
      * @param price
      */
-    public void Buy(BasePlace place, int price) {
+    public void Buy(BuyAble place, int price) {
         possession.add(place);
+        place.setOwner(this);
         money -= price;
     }
 
     /**
-     * Sell given place back to bank for a given price that will be added to player account.
+     * Sell given place back to bank for a given price that will be added to
+     * player account.
+     *
      * @param place
      * @param income
      */
-    public void Sell(BasePlace place, int income) {
+    public void Sell(BuyAble place, int income) {
         possession.remove(place);
         money += income;
     }
 
     /**
+     * Increase the value of player money
+     *
+     * @param salary
+     */
+    public void EarnMoney(int salary) {
+        money += salary;
+    }
+
+    /**
      * Decrease player money
+     *
      * @param amount
      */
     public void Pay(int amount) {
         money -= amount;
+        //todo end game if money<0;
+//        PlayersLoop.getPlayers().remove(this);
     }
 
     /**
      * Image of chosen player counter
+     *
      * @return
      */
     public BufferedImage getPlayerCounter() {
@@ -180,22 +200,25 @@ public class Player {
 
     /**
      * Set new value of counter
+     *
      * @param playerIcon
      */
     public void setPlayerIcon(BufferedImage playerIcon) {
         this.playerCounter = playerIcon;
     }
-    
+
     /**
      * Return current player place on board
+     *
      * @return
      */
-    public int getBoardPlace(){
+    public int getBoardPlace() {
         return _boardCore.getCursor();
     }
 
     /**
      * Move player counter directly to requested place on game board
+     *
      * @param placeId
      * @return
      */
@@ -207,6 +230,7 @@ public class Player {
 
     /**
      * Move player counter to a given place on game board
+     *
      * @param diceValue
      * @return
      */
@@ -214,8 +238,8 @@ public class Player {
         String msg = "";
         for (int i = 0; i < diceValue; i++) {
             _boardCore.iterator().next().MoveOver(this);
-            if(getBoardPlace()==0){
-                msg="Pass Go! Collect 200$\n";
+            if (getBoardPlace() == 0) {
+                msg = "Pass Go! Collect 200$\n";
             }
         }
         msg = msg.concat(BoardCore.getFieldsOnBoard().get(_boardCore.getCursor()).StepAction(this));

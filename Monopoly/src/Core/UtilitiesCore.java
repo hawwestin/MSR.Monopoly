@@ -29,6 +29,7 @@ public abstract class UtilitiesCore extends BasePlace implements BuyAble {
 
     /**
      * Create new abstract object of utilites common logic.
+     *
      * @param name
      * @param price
      */
@@ -43,6 +44,9 @@ public abstract class UtilitiesCore extends BasePlace implements BuyAble {
             guest.Pay(getRent());
             owner.EarnMoney(getRent());
             return String.format("Pay %d to player %s who owns %s", getRent(), owner.toString(), this.toString());
+        }
+        if (owner == guest) {
+            return String.format("Steped on your property %s", this.toString());
         }
         return String.format("Steped on unowned %s", this.toString());
     }
@@ -88,9 +92,12 @@ public abstract class UtilitiesCore extends BasePlace implements BuyAble {
     }
 
     @Override
-    public void Buy(Player buyer) {
+    public void setOwner(Player buyer) {
         owner = buyer;
-        buyer.Buy(this, _price);
     }
 
+    @Override
+    public Player getOwner() {
+        return owner;
+    }
 }

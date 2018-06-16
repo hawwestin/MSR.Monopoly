@@ -226,7 +226,7 @@ public abstract class BaseField implements Painter {
     public void paint(Graphics2D g, AffineTransform worldToScreen, double w, double h) {
         Rectangle2D border = new Rectangle2D.Double(xOffset, yOffset, width, height);
         g.rotate((Math.PI / 2) * rotate, xOffset, yOffset);
-        g.setStroke(new BasicStroke(3));
+        g.setStroke(new BasicStroke(5));
         g.setColor(_place.BorderColor());
         g.draw(border);
     }
