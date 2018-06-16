@@ -74,7 +74,7 @@ public class Board {
     }
     
     /**
-     *
+     * Reset world camera to defaul view
      */
     public void ResetWorldView(){
         _viewer.resetTransform();

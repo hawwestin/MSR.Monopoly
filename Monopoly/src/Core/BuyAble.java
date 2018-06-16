@@ -44,6 +44,7 @@ public interface BuyAble {
     /**
      * Sell field to other player
      * @param buyer
+     * @param price
      */
     public void Sell(Player buyer, int price);
 

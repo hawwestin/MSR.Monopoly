@@ -113,7 +113,7 @@ public class ImagePanel extends JComponent implements Painter {
     /**
      * Create new object ImagePanel from pre loaded Image.
      *
-     s* @param xOffset
+     * @param xOffset
      * @param yOffset
      * @param image
      * @param toolTipText
@@ -128,6 +128,7 @@ public class ImagePanel extends JComponent implements Painter {
 
     /**
      * Resize displayed image to new width and hight
+     *
      * @param width
      * @param height
      */
