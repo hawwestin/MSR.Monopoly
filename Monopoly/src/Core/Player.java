@@ -48,6 +48,30 @@ public class Player {
     private boolean _jailBreak;
 
     /**
+     * Create new object of Player.
+     *
+     * @param number
+     * @param name
+     * @param color
+     * @param icon
+     */
+    public Player(int number, String name, Color color, BufferedImage icon) {
+        money = Settings.StartAmountOfMoney;
+        _playerNumber = number;
+        playerCounter = icon;
+        _name = name;
+        _color = color;
+        _boardCore = new BoardCore(0);
+        _counterPanel = new ImagePanel(0, 0, icon, name);
+        _counterPanel.Resize(Settings.SizeOfIconOnBoard, Settings.SizeOfIconOnBoard);
+        _counterPanel.setyOffset(number * Settings.SizeOfIconOnBoard);
+    }
+
+    public ArrayList<BuyAble> getPossession() {
+        return possession;
+    }
+
+    /**
      * Give color to the player. Color should not be changed after game began
      *
      * @param color
@@ -111,26 +135,6 @@ public class Player {
         this._jailBreak = _jailBreak;
     }
 
-    /**
-     * Create new object of Player.
-     *
-     * @param number
-     * @param name
-     * @param color
-     * @param icon
-     */
-    public Player(int number, String name, Color color, BufferedImage icon) {
-        money = Settings.StartAmountOfMoney;
-        _playerNumber = number;
-        playerCounter = icon;
-        _name = name;
-        _color = color;
-        _boardCore = new BoardCore(0);
-        _counterPanel = new ImagePanel(0, 0, icon, name);
-        _counterPanel.Resize(Settings.SizeOfIconOnBoard, Settings.SizeOfIconOnBoard);
-        _counterPanel.setyOffset(number * Settings.SizeOfIconOnBoard);
-    }
-
     @Override
     public String toString() {
         return _name;
@@ -185,8 +189,6 @@ public class Player {
      */
     public void Pay(int amount) {
         money -= amount;
-        //todo end game if money<0;
-//        PlayersLoop.getPlayers().remove(this);
     }
 
     /**

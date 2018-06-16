@@ -92,7 +92,10 @@ public class Start extends JFrame {
                 mainPanel.revalidate();
                 mainPanel.repaint();
                 break;
-            //todo WinnerState with new Sth! ?
+            case GAME_END:
+                _gameWindow.TextLog(String.format("\n\nThe winner is %s !!!!\nThe End", PlayersLoop.getPlayers().get(0)));
+                _gameWindow.EndGame();
+                break;
             default:
                 System.out.println("UNKNOWN STATE!");
                 //todo logger.

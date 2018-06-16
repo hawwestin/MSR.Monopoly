@@ -94,6 +94,28 @@ public class GameWindow extends javax.swing.JPanel {
         }
     }
 
+    public void EndGame() {
+        JBBuy.setEnabled(false);
+        JBEndTurn.setEnabled(false);
+        JBThrow.setEnabled(false);
+        JBShowFieldInfo.setEnabled(false);
+    }
+
+    private void EnableBuyButton() {
+        BasePlace tmpField = BoardCore.getFieldsOnBoard().get(PlayersLoop.getCurrentPlayer().getBoardPlace());
+        if (tmpField instanceof BuyAble) {
+            BuyAble baField = (BuyAble) tmpField;
+            if (baField.getOwner() == null) {
+                int tmp = PlayersLoop.getCurrentPlayer().GetMoney();
+                if (baField.getPrice() <= tmp) {
+                    JBBuy.setEnabled(true);
+                    return;
+                }
+            }
+        }
+        JBBuy.setEnabled(false);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -265,22 +287,18 @@ public class GameWindow extends javax.swing.JPanel {
         }
         TextLog(PlayersLoop.getCurrentPlayer().Move(way));
         _board.Repaint();
-        
+
         if (Dice.isThrowed()) {
             JBThrow.setEnabled(false);
         }
 
-        BasePlace tmpField = BoardCore.getFieldsOnBoard().get(PlayersLoop.getCurrentPlayer().getBoardPlace());
-        if (tmpField instanceof BuyAble) {
-            BuyAble baField = (BuyAble) tmpField;
-            if (baField.getOwner() == null) {
-                if (baField.getPrice() <= PlayersLoop.getCurrentPlayer().GetMoney()) {
-                    JBBuy.setEnabled(true);
-                }
-            }
-        } else {
-            JBBuy.setEnabled(false);
+        if (PlayersLoop.getCurrentPlayer().GetMoney() <= 0) {
+            TextLog("You ran out of money! You lose!");
+            PlayersLoop.RemoveBankrupt(PlayersLoop.getCurrentPlayer());
+            JBThrow.setEnabled(false);
+            Dice.setThrowed(true);
         }
+        EnableBuyButton();
 
 
     }//GEN-LAST:event_JBThrowActionPerformed

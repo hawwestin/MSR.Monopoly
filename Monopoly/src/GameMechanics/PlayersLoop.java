@@ -23,6 +23,7 @@
  */
 package GameMechanics;
 
+import Core.BuyAble;
 import Core.Player;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -80,6 +81,20 @@ public class PlayersLoop {
      */
     public static void ShufflePlayersOrder() {
         //todo shuffle players order based on initial dice throw 
+    }
+
+    public static void RemoveBankrupt(Player player) {
+        if (getPlayers().indexOf(player) > 0) {
+            currentPlayer = getPlayers().get(getPlayers().indexOf(currentPlayer) - 1);
+        }
+        _players.remove(player);
+        for (BuyAble prop : player.getPossession()) {
+            prop.setOwner(null);
+        }
+        if (_players.size() == 1) {
+            Start.changeGameState(GameState.GAME_END);
+        }
+
     }
 
     /**

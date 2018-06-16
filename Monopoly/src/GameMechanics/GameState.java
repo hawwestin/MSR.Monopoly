@@ -37,5 +37,10 @@ public enum GameState {
     /**
      * Main board is displayed. 
      */
-    GAME_STATE
+    GAME_STATE,
+
+    /**
+     * Game has ended
+     */
+    GAME_END
 }

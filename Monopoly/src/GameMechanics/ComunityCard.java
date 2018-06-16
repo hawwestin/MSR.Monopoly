@@ -61,6 +61,8 @@ public class ComunityCard implements ICardCollection {
         innerList.add(LottoWiner);
         innerList.add(LottoWiner);
         innerList.add(LottoWiner);
+        innerList.add(LegacyTax);
+        innerList.add(LegacyTax);
 
         return innerList;
     }
@@ -75,6 +77,14 @@ public class ComunityCard implements ICardCollection {
         public String actionPerformed(Player player) {
             player.EarnMoney(25);
             return "You won on Lottery 25$\n";
+        }
+    };
+    
+    private final ICard LegacyTax = new ICard() {
+        @Override
+        public String actionPerformed(Player player) {
+            player.Pay(500);
+            return "Your ancestor left you with 500 unpaid tax";
         }
     };
 
