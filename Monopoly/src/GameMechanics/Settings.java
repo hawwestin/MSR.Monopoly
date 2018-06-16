@@ -5,6 +5,8 @@
  */
 package GameMechanics;
 
+import java.awt.Font;
+
 /**
  * Game application settings constants.
  * @author Michal
@@ -27,5 +29,10 @@ public class Settings {
      * Size of player counter image on board. 
      */
     public static int SizeOfIconOnBoard = 55;
+    
+    /**
+     * Dafault in game font for on board text.
+     */
+    public static final Font DEFAULT_FONT = new Font("Arial", Font.PLAIN, 20);
     
 }

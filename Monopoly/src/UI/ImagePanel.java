@@ -1,7 +1,25 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The MIT License
+ *
+ * Copyright 2018 Michal.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 package UI;
 
@@ -17,6 +35,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
 /**
+ * Component managing image drawer for Viwer.Painter implementations.
  *
  * @author Michal
  */
@@ -27,26 +46,58 @@ public class ImagePanel extends JComponent implements Painter {
     private int _yOffset;
     private int _rotate;
 
+    /**
+     * Set tilt of image
+     *
+     * @param _rotate
+     */
     public void setRotate(int _rotate) {
         this._rotate = _rotate;
     }
 
+    /**
+     * Move image on board setting new x offset .
+     *
+     * @param _xOffset
+     */
     public void setxOffset(int _xOffset) {
         this._xOffset = _xOffset;
     }
 
+    /**
+     * Move image on board setting new y offset .
+     *
+     * @param _yOffset
+     */
     public void setyOffset(int _yOffset) {
         this._yOffset = _yOffset;
     }
 
+    /**
+     * Current image x offset on game board
+     *
+     * @return
+     */
     public int getxOffset() {
         return _xOffset;
     }
 
+    /**
+     * Current image y offset on game board
+     *
+     * @return
+     */
     public int getyOffset() {
         return _yOffset;
     }
 
+    /**
+     * Create new Object ImagePanel form given path to file.
+     *
+     * @param xOffset
+     * @param yOffset
+     * @param imagePath
+     */
     public ImagePanel(int xOffset, int yOffset, String imagePath) {
         _xOffset = xOffset;
         _yOffset = yOffset;
@@ -59,6 +110,14 @@ public class ImagePanel extends JComponent implements Painter {
         }
     }
 
+    /**
+     * Create new object ImagePanel from pre loaded Image.
+     *
+     s* @param xOffset
+     * @param yOffset
+     * @param image
+     * @param toolTipText
+     */
     public ImagePanel(int xOffset, int yOffset, BufferedImage image, String toolTipText) {
         _xOffset = xOffset;
         _yOffset = yOffset;
@@ -67,6 +126,11 @@ public class ImagePanel extends JComponent implements Painter {
         setToolTipText(toolTipText);
     }
 
+    /**
+     * Resize displayed image to new width and hight
+     * @param width
+     * @param height
+     */
     public void Resize(int width, int height) {
         BufferedImage result = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Image tmp = _image.getScaledInstance(width, height, Image.SCALE_SMOOTH);

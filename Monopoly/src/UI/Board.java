@@ -1,13 +1,32 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The MIT License
+ *
+ * Copyright 2018 Michal.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 package UI;
 
 import Core.BoardCore;
 import Core.Player;
 import GameMechanics.PlayersLoop;
+import GameMechanics.Settings;
 import Viewer.Painter;
 import Viewer.Viewer;
 import java.awt.BasicStroke;
@@ -18,6 +37,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 
 /**
+ * Main grapihics of board game initializer
  *
  * @author Michal
  */
@@ -26,6 +46,11 @@ public class Board {
     private Viewer _viewer;
     private int _innerBoardLength;
 
+    /**
+     * Create ne board instance
+     *
+     * @param view
+     */
     public Board(Viewer view) {
         _viewer = view;
 
@@ -39,14 +64,22 @@ public class Board {
         _viewer.setDisplayedWorldArea(_innerBoardLength, _innerBoardLength, -_innerBoardLength, -_innerBoardLength);
     }
 
+    /**
+     * return width of inner board field square
+     *
+     * @return
+     */
     public int getInnerBoardLength() {
         return _innerBoardLength;
     }
 
-    public void Repaint(){
+    /**
+     * Force Repaint of the board after element was changed.
+     */
+    public void Repaint() {
         _viewer.repaint();
     }
-    
+
     private void makeTiles(int layer) {
         int x = 0;
         int y = 0;
@@ -97,15 +130,15 @@ public class Board {
                 g.draw(innerField);
 
                 g.rotate((Math.PI / 2) * -0.5, _innerBoardLength / 2, _innerBoardLength / 2);
-                BaseField.DrawCenteredString(g, "MONOPOLY", innerField, BaseField.DEFAULT_FONT.deriveFont(250.0f));
+                BaseField.DrawCenteredString(g, "MONOPOLY", innerField, Settings.DEFAULT_FONT.deriveFont(250.0f));
                 g.setTransform(worldToScreen);
 
                 g.rotate((Math.PI / 2) * 1.5, _innerBoardLength - _innerBoardLength / 4, _innerBoardLength - _innerBoardLength / 4);
-                BaseField.DrawCenteredString(g, "COMMUNITY CHEST", innerFieldCommunity, BaseField.DEFAULT_FONT.deriveFont(40.0f));
+                BaseField.DrawCenteredString(g, "COMMUNITY CHEST", innerFieldCommunity, Settings.DEFAULT_FONT.deriveFont(40.0f));
                 g.setTransform(worldToScreen);
 
                 g.rotate((Math.PI / 2) * -0.5, _innerBoardLength / 4, _innerBoardLength / 4);
-                BaseField.DrawCenteredString(g, "CHANCE", innerFieldChance, BaseField.DEFAULT_FONT.deriveFont(40.0f));
+                BaseField.DrawCenteredString(g, "CHANCE", innerFieldChance, Settings.DEFAULT_FONT.deriveFont(40.0f));
 
                 g.setTransform(oldAT);
             }
@@ -113,9 +146,15 @@ public class Board {
         }, layer);
     }
 
+    /**
+     * After players was persist in PlayersLoop draw thier corepsonding counters
+     * on game board
+     *
+     * @param layer
+     */
     public void makePlayersLayer(int layer) {
         for (Player player : PlayersLoop.getPlayers()) {
-            _viewer.addPainter(player.getCounterPanel(),layer);
+            _viewer.addPainter(player.getCounterPanel(), layer);
         }
     }
 

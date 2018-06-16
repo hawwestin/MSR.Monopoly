@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 
 /**
+ * Starting window when players can enter theirs name and chose
  *
  * @author Michal
  */
@@ -43,11 +44,22 @@ public class WelcomeWindow extends javax.swing.JPanel {
 
     private int _currentPlayerIndex = 0;
 
-    public int getCurrentPlayerIndex() {
+    /**
+     * Return current editied player instance.
+     *
+     * @return
+     */
+    private int getCurrentPlayerIndex() {
         return _currentPlayerIndex;
     }
 
-    public void setCurrentPlayerIndex(int currentPlayerIndex) {
+    /**
+     * Maintain current playher index in safe range. stop game start before at
+     * least 2 players confirmed attendence in game
+     *
+     * @param currentPlayerIndex
+     */
+    private void setCurrentPlayerIndex(int currentPlayerIndex) {
         if (_currentPlayerIndex > 0 || _currentPlayerIndex < Settings.PlayersLimit) {
             _currentPlayerIndex = currentPlayerIndex;
             JBPrevPlayer.setEnabled(true);
@@ -192,9 +204,7 @@ public class WelcomeWindow extends javax.swing.JPanel {
             players.get(_currentPlayerIndex).setColor(jColorChooser1.getColor());
             players.get(_currentPlayerIndex).setName(JTFName.getText());
             players.get(_currentPlayerIndex).setPlayerIcon(Icon.getIconMap().get(JCBIcon.getSelectedItem()));
-        }
-        else if(players.size()==Settings.PlayersLimit)
-        {
+        } else if (players.size() == Settings.PlayersLimit) {
             setCurrentPlayerIndex(_currentPlayerIndex -= 1);
             players.get(_currentPlayerIndex).setColor(jColorChooser1.getColor());
             players.get(_currentPlayerIndex).setName(JTFName.getText());
@@ -209,7 +219,7 @@ public class WelcomeWindow extends javax.swing.JPanel {
             players.get(_currentPlayerIndex).setColor(jColorChooser1.getColor());
             players.get(_currentPlayerIndex).setName(JTFName.getText());
             players.get(_currentPlayerIndex).setPlayerIcon(Icon.getIconMap().get(JCBIcon.getSelectedItem()));
-        }        
+        }
         setCurrentPlayerIndex(_currentPlayerIndex += 1);
         if (players.size() < _currentPlayerIndex) {
             players.add(new Player(players.size(),
@@ -227,7 +237,7 @@ public class WelcomeWindow extends javax.swing.JPanel {
         } else if (players.size() > _currentPlayerIndex) {
             JTFName.setText(players.get(_currentPlayerIndex).toString());
             jColorChooser1.setColor(players.get(_currentPlayerIndex).getColor());
-        } else if (players.size() !=Settings.PlayersLimit){
+        } else if (players.size() != Settings.PlayersLimit) {
             JTFName.setText("");
             jColorChooser1.setColor(Color.WHITE);
             JCBIcon.setSelectedIndex(0);

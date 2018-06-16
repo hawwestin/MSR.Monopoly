@@ -15,6 +15,11 @@ import Viewer.painters.Axes;
 @SuppressWarnings("javadoc")
 public class AxesTest
 {
+
+    /**
+     * non-unit test
+     * @param args
+     */
     public static void main(String[] args)
     {
         testSnapping();

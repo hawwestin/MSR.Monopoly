@@ -23,10 +23,8 @@
  */
 package Core;
 
-import java.awt.Color;
-
 /**
- *
+ * Methods allowing player to obtain/sell field. 
  * @author Michal
  */
 public interface BuyAble {

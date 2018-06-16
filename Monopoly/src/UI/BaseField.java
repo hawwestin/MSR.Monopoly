@@ -1,7 +1,25 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The MIT License
+ *
+ * Copyright 2018 Michal.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 package UI;
 
@@ -19,20 +37,51 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 
 /**
+ * Base graphics for field on game board.
  *
  * @author Michal
  */
 public abstract class BaseField implements Painter {
 
-    public static final Font DEFAULT_FONT = new Font("Arial", Font.PLAIN, 20);
-
+    /**
+     * Base Place instance for core logic.
+     */
     protected BasePlace _place;
+
+    /**
+     * Field number.
+     */
     protected int _number;
+
+    /**
+     * Width of element on board.
+     */
     protected int width;
+
+    /**
+     * Height of element on board.
+     */
     protected int height;
+
+    /**
+     * X offset of top left corner of the field in game board Viewer.
+     */
     protected int xOffset;
+
+    /**
+     * Y offset of top left corner of the field in game board Viewer.
+     */
     protected int yOffset;
+
+    /**
+     * Field tilt on game board.
+     */
     protected String _align;
+
+    /**
+     * Field tilt on game board. 0 - 0 degres upwards 1 - 90 geres left 2 - 180
+     * degres , upside down 3 - 270 degres right
+     */
     protected int rotate;
 
     //Ractangel Dimension
@@ -72,6 +121,11 @@ public abstract class BaseField implements Painter {
     }
 
     //todo movement animation
+    /**
+     * Draw player counter on field
+     *
+     * @param player
+     */
     public void DrawPlayer(Player player) {
         player.getCounterPanel().setRotate(rotate);
         switch (rotate) {
@@ -94,6 +148,11 @@ public abstract class BaseField implements Painter {
         }
     }
 
+    /**
+     * Write field name below street color rectangle.
+     *
+     * @param g
+     */
     protected void SetFieldName(Graphics2D g) {
         Font oldFont = g.getFont();
         g.setRenderingHint(
@@ -103,11 +162,16 @@ public abstract class BaseField implements Painter {
                 RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
         g.setColor(Color.BLACK);
-        g.setFont(DEFAULT_FONT);
+        g.setFont(Settings.DEFAULT_FONT);
         DrawMultiLineString(g, _place.toString(), xOffset + 20, yOffset + 95);
         g.setFont(oldFont);
     }
 
+    /**
+     * Draw place price in bottom line of field.
+     * @param g
+     * @param price
+     */
     protected void SetPrice(Graphics2D g, int price) {
         Font oldFont = g.getFont();
         g.setRenderingHint(
@@ -117,8 +181,8 @@ public abstract class BaseField implements Painter {
                 RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
         g.setColor(Color.BLACK);
-        g.setFont(DEFAULT_FONT);        
-        g.drawString(String.format("cena %s$" , price), xOffset + 20, yOffset + 260);
+        g.setFont(Settings.DEFAULT_FONT);
+        g.drawString(String.format("cena %s$", price), xOffset + 20, yOffset + 260);
         g.setFont(oldFont);
     }
 
