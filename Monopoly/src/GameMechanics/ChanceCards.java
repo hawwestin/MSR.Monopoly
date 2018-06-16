@@ -115,7 +115,7 @@ public class ChanceCards implements ICardCollection {
                 newPlace = modulo * 10 + Math.abs(15 - remainder);
             }
             player.Move(newPlace);
-            return String.format("Advance To %s", BoardCore.getFieldsOnBoard().get(newPlace).toString());
+            return String.format("Advance To %s", BoardCore.getFieldsOnBoard().get(player.getBoardPlace()).toString());
         }
     };
 

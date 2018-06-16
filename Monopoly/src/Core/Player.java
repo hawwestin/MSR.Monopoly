@@ -23,7 +23,6 @@
  */
 package Core;
 
-import GameMechanics.PlayersLoop;
 import GameMechanics.Settings;
 import UI.ImagePanel;
 import java.awt.Color;
@@ -46,6 +45,7 @@ public class Player {
     private BufferedImage playerCounter;
     private ImagePanel _counterPanel;
     private boolean _jailBreak;
+    private int _jailEscapeRetry;
 
     /**
      * Create new object of Player.
@@ -68,7 +68,24 @@ public class Player {
     }
 
     /**
+     * Get current vaule of jail break retry
+     * @return
+     */
+    public int getJailEscapeRetry() {
+        return _jailEscapeRetry;
+    }
+
+    /**
+     * Set new value for jabil break atempt escape
+     * @param _jailEscapeRetry
+     */
+    public void setJailEscapeRetry(int _jailEscapeRetry) {
+        this._jailEscapeRetry = _jailEscapeRetry;
+    }
+
+    /**
      * Return owned by player fields
+     *
      * @return
      */
     public ArrayList<BuyAble> getPossession() {

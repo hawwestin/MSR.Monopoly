@@ -41,6 +41,7 @@ public class GoToJailCornerCoreImpl extends CornerCore {
     public String StepAction(Player guest) {
         //to  do go to jail
         guest.MoveToField(10);
+        guest.setJailBreak(true);
         return "Go to jail!";
     }
 

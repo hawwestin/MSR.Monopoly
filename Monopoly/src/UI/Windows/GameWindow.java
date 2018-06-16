@@ -119,6 +119,21 @@ public class GameWindow extends javax.swing.JPanel {
         JBBuy.setEnabled(false);
     }
 
+    private void JailBreak() {
+        if (PlayersLoop.getCurrentPlayer().getJailBreak()) {
+            if (Dice.getDice1() == Dice.getDice2()) {
+                TextLog(String.format("You escape from Jail!\n", Dice.getDice1(), Dice.getDice2()));
+                Dice.setThrowed(true);
+                PlayersLoop.getCurrentPlayer().setJailBreak(false);
+                PlayersLoop.getCurrentPlayer().setJailEscapeRetry(0);
+            } else {
+                TextLog("Better luck next time");
+                PlayersLoop.getCurrentPlayer().setJailEscapeRetry(PlayersLoop.getCurrentPlayer().getJailEscapeRetry() + 1);
+
+            }
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -280,15 +295,24 @@ public class GameWindow extends javax.swing.JPanel {
         } catch (DiceJail ex) {
             TextLog(ex.getMessage());
             JBThrow.setEnabled(false);
+            PlayersLoop.getCurrentPlayer().MoveToField(10);
+            PlayersLoop.getCurrentPlayer().setJailBreak(true);
+            _board.Repaint();
             return;
-            //todo go to Jail
         }
+
         if (Dice.getDice1() == Dice.getDice2()) {
             TextLog(String.format("Throwed %d and %d -> %d DUBEL!\n", Dice.getDice1(), Dice.getDice2(), way));
         } else {
             TextLog(String.format("Throwed %d and %d -> %d\n", Dice.getDice1(), Dice.getDice2(), way));
         }
-        TextLog(PlayersLoop.getCurrentPlayer().Move(way));
+
+        if (PlayersLoop.getCurrentPlayer().getJailBreak() == false) {
+            TextLog(PlayersLoop.getCurrentPlayer().Move(way));
+        } else {
+            JailBreak();
+        }
+
         _board.Repaint();
 
         if (Dice.isThrowed()) {
@@ -296,11 +320,12 @@ public class GameWindow extends javax.swing.JPanel {
         }
 
         if (PlayersLoop.getCurrentPlayer().GetMoney() <= 0) {
-            TextLog("You ran out of money! You lose!");
+            TextLog("\nYou ran out of money! You lose!\n\n");
             PlayersLoop.RemoveBankrupt(PlayersLoop.getCurrentPlayer());
             JBThrow.setEnabled(false);
             Dice.setThrowed(true);
         }
+
         EnableBuyButton();
 
 
@@ -312,9 +337,20 @@ public class GameWindow extends javax.swing.JPanel {
             return;
         }
         PlayersLoop.iterator().next();
-        TextLog(String.format("Current player %s (%d$)\n", PlayersLoop.getCurrentPlayer().toString(), PlayersLoop.getCurrentPlayer().GetMoney()));
+        TextLog(String.format("\nCurrent player %s (%d$)\n", PlayersLoop.getCurrentPlayer().toString(), PlayersLoop.getCurrentPlayer().GetMoney()));
         Dice.Reset();
         JBThrow.setEnabled(true);
+
+        if (PlayersLoop.getCurrentPlayer().getJailBreak()) {
+            JBBuy.setEnabled(true);
+            JBBuy.setText("Pay 50$");
+            if (PlayersLoop.getCurrentPlayer().getJailEscapeRetry() == 3) {
+                JBThrow.setEnabled(false);
+            }
+        } else {
+            JBBuy.setText("Kup");
+        }
+
     }//GEN-LAST:event_JBEndTurnActionPerformed
 
     private void JBResetViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBResetViewActionPerformed
@@ -330,6 +366,17 @@ public class GameWindow extends javax.swing.JPanel {
             TextLog(String.format("%s bought %s for %d.", PlayersLoop.getCurrentPlayer().toString(), tmpField.toString(), baField.getPrice()));
             _board.Repaint();
             JBBuy.setEnabled(false);
+        }
+        if (PlayersLoop.getCurrentPlayer().getJailBreak()) {
+            PlayersLoop.getCurrentPlayer().Pay(50);
+            PlayersLoop.getCurrentPlayer().setJailBreak(false);
+            PlayersLoop.getCurrentPlayer().setJailEscapeRetry(0);
+            _board.Repaint();
+            JBBuy.setEnabled(false);
+            JBBuy.setText("Kup");
+            JBThrow.setEnabled(false);
+            Dice.setThrowed(true);
+            TextLog("You pay 50$ to get out of Jail");
         }
     }//GEN-LAST:event_JBBuyActionPerformed
 
