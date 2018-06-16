@@ -13,11 +13,12 @@ import GameMechanics.PlayersLoop;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
+ * Startup class for entire board game. Hosts game JFrame window and obtain
+ * change of game state
  *
  * @author Michal
  */
@@ -29,14 +30,27 @@ public class Start extends JFrame {
     private static WelcomeWindow _welcome;
     private static PlayersLoop _gameLoop;
 
+    /**
+     * Return Game window JPanel instance.
+     *
+     * @return
+     */
     public static GameWindow getGame() {
         return _gameWindow;
     }
 
+    /**
+     * Run the Game.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         new Start();
     }
 
+    /**
+     * Create backbone of the game class instance.
+     */
     public Start() {
         super();
         setTitle("Monopoly");
@@ -57,6 +71,11 @@ public class Start extends JFrame {
         setSize(new Dimension(800, 600));
     }
 
+    /**
+     * Change current game state.
+     *
+     * @param state
+     */
     public static void changeGameState(GameState state) {
         gameState = state;
 
@@ -76,14 +95,20 @@ public class Start extends JFrame {
             //todo WinnerState with new Sth! ?
             default:
                 System.out.println("UNKNOWN STATE!");
+                //todo logger.
                 break;
         }
     }
 
+    /**
+     * Persist players object list obtained on welcome screen.
+     *
+     * @param players
+     */
     public static void InitGame(ArrayList<Player> players) {
-        _gameLoop.setPlayers(players);
+        PlayersLoop.setPlayers(players);
         _gameWindow.getBoard().makePlayersLayer(5);
-        PlayersLoop.setCurrentPlayer(players.get(0));        
+        PlayersLoop.setCurrentPlayer(players.get(0));
         Dice.Reset();
         // todo Dice player order 
 

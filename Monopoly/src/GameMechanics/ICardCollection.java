@@ -26,10 +26,16 @@ package GameMechanics;
 import Core.Player;
 
 /**
- *
+ * A collection of Icard witch a card draw mechanism 
  * @author Michal
  */
 public interface ICardCollection {
+
+    /**
+     * Perform random action from drawed card.
+     * @param guest
+     * @return
+     */
     public String MakeAction(Player guest);
     
 }

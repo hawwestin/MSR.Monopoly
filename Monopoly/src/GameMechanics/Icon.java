@@ -33,7 +33,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 /**
- *
+ * Container for images of player counters 
  * @author Michal
  */
 public class Icon {
@@ -54,10 +54,15 @@ public class Icon {
             map.put("Ship", ImageIO.read(new File("img/ship.png")));
         } catch (IOException ex) {
             Logger.getLogger(WelcomeWindow.class.getName()).log(Level.SEVERE, null, ex);
+            //todo logger
         }
         return map;
     }
 
+    /**
+     * Return map of in game supported counters image.
+     * @return
+     */
     public static HashMap<String, BufferedImage> getIconMap() {
         return iconMap;
     }    

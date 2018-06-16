@@ -28,6 +28,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
+ * Collection of ICard. Implements Comunity chest card logic witch you can find
+ * in original board game Monopoly.Chance to draw a card is maintain in quntity
+ * of similar ICard in cardList.
  *
  * @author Michal
  */
@@ -37,6 +40,9 @@ public class ComunityCard implements ICardCollection {
     private Random rand;
     private final String name = "Comunit Chest";
 
+    /**
+     * New Comunity CHest Card object.
+     */
     public ComunityCard() {
         this.list = makeList();
         rand = new Random();

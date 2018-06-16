@@ -30,43 +30,64 @@ import java.util.Iterator;
 
 /**
  * Iteration over players list
+ *
  * @author Michal
  */
 public class PlayersLoop {
 
     //todo re order players after initial Dice throw.
     private static ArrayList<Player> _players;
-    private static HashMap<Player, Integer> _positions = new HashMap<>();
     private static Player currentPlayer;
 
+    /**
+     * Persis player list.
+     *
+     * @param players
+     */
     public static void setPlayers(ArrayList<Player> players) {
         PlayersLoop._players = players;
-        players.forEach(player -> _positions.put(player, 0));
 
-        //todo display players icon on board
-//        BoardCore.getStreets()
     }
 
+    /**
+     * return player object list.
+     *
+     * @return
+     */
     public static ArrayList<Player> getPlayers() {
         return _players;
     }
 
-    public static HashMap<Player, Integer> getPositions() {
-        return _positions;
-    }
-
+    /**
+     * return current player for its tourn on board
+     *
+     * @return
+     */
     public static Player getCurrentPlayer() {
         return currentPlayer;
     }
 
+    /**
+     * Set new player for it's tour on board
+     *
+     * @param currentPlayer
+     */
     public static void setCurrentPlayer(Player currentPlayer) {
         PlayersLoop.currentPlayer = currentPlayer;
     }
 
+    /**
+     * Re-Order players based on initial dice throw.
+     */
     public static void ShufflePlayersOrder() {
         //todo shuffle players order based on initial dice throw 
     }
 
+    /**
+     * Iterate over static player list in loop.
+     *
+     * @return
+     */
     public static Iterator<Player> iterator() {
         return new Iterator<Player>() {
             @Override

@@ -23,9 +23,16 @@
  */
 package GameMechanics;
 
-
+/**
+ * If player cannot throw the dice again Rise exception.
+ * @author Michal
+ */
 public class DiceThrowed extends Exception {
 
+    /**
+     * Raise new exception
+     * @param msg
+     */
     public DiceThrowed(String msg) {
         super(msg);
     }

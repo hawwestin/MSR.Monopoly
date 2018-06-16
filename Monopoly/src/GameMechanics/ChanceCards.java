@@ -29,25 +29,31 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
+ * Collection of ICard. Implements Chance card logic witch you can find in
+ * original board game Monopoly. Chance to draw a card is maintain in quntity of
+ * similar ICard in cardList.
  *
  * @author Michal
  */
 public class ChanceCards implements ICardCollection {
 
-    private ArrayList<ICard> list;
+    private ArrayList<ICard> cardList;
     private Random rand;
     private final String name = "Chance";
 
+    /**
+     * Create new CanceCard object.
+     */
     public ChanceCards() {
-        this.list = makeList();
+        this.cardList = makeList();
         rand = new Random();
     }
 
     @Override
     public String MakeAction(Player guest) {
 
-        int r = rand.nextInt(list.size());
-        return list.get(r).actionPerformed(guest);
+        int r = rand.nextInt(cardList.size());
+        return cardList.get(r).actionPerformed(guest);
 
     }
 
@@ -56,7 +62,18 @@ public class ChanceCards implements ICardCollection {
         innerList = new ArrayList<>();
 
         innerList.add(GoToGO);
+        innerList.add(GoToGO);
+        innerList.add(GoToGO);
         innerList.add(GoToRandom);
+        innerList.add(GoToRandom);
+        innerList.add(GoToRandom);
+        innerList.add(GoToRandom);
+        innerList.add(GoToRandom);
+        innerList.add(GoToRandom);
+        innerList.add(GoToRandom);
+        innerList.add(GoToRandom);
+        innerList.add(GoToNextStation);
+        innerList.add(GoToNextStation);
         innerList.add(GoToNextStation);
 
         return innerList;
@@ -78,7 +95,7 @@ public class ChanceCards implements ICardCollection {
     private final ICard GoToRandom = new ICard() {
         @Override
         public String actionPerformed(Player player) {
-            int r = rand.nextInt(BoardCore.getFieldsOnBoard().size());
+            int r = rand.nextInt(BoardCore.getFieldsOnBoard().size() - 1) + 1;
             player.MoveToField(r);
             return String.format("Go to %s\n", BoardCore.getFieldsOnBoard().get(r).toString());
         }

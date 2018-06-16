@@ -26,6 +26,7 @@ package GameMechanics;
 import java.util.Random;
 
 /**
+ * Double dice logic from board game.
  *
  * @author Michal
  */
@@ -36,31 +37,68 @@ public class Dice {
     private static int _dice1;
     private static int _dice2;
 
+    /**
+     * get value of first die after it was thrown
+     *
+     * @return
+     */
     public static int getDice1() {
         return _dice1;
     }
 
+    /**
+     * get value of second die after it was thrown
+     *
+     * @return
+     */
     public static int getDice2() {
         return _dice2;
     }
 
+    /**
+     * Return false if current player can throw the dice.
+     *
+     * @return
+     */
     public static boolean isThrowed() {
         return _throwed;
     }
 
+    /**
+     * If player should not be able to throw the dice again set throwed to true.
+     *
+     * @param throwed
+     */
     public static void setThrowed(boolean throwed) {
         _throwed = throwed;
     }
 
+    /**
+     * Get value of series double throw
+     *
+     * @return
+     */
     public static int getStrikeCounter() {
         return strikeCounter;
     }
 
+    /**
+     * Update value od series of double throw
+     *
+     * @param strikeCounter
+     */
     public static void setStrikeCounter(int strikeCounter) {
-        strikeCounter = strikeCounter;
+        Dice.strikeCounter = strikeCounter;
     }
 
-    public static int Throw() throws DiceThrowed, DiceJail {        
+    /**
+     * Draw by lot the value for both die
+     *
+     * @return sum of both dice value.
+     * @throws DiceThrowed if player cannot throw the die again
+     * @throws DiceJail if player series of double reach three occurence. 
+     */
+    public static int Throw() throws DiceThrowed, DiceJail {
         if (isThrowed()) {
             throw new DiceThrowed("You have already throw the dice in turn\n");
         }
@@ -81,6 +119,9 @@ public class Dice {
         return _dice1 + _dice2;
     }
 
+    /**
+     * Reset both dice and boolean static flags for next player tour.
+     */
     public static void Reset() {
 
         setThrowed(false);

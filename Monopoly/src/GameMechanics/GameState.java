@@ -24,9 +24,18 @@
 package GameMechanics;
 
 /**
- *
+ * Enum of game windows prepared for the players.
  * @author Michal
  */
 public enum GameState {
-    START_STATE, GAME_STATE
+
+    /**
+     * The game is on welcom screen panel
+     */
+    START_STATE,
+
+    /**
+     * Main board is displayed. 
+     */
+    GAME_STATE
 }

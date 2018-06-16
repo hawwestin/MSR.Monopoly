@@ -24,9 +24,38 @@
 package GameMechanics;
 
 /**
- *
+ * List of possible street build steps.
  * @author Michal
  */
 public enum Constructions {
-    GROUND, HOUSE1, HOUSE2, HOUSE3, HOUSE4, HOTEL
+
+    /**
+     * Owned street with nothing builded on it.
+     */
+    GROUND,
+
+    /**
+     * Street with one house builded on it
+     */
+    HOUSE1,
+
+    /**
+     * Street with two house builded on it
+     */
+    HOUSE2,
+
+    /**
+     * Street with three house builded on it
+     */
+    HOUSE3,
+
+    /**
+     * Street with four house builded on it
+     */
+    HOUSE4, 
+
+    /**
+     * Street with a hotel builded on it
+     */
+    HOTEL
 }

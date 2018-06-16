@@ -26,10 +26,15 @@ package GameMechanics;
 import Core.Player;
 
 /**
- *
+ * Action Card witch player can draw by lot.
  * @author Michal
  */
 public interface ICard {
     
+    /**
+     * After player entrance at Card field tha action is perfromed.
+     * @param player
+     * @return
+     */
     public String actionPerformed(Player player);
 }

@@ -23,11 +23,20 @@
  */
 package GameMechanics;
 
-
+/**
+ * Player thrown series of three double die value. If so he is obtained to go to
+ * jail by current set of rules.
+ *
+ * @author Michal
+ */
 public class DiceJail extends Exception {
 
+    /**
+     * Raise Dice go to jail new exception 
+     * @param msg
+     */
     public DiceJail(String msg) {
         super(msg);
     }
-    
+
 }
