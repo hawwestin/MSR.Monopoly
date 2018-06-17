@@ -47,7 +47,7 @@ public class Board {
     private int _innerBoardLength;
 
     /**
-     * Create ne board instance
+     * Create new board instance
      *
      * @param view
      */

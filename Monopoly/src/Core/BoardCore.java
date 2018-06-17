@@ -23,12 +23,12 @@
  */
 package Core;
 
-import GameMechanics.ChanceCards;
-import GameMechanics.ComunityCard;
+import GameMechanics.Card.ChanceCards;
+import GameMechanics.Card.ComunityCard;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.awt.Color;
-import GameMechanics.ICardCollection;
+import GameMechanics.Card.ICardCollection;
 
 /**
  * Aggregate all board tiles. Board hold info about player possition.

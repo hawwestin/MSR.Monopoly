@@ -23,7 +23,7 @@
  */
 package Core;
 
-import GameMechanics.ICardCollection;
+import GameMechanics.Card.ICardCollection;
 
 /**
  * Specialize implementation of ActionCore. This place holds list of cards for
