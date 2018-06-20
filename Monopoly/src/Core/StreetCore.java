@@ -24,8 +24,12 @@
 package Core;
 
 import GameMechanics.Constructions;
+import GameMechanics.FieldAlign;
 import UI.BaseField;
+import UI.Board;
 import UI.StreetField;
+import UI.StreetPropertyCard;
+import Viewer.Painter;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +49,7 @@ public class StreetCore extends BasePlace implements BuyAble {
     private Color color;
     private static List<StreetCore> _streets = new ArrayList<>();
     private Constructions _construction;
+    private Painter _propertyCard;
 
     /**
      * Create new object of streetCore
@@ -110,6 +115,8 @@ public class StreetCore extends BasePlace implements BuyAble {
     @Override
     public void setOwner(Player buyer) {
         owner = buyer;
+        //todo draw property card
+        //Board.getSingleton().makePropertyCard(_propertyCard, 1);
     }
 
     @Override
@@ -139,7 +146,7 @@ public class StreetCore extends BasePlace implements BuyAble {
     }
 
     @Override
-    public BaseField makeField(int number, int x, int y, String align) {
+    public BaseField makeField(int number, int x, int y, FieldAlign align) {
         if (_baseFiled == null) {
             _baseFiled = new StreetField(this, number, x, y, align);
 
@@ -155,6 +162,7 @@ public class StreetCore extends BasePlace implements BuyAble {
             //FIXME get proper price on sell
             owner.Sell(this, getPrice());
             owner = null;
+//            Board.getSingleton().removePropertyCard(_propertyCard);
         }
     }
 
@@ -162,6 +170,19 @@ public class StreetCore extends BasePlace implements BuyAble {
     public void Sell(Player buyer, int price) {
         owner.Sell(this, price);
         buyer.Buy(this, price);
+        //Board.getSingleton().makePropertyCard(_propertyCard, 1);
+    }
+
+    @Override
+    public Painter getPropertyCard(int number, int x, int y, FieldAlign align) {
+        if (_propertyCard == null) {
+            _propertyCard = new StreetPropertyCard(this, number, x, y, align);
+
+            return _propertyCard;
+        } else {
+            return _propertyCard;
+        }
+
     }
 
 }

@@ -23,15 +23,19 @@
  */
 package Core;
 
+import GameMechanics.FieldAlign;
+import Viewer.Painter;
+
 /**
- * Methods allowing player to obtain/sell field. 
+ * Methods allowing player to obtain/sell field.
+ *
  * @author Michal
  */
 public interface BuyAble {
-    
-    
+
     /**
      * Get current value of rent on field
+     *
      * @return
      */
     public int getRent();
@@ -43,29 +47,43 @@ public interface BuyAble {
 
     /**
      * Sell field to other player
+     *
      * @param buyer
      * @param price
      */
     public void Sell(Player buyer, int price);
 
     /**
-     * Set new owner of the field 
+     * Method for player to buy a buy able property. Set new owner of the field
      * Charge funds from the player's account
+     *
      * @param buyer
      */
     public void setOwner(Player buyer);
 
     /**
      * Return getPrice
+     *
      * @return
      */
-    public int getPrice();    
-    
+    public int getPrice();
+
     /**
      * Get Owner of current field or Null if unowned
+     *
      * @return
      */
     public Player getOwner();
-    
-    
+
+    /**
+     * Get graphics to draw property card around game borad.
+     *
+     * @param number Player Number
+     * @param x
+     * @param y
+     * @param align
+     * @return
+     */
+    public Painter getPropertyCard(int number, int x, int y, FieldAlign align);
+
 }

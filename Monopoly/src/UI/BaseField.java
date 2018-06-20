@@ -25,6 +25,7 @@ package UI;
 
 import Core.BasePlace;
 import Core.Player;
+import GameMechanics.FieldAlign;
 import GameMechanics.Settings;
 import Viewer.Painter;
 import java.awt.BasicStroke;
@@ -73,10 +74,7 @@ public abstract class BaseField implements Painter {
      */
     protected int yOffset;
 
-    /**
-     * Field tilt on game board.
-     */
-    protected String _align;
+
 
     /**
      * Field tilt on game board. 0 - 0 degres upwards 1 - 90 geres left 2 - 180
@@ -88,36 +86,37 @@ public abstract class BaseField implements Painter {
     /**
      *
      * @param place
-     * @param number
+     * @param number of field in order.
      * @param x
      * @param y
      * @param align
      */
-    public BaseField(BasePlace place, int number, int x, int y, String align) {
+    public BaseField(BasePlace place, int number, int x, int y, FieldAlign align) {
         _place = place;
         _number = number;
         xOffset = x;
-        yOffset = y;
-        _align = align;
+        yOffset = y;        
 
         width = 175;
         height = 280;
 
-        if (_align.equals("up") || _align.equals("down")) {
-            if (_align.equals("up")) {
-                rotate = 0;
-            } else {
-                rotate = 2;
-            }
+        rotate = align.ordinal();
 
-        } else if (_align.equals("left") || _align.equals("right")) {
-            if (_align.equals("left")) {
-                rotate = 1;
-            } else {
-                rotate = 3;
-            }
-
-        }
+//        if (_align.equals("up") || _align.equals("down")) {
+//            if (_align.equals("up")) {
+//                rotate = 0;
+//            } else {
+//                rotate = 2;
+//            }
+//
+//        } else if (_align.equals("left") || _align.equals("right")) {
+//            if (_align.equals("left")) {
+//                rotate = 1;
+//            } else {
+//                rotate = 3;
+//            }
+//
+//        }
     }
 
     //todo movement animation
@@ -169,6 +168,7 @@ public abstract class BaseField implements Painter {
 
     /**
      * Draw place price in bottom line of field.
+     *
      * @param g
      * @param price
      */

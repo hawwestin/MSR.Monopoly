@@ -25,6 +25,7 @@ package UI;
 
 import Core.BoardCore;
 import Core.Player;
+import GameMechanics.FieldAlign;
 import GameMechanics.PlayersLoop;
 import GameMechanics.Settings;
 import Viewer.Painter;
@@ -45,6 +46,7 @@ public class Board {
 
     private Viewer _viewer;
     private int _innerBoardLength;
+    private static Board Singleton;
 
     /**
      * Create new board instance
@@ -53,6 +55,7 @@ public class Board {
      */
     public Board(Viewer view) {
         _viewer = view;
+        Singleton = this;
 
         makeTiles(1);
         makeInnerBoard(1);
@@ -61,7 +64,15 @@ public class Board {
 //        _viewer.addPainter(map, 0); //ToDO Board Image as option as thing to by played or clean graphics.
         // Player Icons should be top layer np 9.  All graphics is 1 so to board by on to set 2
 
-        ResetWorldView();        
+        ResetWorldView();
+    }
+
+    public static Board getSingleton() {
+        if (Singleton == null) {
+//        todo write to log
+
+        }
+        return Singleton;
     }
 
     /**
@@ -72,13 +83,13 @@ public class Board {
     public int getInnerBoardLength() {
         return _innerBoardLength;
     }
-    
+
     /**
      * Reset world camera to defaul view
      */
-    public void ResetWorldView(){
+    public void ResetWorldView() {
         _viewer.resetTransform();
-        _viewer.setDisplayedWorldArea(_innerBoardLength-300, _innerBoardLength-300, 300-_innerBoardLength, 300-_innerBoardLength);
+        _viewer.setDisplayedWorldArea(_innerBoardLength - 300, _innerBoardLength - 300, 300 - _innerBoardLength, 300 - _innerBoardLength);
     }
 
     /**
@@ -93,23 +104,23 @@ public class Board {
         int y = 0;
 
         for (int i = 0; i < 10; i++) {
-            _viewer.addPainter(BoardCore.getFieldsOnBoard().get(i).makeField(i, x, y, "up"), layer);
+            _viewer.addPainter(BoardCore.getFieldsOnBoard().get(i).makeField(i, x, y,FieldAlign.UP), layer);
             x -= 175;
         }
         x += 175;
         _innerBoardLength = x;
         for (int i = 10; i < 20; i++) {
-            _viewer.addPainter(BoardCore.getFieldsOnBoard().get(i).makeField(i, x, y, "left"), layer);
+            _viewer.addPainter(BoardCore.getFieldsOnBoard().get(i).makeField(i, x, y, FieldAlign.LEFT), layer);
             y -= 175;
         }
         y += 175;
         for (int i = 20; i < 30; i++) {
-            _viewer.addPainter(BoardCore.getFieldsOnBoard().get(i).makeField(i, x, y, "down"), layer);
+            _viewer.addPainter(BoardCore.getFieldsOnBoard().get(i).makeField(i, x, y, FieldAlign.DOWN), layer);
             x += 175;
         }
         x -= 175;
         for (int i = 30; i < 40; i++) {
-            _viewer.addPainter(BoardCore.getFieldsOnBoard().get(i).makeField(i, x, y, "right"), layer);
+            _viewer.addPainter(BoardCore.getFieldsOnBoard().get(i).makeField(i, x, y, FieldAlign.RIGHT), layer);
             y += 175;
         }
 
@@ -166,4 +177,22 @@ public class Board {
         }
     }
 
+    /**
+     * Draw property card on Game World
+     *
+     * @param card Property Card
+     * @param layer Drawable layer
+     */
+    public void makePropertyCard(Painter card, int layer) {
+        _viewer.addPainter(card, layer);
+    }
+
+    /**
+     * Remove property card from game board
+     *
+     * @param card
+     */
+    public void removePropertyCard(Painter card) {
+        _viewer.removePainter(card);
+    }
 }

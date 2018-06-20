@@ -23,6 +23,7 @@
  */
 package Core;
 
+import GameMechanics.FieldAlign;
 import UI.BaseField;
 import UI.CornerField;
 import java.awt.Color;
@@ -57,7 +58,7 @@ public abstract class CornerCore extends BasePlace {
     }
 
     @Override
-    public BaseField makeField(int number, int x, int y, String align) {
+    public BaseField makeField(int number, int x, int y, FieldAlign align) {
         if (_baseFiled == null) {
             _baseFiled = new CornerField(this, number, x, y, align);
 

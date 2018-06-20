@@ -21,41 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package UI;
-
-import Core.BasePlace;
-import GameMechanics.FieldAlign;
-import Viewer.Painter;
-import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
+package GameMechanics;
 
 /**
- * Graphics for action firled on game board.
- * @author michal
+ *
+ * @author Michal
  */
-public class ActionField extends BaseField implements Painter {    
+public enum FieldAlign {
 
     /**
-     * Initialize action field for game board.
-     * @param place
-     * @param number
-     * @param x
-     * @param y
-     * @param align
+     * Text face Up in game default orientation
      */
-    public ActionField(BasePlace place, int number, int x, int y, FieldAlign align) {
-        super(place, number, x, y, align);
-        
-    }
-        
-    @Override
-    public void paint(Graphics2D g, AffineTransform worldToScreen, double w, double h) {       
-        AffineTransform oldAT = g.getTransform();
-        g.transform(worldToScreen);
-        super.paint(g, worldToScreen, w, h);
-        SetFieldName(g);               
-        
-        g.setTransform(oldAT);
-    }
+    UP,
+
+    /**
+     * Text face Left in game default orientation
+     */
+    LEFT,
+
+    /**
+     * Text face down in game default orientation
+     */
+    DOWN,
+
+    /**
+     * Text face Right in game default orientation
+     */
+    RIGHT
 
 }

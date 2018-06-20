@@ -5,8 +5,12 @@
  */
 package Core;
 
+import GameMechanics.FieldAlign;
 import UI.BaseField;
+import UI.Board;
 import UI.UtilitiesField;
+import UI.UtilitiesPropertyCard;
+import Viewer.Painter;
 import java.awt.Color;
 
 /**
@@ -21,6 +25,7 @@ public abstract class UtilitiesCore extends BasePlace implements BuyAble {
      */
     protected Player owner;
     private int _price;
+    private Painter _propertyCard;
 
     /**
      * Value of field rent.
@@ -66,7 +71,7 @@ public abstract class UtilitiesCore extends BasePlace implements BuyAble {
     }
 
     @Override
-    public BaseField makeField(int number, int x, int y, String align) {
+    public BaseField makeField(int number, int x, int y, FieldAlign align) {
         if (_baseFiled == null) {
             _baseFiled = new UtilitiesField(this, number, x, y, align);
 
@@ -83,21 +88,42 @@ public abstract class UtilitiesCore extends BasePlace implements BuyAble {
 
     @Override
     public void Sell() {
+        //TODO Sell
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void Sell(Player buyer, int price) {
+        //TODO Sell
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void setOwner(Player buyer) {
         owner = buyer;
+        //Board.getSingleton().makePropertyCard(_propertyCard, 1);
     }
 
     @Override
     public Player getOwner() {
         return owner;
+    }
+
+    @Override
+    public int getRent() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Painter getPropertyCard(int number, int x, int y, FieldAlign align) {
+        if (_propertyCard == null) {
+            _propertyCard = new UtilitiesPropertyCard(this, number, x, y, align);
+
+            Board.getSingleton().makePropertyCard(_propertyCard, 1);
+
+            return _propertyCard;
+        } else {
+            return _propertyCard;
+        }
     }
 }

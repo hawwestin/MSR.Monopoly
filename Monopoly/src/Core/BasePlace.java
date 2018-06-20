@@ -23,6 +23,7 @@
  */
 package Core;
 
+import GameMechanics.FieldAlign;
 import UI.BaseField;
 import java.awt.Color;
 
@@ -80,7 +81,7 @@ public abstract class BasePlace {
      * @param align
      * @return
      */
-    public abstract BaseField makeField(int number, int x, int y, String align);
+    public abstract BaseField makeField(int number, int x, int y, FieldAlign align);
 
     @Override
     public String toString() {

@@ -24,6 +24,7 @@
 package UI;
 
 import Core.BasePlace;
+import GameMechanics.FieldAlign;
 import GameMechanics.Settings;
 import Viewer.Painter;
 import java.awt.Graphics2D;
@@ -46,7 +47,7 @@ public class CornerField extends BaseField implements Painter {
      * @param y
      * @param align
      */
-    public CornerField(BasePlace place, int number, int x, int y, String align) {
+    public CornerField(BasePlace place, int number, int x, int y, FieldAlign align) {
         super(place, number, x, y, align);
         width = 280;
         height = 280;

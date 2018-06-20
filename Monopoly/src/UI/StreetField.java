@@ -24,6 +24,7 @@
 package UI;
 
 import Core.StreetCore;
+import GameMechanics.FieldAlign;
 import Viewer.Painter;
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
@@ -46,7 +47,7 @@ public class StreetField extends BaseField implements Painter {
      * @param y
      * @param align
      */
-    public StreetField(StreetCore place, int number, int x, int y, String align) {
+    public StreetField(StreetCore place, int number, int x, int y, FieldAlign align) {
         super(place, number, x, y, align);
         this._place = place;
     }

@@ -23,39 +23,25 @@
  */
 package UI;
 
-import Core.BasePlace;
+import Core.StreetCore;
 import GameMechanics.FieldAlign;
-import Viewer.Painter;
-import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
 
 /**
- * Graphics for action firled on game board.
- * @author michal
+ *
+ * @author Michal
  */
-public class ActionField extends BaseField implements Painter {    
-
+public class StreetPropertyCard extends StreetField{
+    
     /**
-     * Initialize action field for game board.
+     *
      * @param place
      * @param number
      * @param x
      * @param y
      * @param align
      */
-    public ActionField(BasePlace place, int number, int x, int y, FieldAlign align) {
+    public StreetPropertyCard(StreetCore place, int number, int x, int y, FieldAlign align) {
         super(place, number, x, y, align);
-        
     }
-        
-    @Override
-    public void paint(Graphics2D g, AffineTransform worldToScreen, double w, double h) {       
-        AffineTransform oldAT = g.getTransform();
-        g.transform(worldToScreen);
-        super.paint(g, worldToScreen, w, h);
-        SetFieldName(g);               
-        
-        g.setTransform(oldAT);
-    }
-
+    
 }

@@ -24,6 +24,7 @@
 package UI;
 
 import Core.UtilitiesCore;
+import GameMechanics.FieldAlign;
 import Viewer.Painter;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -46,7 +47,7 @@ public class UtilitiesField extends BaseField implements Painter {
      * @param y
      * @param align
      */
-    public UtilitiesField(UtilitiesCore place, int number, int x, int y, String align) {
+    public UtilitiesField(UtilitiesCore place, int number, int x, int y, FieldAlign align) {
         super(place, number, x, y, align);
         this._place = place;
     }

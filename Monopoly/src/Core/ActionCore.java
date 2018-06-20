@@ -23,6 +23,7 @@
  */
 package Core;
 
+import GameMechanics.FieldAlign;
 import UI.ActionField;
 import UI.BaseField;
 import java.awt.Color;
@@ -53,7 +54,7 @@ public abstract class ActionCore extends BasePlace {
     }
 
     @Override
-    public BaseField makeField(int number, int x, int y, String align) {
+    public BaseField makeField(int number, int x, int y, FieldAlign align) {
         if (_baseFiled == null) {
             _baseFiled = new ActionField(this, number, x, y, align);
 
