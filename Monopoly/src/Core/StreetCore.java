@@ -103,6 +103,11 @@ public class StreetCore extends BasePlace implements BuyAble {
     }
 
     @Override
+    public Player getOwner() {
+        return owner;
+    }
+
+    @Override
     public void setOwner(Player buyer) {
         owner = buyer;
     }
@@ -122,12 +127,6 @@ public class StreetCore extends BasePlace implements BuyAble {
             }
         }
         return true;
-    }
-
-    @Override
-    public void Sell() {
-        owner.Sell(this, getPrice());
-        owner = null;
     }
 
     @Override
@@ -151,12 +150,18 @@ public class StreetCore extends BasePlace implements BuyAble {
     }
 
     @Override
-    public void Sell(Player buyer, int price) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void Sell() {
+        if (_construction == Constructions.GROUND) {
+            //FIXME get proper price on sell
+            owner.Sell(this, getPrice());
+            owner = null;
+        }
     }
 
     @Override
-    public Player getOwner() {
-        return owner;
+    public void Sell(Player buyer, int price) {
+        owner.Sell(this, price);
+        buyer.Buy(this, price);
     }
+
 }
