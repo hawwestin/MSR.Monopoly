@@ -97,10 +97,6 @@ public class PlayerWalletBox extends JComponent implements Painter {
         }
     }
 
-    private void SellAction(Graphics2D g) {
-
-    }
-
     @Override
     public void paint(Graphics2D g, AffineTransform worldToScreen, double w, double h) {
         AffineTransform oldAT = g.getTransform();

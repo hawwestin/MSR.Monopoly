@@ -26,8 +26,7 @@ package Core;
 import GameMechanics.Constructions;
 import GameMechanics.FieldAlign;
 import UI.BaseField;
-import UI.Board;
-import UI.IPropCard;
+import UI.PropCard;
 import UI.StreetField;
 import UI.StreetPropertyCard;
 import java.awt.Color;
@@ -173,7 +172,7 @@ public class StreetCore extends BasePlace implements BuyAble {
     }
 
     @Override
-    public IPropCard getPropCard() {
+    public PropCard getPropCard() {
         return _propertyCard;
     }
 

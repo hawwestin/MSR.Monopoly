@@ -7,8 +7,7 @@ package Core;
 
 import GameMechanics.FieldAlign;
 import UI.BaseField;
-import UI.Board;
-import UI.IPropCard;
+import UI.PropCard;
 import UI.UtilitiesField;
 import UI.UtilitiesPropertyCard;
 import java.awt.Color;
@@ -120,7 +119,7 @@ public abstract class UtilitiesCore extends BasePlace implements BuyAble {
     }
 
     @Override
-    public IPropCard getPropCard() {
+    public PropCard getPropCard() {
         return _propertyCard;
     }
 }

@@ -39,57 +39,15 @@ import java.awt.geom.Rectangle2D;
  *
  * @author Michal
  */
-public class UtilitiesPropertyCard implements IPropCard {
+public class UtilitiesPropertyCard extends PropCard {
 
     private UtilitiesCore _place;
-    private String _propMsg;
-
-    private Rectangle2D SellButton;
-    /**
-     * X offset of top left corner of the field in game board Viewer.
-     */
-    protected int xOffset;
-
-    /**
-     * Y offset of top left corner of the field in game board Viewer.
-     */
-    protected int yOffset;
-
-    /**
-     * Field tilt on game board. 0 - 0 degres upwards 1 - 90 geres left 2 - 180
-     * degres , upside down 3 - 270 degres right
-     */
-    protected FieldAlign rotate;
-    /**
-     * Width of element on board.
-     */
-    protected int width = 175;
-
-    /**
-     * Height of element on board.
-     */
-    protected int height = 280;
-
-    private Point2D _cardAnchor;
 
     public UtilitiesPropertyCard(UtilitiesCore place) {
         _place = place;
     }
 
-    public void setPropMsg(String propMsg) {
-        _propMsg = propMsg;
-    }
-
     @Override
-    public IPropCard MakePropertyCard(FieldAlign align, int x, int y, Point2D cardAnchor) {
-        rotate = align;
-        xOffset = x;
-        yOffset = y;
-
-        _cardAnchor = cardAnchor;
-        return this;
-    }
-
     public void paint(Graphics2D g) {
 
         Rectangle2D border = new Rectangle2D.Double(xOffset, yOffset, width, height);
@@ -115,24 +73,6 @@ public class UtilitiesPropertyCard implements IPropCard {
     }
 
     @Override
-    public void SetXOffset(int x) {
-        xOffset = x;
-
-    }
-
-    @Override
-    public void SetYOffset(int y) {
-        yOffset = y;
-
-    }
-
-    @Override
-    public void setRotate(FieldAlign align) {
-        rotate = align;
-
-    }
-
-    @Override
     public void mouseClicked(MouseEvent e) {
         if (_place.getOwner() == null) {
             return;
@@ -153,26 +93,6 @@ public class UtilitiesPropertyCard implements IPropCard {
                 System.err.println(String.format("y %d", e.getY()));
             }
         }
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

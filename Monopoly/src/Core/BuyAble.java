@@ -23,7 +23,7 @@
  */
 package Core;
 
-import UI.IPropCard;
+import UI.PropCard;
 
 /**
  * Methods allowing player to obtain/sell field.
@@ -79,6 +79,6 @@ public interface BuyAble {
      *
      * @return
      */
-    public IPropCard getPropCard();
+    public PropCard getPropCard();
 
 }

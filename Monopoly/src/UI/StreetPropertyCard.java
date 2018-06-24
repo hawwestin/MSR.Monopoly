@@ -24,7 +24,6 @@
 package UI;
 
 import Core.StreetCore;
-import GameMechanics.FieldAlign;
 import GameMechanics.Settings;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -34,46 +33,17 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-import javax.swing.JComponent;
 
 /**
  *
  * @author Michal
  */
-public class StreetPropertyCard extends JComponent implements IPropCard {
+public class StreetPropertyCard extends PropCard {
 
-    private final StreetCore _place;
-    private String _propMsg;
+    private final StreetCore _place;    
 
-    private Rectangle2D SellButton;
+    
     private Rectangle2D ConstructButton;
-
-    /**
-     * X offset of top left corner of the field in game board Viewer.
-     */
-    protected int xOffset;
-
-    /**
-     * Y offset of top left corner of the field in game board Viewer.
-     */
-    protected int yOffset;
-
-    /**
-     * Field tilt on game board. 0 - 0 degres upwards 1 - 90 geres left 2 - 180
-     * degres , upside down 3 - 270 degres right
-     */
-    protected FieldAlign rotate;
-    /**
-     * Width of element on board.
-     */
-    protected int width = 175;
-
-    /**
-     * Height of element on board.
-     */
-    protected int height = 280;
-
-    private Point2D _cardAnchor;
 
     /**
      *
@@ -81,39 +51,10 @@ public class StreetPropertyCard extends JComponent implements IPropCard {
      */
     public StreetPropertyCard(StreetCore place) {
         this._place = place;
-//        this.addMouseListener(this);
     }
 
     @Override
-    public void SetXOffset(int x) {
-        xOffset = x;
-
-    }
-
-    @Override
-    public void SetYOffset(int y) {
-        yOffset = y;
-
-    }
-
-    @Override
-    public void setRotate(FieldAlign align) {
-        rotate = align;
-
-    }
-
-    @Override
-    public IPropCard MakePropertyCard(FieldAlign align, int x, int y, Point2D cardAnchor) {
-        rotate = align;
-        xOffset = x;
-        yOffset = y;
-        _cardAnchor = cardAnchor;
-        //additional offset for street allignment in Property Box of a player. 
-        //for each in player property and print them ? With separate .. and color grouping ?
-        return this;
-    }
-
-    public void paint(Graphics2D g) {        
+    public void paint(Graphics2D g) {
         Rectangle2D border = new Rectangle2D.Double(xOffset, yOffset, width, height);
         g.setStroke(new BasicStroke(5f));
         g.setColor(Color.BLACK);
@@ -125,7 +66,7 @@ public class StreetPropertyCard extends JComponent implements IPropCard {
         g.fillRect(xOffset + 1, yOffset + 1, width - 3, 48);
 
         g.setColor(Color.BLACK);
-        BaseField.DrawMultiLineString(g, _place.toString(), xOffset, yOffset, width, (height-35) / 2, Settings.DEFAULT_FONT);
+        BaseField.DrawMultiLineString(g, _place.toString(), xOffset, yOffset, width, (height - 35) / 2, Settings.DEFAULT_FONT);
 
         SellButton = new Rectangle2D.Double(xOffset, yOffset + height - 35, width / 2, 35);
         g.setStroke(new BasicStroke(3f));
@@ -173,23 +114,4 @@ public class StreetPropertyCard extends JComponent implements IPropCard {
         }
     }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
