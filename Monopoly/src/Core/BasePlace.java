@@ -35,7 +35,7 @@ import java.awt.Color;
  */
 public abstract class BasePlace {
 
-    private final String _name;    
+    private final String _name;
 
     /**
      * Object of painted tail graphics on board.
@@ -44,7 +44,8 @@ public abstract class BasePlace {
 
     /**
      * Create new BasePlace
-     * @param name the name of field used to display on board. 
+     *
+     * @param name the name of field used to display on board.
      */
     public BasePlace(String name) {
         _name = name;
@@ -54,7 +55,7 @@ public abstract class BasePlace {
      * When a player ends his movement on the field run individual field action.
      *
      * @param guest
-     * @return 
+     * @return
      */
     public abstract String StepAction(Player guest);
 

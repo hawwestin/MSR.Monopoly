@@ -47,6 +47,13 @@ public class UtilitiesCoreImpl extends UtilitiesCore {
     public UtilitiesCoreImpl(String name, int price) {
         super(name, price);
         _utilities.add(this);
+        
+        _propertyCard.setPropMsg("If one utility is owned</br>"
+                + "rent is 4 times amount</br>"
+                + "ahown on dice</br></br>"
+                + "If both utilites are owned</br>"
+                + "rent is 10 timeas amount</br>"
+                + "shown on dice");
 
     }
 

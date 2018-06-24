@@ -25,23 +25,96 @@ package UI;
 
 import Core.StreetCore;
 import GameMechanics.FieldAlign;
+import GameMechanics.Settings;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 
 /**
  *
  * @author Michal
  */
-public class StreetPropertyCard extends StreetField{
-    
+public class StreetPropertyCard implements IPropCard {
+
+    private final StreetCore _place;
+
+    /**
+     * X offset of top left corner of the field in game board Viewer.
+     */
+    protected int xOffset;
+
+    /**
+     * Y offset of top left corner of the field in game board Viewer.
+     */
+    protected int yOffset;
+
+    /**
+     * Field tilt on game board. 0 - 0 degres upwards 1 - 90 geres left 2 - 180
+     * degres , upside down 3 - 270 degres right
+     */
+    protected FieldAlign rotate;
+    /**
+     * Width of element on board.
+     */
+    protected int width = 175;
+
+    /**
+     * Height of element on board.
+     */
+    protected int height = 280;
+
+    private Point2D cardAnchor;
+
     /**
      *
      * @param place
-     * @param number
-     * @param x
-     * @param y
-     * @param align
      */
-    public StreetPropertyCard(StreetCore place, int number, int x, int y, FieldAlign align) {
-        super(place, number, x, y, align);
+    public StreetPropertyCard(StreetCore place) {
+        this._place = place;
     }
-    
+
+    @Override
+    public IPropCard MakePropertyCard(FieldAlign align, int x, int y) {
+        rotate = align;
+        xOffset = x;
+        yOffset = y;
+
+        //additional offset for street allignment in Property Box of a player. 
+        //for each in player property and print them ? With separate .. and color grouping ?
+        return this;
+    }
+
+    public void paint(Graphics2D g) {
+        Rectangle2D border = new Rectangle2D.Double(xOffset, yOffset, width, height);
+        g.setStroke(new BasicStroke(5));
+        g.setColor(Color.BLACK);
+        g.draw(border);
+
+        g.setStroke(new BasicStroke(3));
+        g.drawRect(xOffset, yOffset, width, 50);
+        g.setColor(_place.getColor());
+        g.fillRect(xOffset + 1, yOffset + 1, width - 3, 48);
+        g.setColor(Color.BLACK);
+        BaseField.DrawMultiLineString(g, _place.toString(), xOffset, yOffset, width, height / 2, Settings.DEFAULT_FONT);
+    }
+
+    @Override
+    public void SetXOffset(int x) {
+        xOffset = x;
+
+    }
+
+    @Override
+    public void SetYOffset(int y) {
+        yOffset = y;
+
+    }
+
+    @Override
+    public void setRotate(FieldAlign align) {
+        rotate = align;
+
+    }
 }

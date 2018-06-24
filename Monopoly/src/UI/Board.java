@@ -24,6 +24,7 @@
 package UI;
 
 import Core.BoardCore;
+import Core.BuyAble;
 import Core.Player;
 import GameMechanics.FieldAlign;
 import GameMechanics.PlayersLoop;
@@ -48,6 +49,11 @@ public class Board {
     private int _innerBoardLength;
     private static Board Singleton;
 
+    private int GraphicsBoardLayer = 1;
+    private int PlayersLayer = 5;
+    private int PlayerWalletLayer = 3;
+    private int PlayerWalletProp = 4;
+
     /**
      * Create new board instance
      *
@@ -57,11 +63,11 @@ public class Board {
         _viewer = view;
         Singleton = this;
 
-        makeTiles(1);
-        makeInnerBoard(1);
+        makeTiles(GraphicsBoardLayer);
+        makeInnerBoard(GraphicsBoardLayer);
         //szablon
 //        ImagePanel map = new ImagePanel(_innerBoardLength - 280, _innerBoardLength - 280, "img/Monopoly-Board.jpg");
-//        _viewer.addPainter(map, 0); //ToDO Board Image as option as thing to by played or clean graphics.
+//        _viewer.addPainter(map, 3); //ToDO Board Image as option as thing to by played or clean graphics.
         // Player Icons should be top layer np 9.  All graphics is 1 so to board by on to set 2
 
         ResetWorldView();
@@ -104,7 +110,7 @@ public class Board {
         int y = 0;
 
         for (int i = 0; i < 10; i++) {
-            _viewer.addPainter(BoardCore.getFieldsOnBoard().get(i).makeField(i, x, y,FieldAlign.UP), layer);
+            _viewer.addPainter(BoardCore.getFieldsOnBoard().get(i).makeField(i, x, y, FieldAlign.UP), layer);
             x -= 175;
         }
         x += 175;
@@ -166,33 +172,46 @@ public class Board {
     }
 
     /**
-     * After players was persist in PlayersLoop draw thier corepsonding counters
-     * on game board
+     * After players persist in PlayersLoop draw thier corepsonding counters on
+     * game board
      *
-     * @param layer
      */
-    public void makePlayersLayer(int layer) {
+    public void makePlayersLayer() {
         for (Player player : PlayersLoop.getPlayers()) {
-            _viewer.addPainter(player.getCounterPanel(), layer);
+            _viewer.addPainter(player.getCounterPanel(), PlayersLayer);
+            /**
+             * to do add property Box around board for Property Card, Amount of
+             * money, player name
+             *
+             */
+            FieldAlign rotate = FieldAlign.values()[player.getPlayerNumber()];
+
+            int xOffset = 0;
+            int yOffset = 0;
+
+            int BoardBoxDistance = 200;
+            int FieldHight = 280;
+
+            switch (rotate) {
+                case UP:
+                    xOffset = getInnerBoardLength();
+                    yOffset = FieldHight + BoardBoxDistance;
+                    break;
+                case LEFT:
+                    xOffset = getInnerBoardLength() - FieldHight - BoardBoxDistance;
+                    yOffset = getInnerBoardLength();
+                    break;
+                case DOWN:
+                    xOffset = 0;
+                    yOffset = getInnerBoardLength() - FieldHight - BoardBoxDistance;
+                    break;
+                case RIGHT:
+                    xOffset = FieldHight + BoardBoxDistance;
+                    yOffset = 0;
+                    break;
+            }
+            player.setWalletBox(new PlayerWalletBox(player, xOffset, yOffset));
+            _viewer.addPainter(player.getWalletBox(), PlayerWalletLayer);
         }
-    }
-
-    /**
-     * Draw property card on Game World
-     *
-     * @param card Property Card
-     * @param layer Drawable layer
-     */
-    public void makePropertyCard(Painter card, int layer) {
-        _viewer.addPainter(card, layer);
-    }
-
-    /**
-     * Remove property card from game board
-     *
-     * @param card
-     */
-    public void removePropertyCard(Painter card) {
-        _viewer.removePainter(card);
     }
 }

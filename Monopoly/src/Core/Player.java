@@ -25,6 +25,7 @@ package Core;
 
 import GameMechanics.Settings;
 import UI.ImagePanel;
+import UI.PlayerWalletBox;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -39,13 +40,15 @@ public class Player {
     private int money;
     private Color _color;
     private ArrayList<BuyAble> possession = new ArrayList<BuyAble>();
-    private BoardCore _boardCore;
+    private final BoardCore _boardCore;
     private final int _playerNumber;
     private String _name;
     private BufferedImage playerCounter;
-    private ImagePanel _counterPanel;
+    private final ImagePanel _counterPanel;
     private boolean _jailBreak;
     private int _jailEscapeRetry;
+
+    private PlayerWalletBox walletBox;
 
     /**
      * Create new object of Player.
@@ -67,8 +70,17 @@ public class Player {
         _counterPanel.setyOffset(number * Settings.SizeOfIconOnBoard);
     }
 
+    public PlayerWalletBox getWalletBox() {
+        return walletBox;
+    }
+
+    public void setWalletBox(PlayerWalletBox walletBox) {
+        this.walletBox = walletBox;
+    }
+
     /**
      * Get current vaule of jail break retry
+     *
      * @return
      */
     public int getJailEscapeRetry() {
@@ -77,6 +89,7 @@ public class Player {
 
     /**
      * Set new value for jabil break atempt escape
+     *
      * @param _jailEscapeRetry
      */
     public void setJailEscapeRetry(int _jailEscapeRetry) {

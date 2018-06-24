@@ -23,7 +23,7 @@ public class Settings {
     /**
      * Base amount of money
      */
-    public static int StartAmountOfMoney = 1500;
+    public static int StartAmountOfMoney = 500;
 
     /**
      * Size of player counter image on board. 

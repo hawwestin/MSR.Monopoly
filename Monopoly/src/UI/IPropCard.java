@@ -21,64 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package Core;
+package UI;
 
-import UI.IPropCard;
+import GameMechanics.FieldAlign;
+import java.awt.Graphics2D;
 
 /**
- * Methods allowing player to obtain/sell field.
  *
  * @author Michal
  */
-public interface BuyAble {
+public interface IPropCard {
+
+    public void SetXOffset(int x);
+
+    public void SetYOffset(int y);
+
+    public void setRotate(FieldAlign align);
 
     /**
-     * Get current value of rent on field
+     * Get graphics to draw property card around game borad.
      *
+     * @param number Player Number
+     * @param x
+     * @param y
      * @return
      */
-    public int getRent();
-
-    /**
-     * Sell field to bank
-     */
-    public void Sell();
-
-    /**
-     * Sell field to other player
-     *
-     * @param buyer
-     * @param price
-     */
-    public void Sell(Player buyer, int price);
-
-    /**
-     * Method for player to buy a buy able property. Set new owner of the field
-     * Charge funds from the player's account
-     *
-     * @param buyer
-     */
-    public void setOwner(Player buyer);
-
-    /**
-     * Return getPrice
-     *
-     * @return
-     */
-    public int getPrice();
-
-    /**
-     * Get Owner of current field or Null if unowned
-     *
-     * @return
-     */
-    public Player getOwner();
-
-    /**
-     * Get street property card with Construction Pricing
-     *
-     * @return
-     */
-    public IPropCard getPropCard();
+    public IPropCard MakePropertyCard(FieldAlign number, int x, int y);
+    
+    public void paint(Graphics2D g);
 
 }

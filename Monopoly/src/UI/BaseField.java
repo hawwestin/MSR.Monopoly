@@ -74,13 +74,11 @@ public abstract class BaseField implements Painter {
      */
     protected int yOffset;
 
-
-
     /**
      * Field tilt on game board. 0 - 0 degres upwards 1 - 90 geres left 2 - 180
      * degres , upside down 3 - 270 degres right
      */
-    protected int rotate;
+    protected FieldAlign rotate;
 
     //Ractangel Dimension
     /**
@@ -95,28 +93,12 @@ public abstract class BaseField implements Painter {
         _place = place;
         _number = number;
         xOffset = x;
-        yOffset = y;        
+        yOffset = y;
 
         width = 175;
         height = 280;
 
-        rotate = align.ordinal();
-
-//        if (_align.equals("up") || _align.equals("down")) {
-//            if (_align.equals("up")) {
-//                rotate = 0;
-//            } else {
-//                rotate = 2;
-//            }
-//
-//        } else if (_align.equals("left") || _align.equals("right")) {
-//            if (_align.equals("left")) {
-//                rotate = 1;
-//            } else {
-//                rotate = 3;
-//            }
-//
-//        }
+        rotate = align;
     }
 
     //todo movement animation
@@ -128,19 +110,19 @@ public abstract class BaseField implements Painter {
     public void DrawPlayer(Player player) {
         player.getCounterPanel().setRotate(rotate);
         switch (rotate) {
-            case 0:
+            case UP:
                 player.getCounterPanel().setxOffset(xOffset);
                 player.getCounterPanel().setyOffset(yOffset + player.getPlayerNumber() * Settings.SizeOfIconOnBoard + 50);
                 break;
-            case 1:
+            case LEFT:
                 player.getCounterPanel().setxOffset(xOffset - player.getPlayerNumber() * Settings.SizeOfIconOnBoard - 50);
                 player.getCounterPanel().setyOffset(yOffset);
                 break;
-            case 2:
+            case DOWN:
                 player.getCounterPanel().setxOffset(xOffset);
                 player.getCounterPanel().setyOffset(yOffset - player.getPlayerNumber() * Settings.SizeOfIconOnBoard - 50);
                 break;
-            case 3:
+            case RIGHT:
                 player.getCounterPanel().setxOffset(xOffset + player.getPlayerNumber() * Settings.SizeOfIconOnBoard + 50);
                 player.getCounterPanel().setyOffset(yOffset);
                 break;
@@ -162,7 +144,7 @@ public abstract class BaseField implements Painter {
                 RenderingHints.VALUE_ANTIALIAS_ON);
         g.setColor(Color.BLACK);
         g.setFont(Settings.DEFAULT_FONT);
-        DrawMultiLineString(g, _place.toString(), xOffset + 20, yOffset + 95);
+        DrawMultiLineString(g, _place.toString(), xOffset, yOffset, width, height/2, Settings.DEFAULT_FONT);
         g.setFont(oldFont);
     }
 
@@ -216,17 +198,49 @@ public abstract class BaseField implements Painter {
         g.drawString(text, Math.round(rect.getX() + xOffset), Math.round(rect.getY() + yOffset));
     }
 
-    void DrawMultiLineString(Graphics2D g, String text, int x, int y) {
-        for (String line : text.split(" ")) {
-            g.drawString(line, x, y += g.getFontMetrics().getHeight());
+    public static void DrawCenteredString(Graphics2D g, String text, int x, int y, int width, int hight, Font font) {
+        FontRenderContext frc = new FontRenderContext(null, true, true);        
+        g.setRenderingHint(
+                RenderingHints.KEY_FRACTIONALMETRICS,
+                RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+        g.setRenderingHint(
+                RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+
+        Rectangle2D textBoundry = font.getStringBounds(text, frc);
+        int textBoundryWidth = (int) Math.round(textBoundry.getWidth());
+        int textBoundryHeight = (int) Math.round(textBoundry.getHeight());
+        int textBoundryX = (int) Math.round(textBoundry.getX());
+        int textBoundryY = (int) Math.round(textBoundry.getY());
+
+        int xOffset = (int) Math.round((width / 2) - (textBoundryWidth / 2) - textBoundryX);
+        int yOffset = (int) Math.round((hight / 2) - (textBoundryHeight / 2) - textBoundryY);
+
+        g.setFont(font);
+        g.drawString(text, Math.round(x + xOffset), Math.round(y + yOffset));
+    }
+
+    public static void DrawMultiLineString(Graphics2D g, String text, int x, int y, int width, int hight, Font font) {
+        for (String line : text.split("(<\\/br>)")) {
+            DrawCenteredString(g, line, x, y += g.getFontMetrics().getHeight(), width, hight, font);
+//            g.drawString(line, x, y += g.getFontMetrics().getHeight());
+        }
+    }
+    
+    public static void DrawMultiLineString(Graphics2D g, String text,Rectangle2D rect, Font font) {
+        double y = rect.getY();
+        for (String line : text.split("(<\\/br>)")) {
+            rect.setRect(rect.getX(),y += g.getFontMetrics().getHeight() , rect.getWidth(), rect.getHeight());
+            DrawCenteredString(g, line, rect, font);
+//            g.drawString(line, x, y += g.getFontMetrics().getHeight());
         }
     }
 
     @Override
     public void paint(Graphics2D g, AffineTransform worldToScreen, double w, double h) {
         Rectangle2D border = new Rectangle2D.Double(xOffset, yOffset, width, height);
-        g.rotate((Math.PI / 2) * rotate, xOffset, yOffset);
-        g.setStroke(new BasicStroke(5));
+        g.rotate((Math.PI / 2) * rotate.ordinal(), xOffset, yOffset);
+        g.setStroke(new BasicStroke(5));       
         g.setColor(_place.BorderColor());
         g.draw(border);
     }

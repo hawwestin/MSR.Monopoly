@@ -25,15 +25,95 @@ package UI;
 
 import Core.UtilitiesCore;
 import GameMechanics.FieldAlign;
+import GameMechanics.Settings;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 
 /**
  *
  * @author Michal
  */
-public class UtilitiesPropertyCard extends UtilitiesField{
-    
-    public UtilitiesPropertyCard(UtilitiesCore place, int number, int x, int y, FieldAlign align) {
-        super(place, number, x, y, align);
+public class UtilitiesPropertyCard implements IPropCard {
+
+    private UtilitiesCore _place;
+    private String _propMsg;
+
+    /**
+     * X offset of top left corner of the field in game board Viewer.
+     */
+    protected int xOffset;
+
+    /**
+     * Y offset of top left corner of the field in game board Viewer.
+     */
+    protected int yOffset;
+
+    /**
+     * Field tilt on game board. 0 - 0 degres upwards 1 - 90 geres left 2 - 180
+     * degres , upside down 3 - 270 degres right
+     */
+    protected FieldAlign rotate;
+    /**
+     * Width of element on board.
+     */
+    protected int width = 175;
+
+    /**
+     * Height of element on board.
+     */
+    protected int height = 280;
+
+    public UtilitiesPropertyCard(UtilitiesCore place) {
+        _place = place;
     }
-    
+
+    public void setPropMsg(String propMsg) {
+        _propMsg = propMsg;
+    }
+
+    @Override
+    public IPropCard MakePropertyCard(FieldAlign align, int x, int y) {
+        rotate = align;
+        xOffset = x;
+        yOffset = y;
+
+        return this;
+    }
+
+    public void paint(Graphics2D g) {
+
+        Rectangle2D border = new Rectangle2D.Double(xOffset, yOffset, width, height);
+
+        g.setColor(Color.BLACK);
+        g.setStroke(new BasicStroke(5));
+        g.draw(border);
+
+        g.setStroke(new BasicStroke(3));
+        g.drawRect(xOffset, yOffset, width, 50);
+        g.fillRect(xOffset + 1, yOffset + 1, width - 3, 48);
+        BaseField.DrawMultiLineString(g, _place.toString(), xOffset, yOffset, width, height / 2, Settings.DEFAULT_FONT);
+        BaseField.DrawMultiLineString(g, _propMsg, border, Settings.DEFAULT_FONT.deriveFont(12f));
+
+    }
+
+    @Override
+    public void SetXOffset(int x) {
+        xOffset = x;
+
+    }
+
+    @Override
+    public void SetYOffset(int y) {
+        yOffset = y;
+
+    }
+
+    @Override
+    public void setRotate(FieldAlign align) {
+        rotate = align;
+
+    }
+
 }

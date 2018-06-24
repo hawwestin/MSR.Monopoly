@@ -167,7 +167,7 @@ public class BoardCore implements Iterable<BasePlace> {
         //green
         FieldInit greenField = new FieldInit(300, 26, 130, 390, 900, 1100, 1275, 200);
         map.put(31, new StreetCore("Pacific", Color.GREEN, greenField));
-        map.put(32, new StreetCore("N Cor", Color.GREEN, greenField));
+        map.put(32, new StreetCore("Newton Core</br>Lorem Ipsum", Color.GREEN, greenField));
         map.put(34, new StreetCore("Pennsylvania", Color.GREEN, new FieldInit(320, 28, 150, 450, 1000, 1200, 1400, 200)));
 
         //blue

@@ -46,6 +46,13 @@ public class RailRoadUtilitiesCoreImpl extends UtilitiesCore {
         super(name, price);
         _railroad.add(this);
         _rent = 25;
+        
+        _propertyCard.setPropMsg("Rent 25$</br>"
+                + "If 2 Stations are owned 50$</br>"
+                + "If 3 Stations are owned 100$</br>"
+                + "If 4 Stations are owned 200$</br>"                
+                );
+        
     }
 
     @Override

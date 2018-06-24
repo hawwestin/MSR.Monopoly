@@ -25,6 +25,7 @@ package GameMechanics;
 
 import Core.BuyAble;
 import Core.Player;
+import UI.Board;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -93,8 +94,9 @@ public class PlayersLoop {
         }
         _players.remove(player);
         for (BuyAble prop : player.getPossession()) {
-            prop.setOwner(null);
+            prop.setOwner(null);            
         }
+        Board.getSingleton().Repaint();
         if (_players.size() == 1) {
             Start.changeGameState(GameState.GAME_END);
         }

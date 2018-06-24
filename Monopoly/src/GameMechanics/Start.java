@@ -110,7 +110,7 @@ public class Start extends JFrame {
      */
     public static void InitGame(ArrayList<Player> players) {
         PlayersLoop.setPlayers(players);
-        _gameWindow.getBoard().makePlayersLayer(5);
+        _gameWindow.getBoard().makePlayersLayer();
         PlayersLoop.setCurrentPlayer(players.get(0));
         Dice.Reset();
         // todo Dice player order 
