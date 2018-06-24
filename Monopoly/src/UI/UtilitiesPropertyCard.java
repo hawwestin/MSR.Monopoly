@@ -29,6 +29,8 @@ import GameMechanics.Settings;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 
 /**
@@ -74,7 +76,7 @@ public class UtilitiesPropertyCard implements IPropCard {
     }
 
     @Override
-    public IPropCard MakePropertyCard(FieldAlign align, int x, int y) {
+    public IPropCard MakePropertyCard(FieldAlign align, int x, int y,AffineTransform worldToScreen) {
         rotate = align;
         xOffset = x;
         yOffset = y;
@@ -114,6 +116,32 @@ public class UtilitiesPropertyCard implements IPropCard {
     public void setRotate(FieldAlign align) {
         rotate = align;
 
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+//        System.err.println("Utiliteis");
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

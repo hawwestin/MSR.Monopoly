@@ -38,7 +38,7 @@ public class PlayersLoop {
 
     //todo re order players after initial Dice throw.
     private static ArrayList<Player> _players;
-    private static Player currentPlayer;
+    private static Player _currentPlayer;
 
     /**
      * Persis player list.
@@ -65,7 +65,7 @@ public class PlayersLoop {
      * @return
      */
     public static Player getCurrentPlayer() {
-        return currentPlayer;
+        return _currentPlayer;
     }
 
     /**
@@ -74,7 +74,7 @@ public class PlayersLoop {
      * @param currentPlayer
      */
     public static void setCurrentPlayer(Player currentPlayer) {
-        PlayersLoop.currentPlayer = currentPlayer;
+        PlayersLoop._currentPlayer = currentPlayer;
     }
 
     /**
@@ -91,7 +91,7 @@ public class PlayersLoop {
      */
     public static void RemoveBankrupt(Player player) {
         if (getPlayers().indexOf(player) > 0) {
-            currentPlayer = getPlayers().get(getPlayers().indexOf(currentPlayer) - 1);
+            _currentPlayer = getPlayers().get(getPlayers().indexOf(_currentPlayer) - 1);
         }
         _players.remove(player);
         for (BuyAble prop : player.getPossession()) {
@@ -119,12 +119,12 @@ public class PlayersLoop {
 
             @Override
             public Player next() {
-                if (getPlayers().indexOf(currentPlayer) + 1 == getPlayers().size()) {
-                    currentPlayer = getPlayers().get(0);
+                if (getPlayers().indexOf(_currentPlayer) + 1 == getPlayers().size()) {
+                    _currentPlayer = getPlayers().get(0);
                 } else {
-                    currentPlayer = getPlayers().get(getPlayers().indexOf(currentPlayer) + 1);
+                    _currentPlayer = getPlayers().get(getPlayers().indexOf(_currentPlayer) + 1);
                 }
-                return currentPlayer;
+                return _currentPlayer;
             }
         };
     }

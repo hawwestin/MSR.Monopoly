@@ -44,7 +44,7 @@ public class RailRoadUtilitiesCoreImpl extends UtilitiesCore {
      */
     public RailRoadUtilitiesCoreImpl(String name, int price) {
         super(name, price);
-        _railroad.add(this);
+        _railroad.add(this);        
         _rent = 25;
         
         _propertyCard.setPropMsg("Rent 25$</br>"

@@ -42,6 +42,7 @@ public abstract class UtilitiesCore extends BasePlace implements BuyAble {
         super(name);
         _price = price;
         _propertyCard = new UtilitiesPropertyCard(this);
+        BoardCore.AddToBuyAbleStreets(this);
     }
 
     @Override

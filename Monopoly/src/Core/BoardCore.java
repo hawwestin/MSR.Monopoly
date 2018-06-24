@@ -29,6 +29,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.awt.Color;
 import GameMechanics.Card.ICardCollection;
+import java.util.ArrayList;
 
 /**
  * Aggregate all board tiles. Board hold info about player possition.
@@ -38,18 +39,32 @@ import GameMechanics.Card.ICardCollection;
 public class BoardCore implements Iterable<BasePlace> {
 
     private int _cursor;
+    private static final ArrayList<BuyAble> buyAbleStreets=new ArrayList<>();
     private static final HashMap<Integer, BasePlace> fieldsOnBoard = MakeStreets();
 
     /**
      * Create new BoardCore for player movement in a loop over the fields.
+     *
      * @param cursor starting position of the player
      */
     public BoardCore(int cursor) {
         _cursor = cursor;
+//        buyAbleStreets = new ArrayList<>();
+    }
+
+    public static ArrayList<BuyAble> getBuyAbleStreets() {
+        return buyAbleStreets;
+    }
+
+    
+    
+    public static void AddToBuyAbleStreets(BuyAble ba) {
+        buyAbleStreets.add(ba);
     }
 
     /**
      * Return ordered board tiles objects.
+     *
      * @return
      */
     public static HashMap<Integer, BasePlace> getFieldsOnBoard() {
@@ -67,6 +82,7 @@ public class BoardCore implements Iterable<BasePlace> {
 
     /**
      * Set new player position
+     *
      * @param cursor
      */
     public void setCursor(int cursor) {

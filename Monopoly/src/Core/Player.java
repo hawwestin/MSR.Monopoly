@@ -37,13 +37,13 @@ import java.util.ArrayList;
  */
 public class Player {
 
-    private int money;
+    private int _money;
     private Color _color;
-    private ArrayList<BuyAble> possession = new ArrayList<BuyAble>();
+    private ArrayList<BuyAble> _possession = new ArrayList<BuyAble>();
     private final BoardCore _boardCore;
     private final int _playerNumber;
     private String _name;
-    private BufferedImage playerCounter;
+    private BufferedImage _playerCounter;
     private final ImagePanel _counterPanel;
     private boolean _jailBreak;
     private int _jailEscapeRetry;
@@ -59,9 +59,9 @@ public class Player {
      * @param icon
      */
     public Player(int number, String name, Color color, BufferedImage icon) {
-        money = Settings.StartAmountOfMoney;
+        _money = Settings.StartAmountOfMoney;
         _playerNumber = number;
-        playerCounter = icon;
+        _playerCounter = icon;
         _name = name;
         _color = color;
         _boardCore = new BoardCore(0);
@@ -92,8 +92,8 @@ public class Player {
      *
      * @param _jailEscapeRetry
      */
-    public void setJailEscapeRetry(int _jailEscapeRetry) {
-        this._jailEscapeRetry = _jailEscapeRetry;
+    public void setJailEscapeRetry(int jailEscapeRetry) {
+        _jailEscapeRetry = jailEscapeRetry;
     }
 
     /**
@@ -102,7 +102,7 @@ public class Player {
      * @return
      */
     public ArrayList<BuyAble> getPossession() {
-        return possession;
+        return _possession;
     }
 
     /**
@@ -129,8 +129,8 @@ public class Player {
      *
      * @param _name
      */
-    public void setName(String _name) {
-        this._name = _name;
+    public void setName(String name) {
+        _name = name;
     }
 
     /**
@@ -180,7 +180,7 @@ public class Player {
      * @return
      */
     public int GetMoney() {
-        return money;
+        return _money;
     }
 
     /**
@@ -190,9 +190,9 @@ public class Player {
      * @param price
      */
     public void Buy(BuyAble place, int price) {
-        possession.add(place);
+        _possession.add(place);
         place.setOwner(this);
-        money -= price;
+        _money -= price;
     }
 
     /**
@@ -203,8 +203,8 @@ public class Player {
      * @param income
      */
     public void Sell(BuyAble place, int income) {
-        possession.remove(place);
-        money += income;
+        _possession.remove(place);
+        _money += income;
     }
 
     /**
@@ -213,7 +213,7 @@ public class Player {
      * @param salary
      */
     public void EarnMoney(int salary) {
-        money += salary;
+        _money += salary;
     }
 
     /**
@@ -222,7 +222,7 @@ public class Player {
      * @param amount
      */
     public void Pay(int amount) {
-        money -= amount;
+        _money -= amount;
     }
 
     /**
@@ -231,7 +231,7 @@ public class Player {
      * @return
      */
     public BufferedImage getPlayerCounter() {
-        return playerCounter;
+        return _playerCounter;
     }
 
     /**
@@ -240,7 +240,7 @@ public class Player {
      * @param playerIcon
      */
     public void setPlayerIcon(BufferedImage playerIcon) {
-        this.playerCounter = playerIcon;
+        this._playerCounter = playerIcon;
     }
 
     /**

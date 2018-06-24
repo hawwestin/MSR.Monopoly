@@ -63,6 +63,7 @@ public class StreetCore extends BasePlace implements BuyAble {
         this.color = color;
         _pricing = pricing;
         _streets.add(this);
+        BoardCore.AddToBuyAbleStreets(this);
         _construction = Constructions.GROUND;
         
         _propertyCard = new StreetPropertyCard(this);

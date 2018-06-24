@@ -23,9 +23,12 @@
  */
 package UI;
 
+import Core.BasePlace;
 import Core.BoardCore;
 import Core.BuyAble;
 import Core.Player;
+import Core.StreetCore;
+import Core.UtilitiesCore;
 import GameMechanics.FieldAlign;
 import GameMechanics.PlayersLoop;
 import GameMechanics.Settings;
@@ -34,9 +37,14 @@ import Viewer.Viewer;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.NoninvertibleTransformException;
+import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Main grapihics of board game initializer
@@ -66,8 +74,8 @@ public class Board {
         makeTiles(GraphicsBoardLayer);
         makeInnerBoard(GraphicsBoardLayer);
         //szablon
-//        ImagePanel map = new ImagePanel(_innerBoardLength - 280, _innerBoardLength - 280, "img/Monopoly-Board.jpg");
-//        _viewer.addPainter(map, 3); //ToDO Board Image as option as thing to by played or clean graphics.
+        ImagePanel map = new ImagePanel(_innerBoardLength - 280, _innerBoardLength - 280, "img/Monopoly-Board.jpg");
+        _viewer.addPainter(map, 3); //ToDO Board Image as option as thing to by played or clean graphics.
         // Player Icons should be top layer np 9.  All graphics is 1 so to board by on to set 2
 
         ResetWorldView();
@@ -105,6 +113,11 @@ public class Board {
         _viewer.repaint();
     }
 
+    public Point2D ScreenToWorldPoint(Point2D screenPoint) {
+        AffineTransform screenToWorld = _viewer.getScreenToWorld();
+        return screenToWorld.transform(screenPoint, null);
+    }
+
     private void makeTiles(int layer) {
         int x = 0;
         int y = 0;
@@ -128,6 +141,10 @@ public class Board {
         for (int i = 30; i < 40; i++) {
             _viewer.addPainter(BoardCore.getFieldsOnBoard().get(i).makeField(i, x, y, FieldAlign.RIGHT), layer);
             y += 175;
+        }
+
+        for (BuyAble street : BoardCore.getBuyAbleStreets()) {
+            _viewer.addMouseListener(street.getPropCard());
         }
 
     }
