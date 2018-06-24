@@ -50,7 +50,7 @@ public class UtilitiesCoreImpl extends UtilitiesCore {
         
         _propertyCard.setPropMsg("If one utility is owned</br>"
                 + "rent is 4 times amount</br>"
-                + "ahown on dice</br></br>"
+                + "shown on dice</br></br>"
                 + "If both utilites are owned</br>"
                 + "rent is 10 timeas amount</br>"
                 + "shown on dice");

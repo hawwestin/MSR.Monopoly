@@ -75,7 +75,7 @@ public class PlayerWalletBox extends JComponent implements Painter {
                 yOffset,
                 Math.abs(Board.getSingleton().getInnerBoardLength()) / 2,
                 100,
-                Settings.DEFAULT_FONT.deriveFont(40f));
+                Settings.DEFAULT_FONT.deriveFont(45f));
     }
 
     private void DrawPlayerMonye(Graphics2D g) {
@@ -85,15 +85,22 @@ public class PlayerWalletBox extends JComponent implements Painter {
                 yOffset,
                 Math.abs(Board.getSingleton().getInnerBoardLength()) / 2,
                 100,
-                Settings.DEFAULT_FONT.deriveFont(40f));
+                Settings.DEFAULT_FONT.deriveFont(45f));
     }
 
     private void DrawPlayerOwnedPossession(Graphics2D g) {
         int x = xOffset;
         int y = yOffset + 100;
+        int col = 0;
         for (BuyAble ba : _owner.getPossession()) {
             ba.getPropCard().MakePropertyCard(rotate, x, y, new Point2D.Double(xOffset, yOffset)).paint(g);
             x += 175;
+            ++col;
+            if (col == 9) {
+                x = xOffset;
+                y = yOffset + 380;
+                col = 0;
+            }
         }
     }
 
@@ -105,9 +112,9 @@ public class PlayerWalletBox extends JComponent implements Painter {
         Rectangle2D border = new Rectangle2D.Double(xOffset,
                 yOffset,
                 Math.abs(Board.getSingleton().getInnerBoardLength()),
-                400);
+                660);
         g.rotate((Math.PI / 2) * rotate.ordinal(), xOffset, yOffset);
-        g.setStroke(new BasicStroke(10));
+        g.setStroke(new BasicStroke(8));
         g.setColor(_owner.getColor());
         g.draw(border);
         //Backgroud 

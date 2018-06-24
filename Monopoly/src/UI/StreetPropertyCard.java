@@ -40,9 +40,8 @@ import java.awt.geom.Rectangle2D;
  */
 public class StreetPropertyCard extends PropCard {
 
-    private final StreetCore _place;    
+    private final StreetCore _place;
 
-    
     private Rectangle2D ConstructButton;
 
     /**
@@ -56,6 +55,8 @@ public class StreetPropertyCard extends PropCard {
     @Override
     public void paint(Graphics2D g) {
         Rectangle2D border = new Rectangle2D.Double(xOffset, yOffset, width, height);
+        Rectangle2D txtBorder = new Rectangle2D.Double(xOffset, yOffset, width, height * 0.75);
+
         g.setStroke(new BasicStroke(5f));
         g.setColor(Color.BLACK);
         g.draw(border);
@@ -66,7 +67,8 @@ public class StreetPropertyCard extends PropCard {
         g.fillRect(xOffset + 1, yOffset + 1, width - 3, 48);
 
         g.setColor(Color.BLACK);
-        BaseField.DrawMultiLineString(g, _place.toString(), xOffset, yOffset, width, (height - 35) / 2, Settings.DEFAULT_FONT);
+        BaseField.DrawMultiLineString(g, _place.toString(), xOffset, yOffset, width, (int) (height * 0.5), Settings.DEFAULT_FONT);
+        BaseField.DrawMultiLineString(g, _propMsg, txtBorder, Settings.DEFAULT_FONT.deriveFont(12f));
 
         SellButton = new Rectangle2D.Double(xOffset, yOffset + height - 35, width / 2, 35);
         g.setStroke(new BasicStroke(3f));

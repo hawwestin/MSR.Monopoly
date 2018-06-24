@@ -64,8 +64,19 @@ public class StreetCore extends BasePlace implements BuyAble {
         _streets.add(this);
         BoardCore.AddToBuyAbleStreets(this);
         _construction = Constructions.GROUND;
-        
+
         _propertyCard = new StreetPropertyCard(this);
+        String propmsg = "";
+        propmsg = propmsg.concat(String.format("Rent %d$</br>", _pricing.getRent()));
+        propmsg = propmsg.concat(String.format("Rent with colour set %d$</br>", _pricing.getRent() * 2));
+        propmsg = propmsg.concat(String.format("Rent with 1 house %d$</br>", _pricing.getHouse1()));
+        propmsg = propmsg.concat(String.format("Rent with 2 house %d$</br>", _pricing.getHouse2()));
+        propmsg = propmsg.concat(String.format("Rent with 3 house %d$</br>", _pricing.getHouse3()));
+        propmsg = propmsg.concat(String.format("Rent with 4 house %d$</br>", _pricing.getHouse4()));
+        propmsg = propmsg.concat(String.format("Rent with hotel %d$</br>", _pricing.getHotel()));
+        propmsg = propmsg.concat(String.format("Construction cost %d$</br>", _pricing.getBuilding()));
+
+        _propertyCard.setPropMsg(propmsg);
     }
 
     @Override
@@ -116,7 +127,7 @@ public class StreetCore extends BasePlace implements BuyAble {
 
     @Override
     public void setOwner(Player buyer) {
-        owner = buyer;        
+        owner = buyer;
     }
 
     @Override
@@ -168,14 +179,12 @@ public class StreetCore extends BasePlace implements BuyAble {
     @Override
     public void Sell(Player buyer, int price) {
         owner.Sell(this, price);
-        buyer.Buy(this, price);        
+        buyer.Buy(this, price);
     }
 
     @Override
     public PropCard getPropCard() {
         return _propertyCard;
     }
-
-
 
 }

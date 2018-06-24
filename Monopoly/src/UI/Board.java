@@ -74,8 +74,8 @@ public class Board {
         makeTiles(GraphicsBoardLayer);
         makeInnerBoard(GraphicsBoardLayer);
         //szablon
-        ImagePanel map = new ImagePanel(_innerBoardLength - 280, _innerBoardLength - 280, "img/Monopoly-Board.jpg");
-        _viewer.addPainter(map, 3); //ToDO Board Image as option as thing to by played or clean graphics.
+//        ImagePanel map = new ImagePanel(_innerBoardLength - 280, _innerBoardLength - 280, "img/Monopoly-Board.jpg");
+//        _viewer.addPainter(map, 3); //ToDO Board Image as option as thing to by played or clean graphics.
         // Player Icons should be top layer np 9.  All graphics is 1 so to board by on to set 2
 
         ResetWorldView();

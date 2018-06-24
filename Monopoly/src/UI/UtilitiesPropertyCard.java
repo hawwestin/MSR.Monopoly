@@ -61,7 +61,7 @@ public class UtilitiesPropertyCard extends PropCard {
         g.drawRect(xOffset, yOffset, width, 50);
         g.fillRect(xOffset + 1, yOffset + 1, width - 3, 48);
 
-        BaseField.DrawMultiLineString(g, _place.toString(), xOffset, yOffset, width, (height - 35) / 2, Settings.DEFAULT_FONT);
+        BaseField.DrawMultiLineString(g, _place.toString(), xOffset, yOffset, width, (int) (height * 0.5), Settings.DEFAULT_FONT);
         BaseField.DrawMultiLineString(g, _propMsg, txtBorder, Settings.DEFAULT_FONT.deriveFont(12f));
 
         SellButton = new Rectangle2D.Double(xOffset, yOffset + height - 35, width, 35);

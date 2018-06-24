@@ -144,7 +144,7 @@ public abstract class BaseField implements Painter {
                 RenderingHints.VALUE_ANTIALIAS_ON);
         g.setColor(Color.BLACK);
         g.setFont(Settings.DEFAULT_FONT);
-        DrawMultiLineString(g, _place.toString(), xOffset, yOffset, width, height/2, Settings.DEFAULT_FONT);
+        DrawMultiLineString(g, _place.toString(), xOffset, yOffset, width, height / 2, Settings.DEFAULT_FONT);
         g.setFont(oldFont);
     }
 
@@ -199,7 +199,7 @@ public abstract class BaseField implements Painter {
     }
 
     public static void DrawCenteredString(Graphics2D g, String text, int x, int y, int width, int hight, Font font) {
-        FontRenderContext frc = new FontRenderContext(null, true, true);        
+        FontRenderContext frc = new FontRenderContext(null, true, true);
         g.setRenderingHint(
                 RenderingHints.KEY_FRACTIONALMETRICS,
                 RenderingHints.VALUE_FRACTIONALMETRICS_ON);
@@ -222,15 +222,15 @@ public abstract class BaseField implements Painter {
 
     public static void DrawMultiLineString(Graphics2D g, String text, int x, int y, int width, int hight, Font font) {
         for (String line : text.split("(<\\/br>)")) {
-            DrawCenteredString(g, line, x, y += g.getFontMetrics().getHeight(), width, hight, font);
-//            g.drawString(line, x, y += g.getFontMetrics().getHeight());
+            DrawCenteredString(g, line, x, y, width, hight, font);
+            y += g.getFontMetrics().getHeight();
         }
     }
-    
-    public static void DrawMultiLineString(Graphics2D g, String text,Rectangle2D rect, Font font) {
+
+    public static void DrawMultiLineString(Graphics2D g, String text, Rectangle2D rect, Font font) {
         double y = rect.getY();
         for (String line : text.split("(<\\/br>)")) {
-            rect.setRect(rect.getX(),y += g.getFontMetrics().getHeight() , rect.getWidth(), rect.getHeight());
+            rect.setRect(rect.getX(), y += g.getFontMetrics().getHeight(), rect.getWidth(), rect.getHeight());
             DrawCenteredString(g, line, rect, font);
 //            g.drawString(line, x, y += g.getFontMetrics().getHeight());
         }
@@ -240,7 +240,7 @@ public abstract class BaseField implements Painter {
     public void paint(Graphics2D g, AffineTransform worldToScreen, double w, double h) {
         Rectangle2D border = new Rectangle2D.Double(xOffset, yOffset, width, height);
         g.rotate((Math.PI / 2) * rotate.ordinal(), xOffset, yOffset);
-        g.setStroke(new BasicStroke(5));       
+        g.setStroke(new BasicStroke(5));
         g.setColor(_place.BorderColor());
         g.draw(border);
     }
