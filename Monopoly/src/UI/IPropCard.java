@@ -26,7 +26,7 @@ package UI;
 import GameMechanics.FieldAlign;
 import java.awt.Graphics2D;
 import java.awt.event.MouseListener;
-import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
 
 /**
  *
@@ -48,7 +48,7 @@ public interface IPropCard extends MouseListener {
      * @param y
      * @return
      */
-    public IPropCard MakePropertyCard(FieldAlign number, int x, int y,AffineTransform worldToScreen);
+    public IPropCard MakePropertyCard(FieldAlign number, int x, int y, Point2D cardAnchor);
 
     public void paint(Graphics2D g);
 

@@ -29,8 +29,10 @@ import GameMechanics.Settings;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Shape;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
 /**
@@ -42,6 +44,7 @@ public class UtilitiesPropertyCard implements IPropCard {
     private UtilitiesCore _place;
     private String _propMsg;
 
+    private Rectangle2D SellButton;
     /**
      * X offset of top left corner of the field in game board Viewer.
      */
@@ -67,6 +70,8 @@ public class UtilitiesPropertyCard implements IPropCard {
      */
     protected int height = 280;
 
+    private Point2D _cardAnchor;
+
     public UtilitiesPropertyCard(UtilitiesCore place) {
         _place = place;
     }
@@ -76,17 +81,19 @@ public class UtilitiesPropertyCard implements IPropCard {
     }
 
     @Override
-    public IPropCard MakePropertyCard(FieldAlign align, int x, int y,AffineTransform worldToScreen) {
+    public IPropCard MakePropertyCard(FieldAlign align, int x, int y, Point2D cardAnchor) {
         rotate = align;
         xOffset = x;
         yOffset = y;
 
+        _cardAnchor = cardAnchor;
         return this;
     }
 
     public void paint(Graphics2D g) {
 
         Rectangle2D border = new Rectangle2D.Double(xOffset, yOffset, width, height);
+        Rectangle2D txtBorder = new Rectangle2D.Double(xOffset, yOffset, width, (height - 35));
 
         g.setColor(Color.BLACK);
         g.setStroke(new BasicStroke(5));
@@ -95,8 +102,15 @@ public class UtilitiesPropertyCard implements IPropCard {
         g.setStroke(new BasicStroke(3));
         g.drawRect(xOffset, yOffset, width, 50);
         g.fillRect(xOffset + 1, yOffset + 1, width - 3, 48);
-        BaseField.DrawMultiLineString(g, _place.toString(), xOffset, yOffset, width, height / 2, Settings.DEFAULT_FONT);
-        BaseField.DrawMultiLineString(g, _propMsg, border, Settings.DEFAULT_FONT.deriveFont(12f));
+
+        BaseField.DrawMultiLineString(g, _place.toString(), xOffset, yOffset, width, (height - 35) / 2, Settings.DEFAULT_FONT);
+        BaseField.DrawMultiLineString(g, _propMsg, txtBorder, Settings.DEFAULT_FONT.deriveFont(12f));
+
+        SellButton = new Rectangle2D.Double(xOffset, yOffset + height - 35, width, 35);
+        g.setStroke(new BasicStroke(3f));
+        g.setColor(Color.BLACK);
+        g.draw(SellButton);
+        BaseField.DrawCenteredString(g, "Sell", SellButton, Settings.DEFAULT_FONT.deriveFont(12f));
 
     }
 
@@ -120,7 +134,25 @@ public class UtilitiesPropertyCard implements IPropCard {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-//        System.err.println("Utiliteis");
+        if (_place.getOwner() == null) {
+            return;
+        }
+        Point2D worldPoint = Board.getSingleton().ScreenToWorldPoint(e.getPoint());
+
+        Rectangle2D transformClick = new Rectangle2D.Double(worldPoint.getX(),
+                worldPoint.getY(), 1, 1);
+
+        AffineTransform at = AffineTransform.getRotateInstance((Math.PI / 2) * -rotate.ordinal(), _cardAnchor.getX(), _cardAnchor.getY());
+        Shape s = at.createTransformedShape(transformClick);
+        transformClick = s.getBounds2D();
+
+        if (SellButton != null) {
+            if ((e.getButton() == 1) && SellButton.contains(transformClick.getX(), transformClick.getY())) {
+                System.err.println(String.format("Sell Street %s", _place.toString()));
+                System.err.println(String.format("x %d", e.getX()));
+                System.err.println(String.format("y %d", e.getY()));
+            }
+        }
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -23,7 +23,6 @@
  */
 package UI;
 
-import Core.BoardCore;
 import Core.BuyAble;
 import Core.Player;
 import GameMechanics.FieldAlign;
@@ -38,6 +37,7 @@ import java.awt.Color;
  */
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import javax.swing.JComponent;
 
@@ -88,11 +88,11 @@ public class PlayerWalletBox extends JComponent implements Painter {
                 Settings.DEFAULT_FONT.deriveFont(40f));
     }
 
-    private void DrawPlayerOwnedPossession(Graphics2D g, AffineTransform worldToScreen) {
+    private void DrawPlayerOwnedPossession(Graphics2D g) {
         int x = xOffset;
         int y = yOffset + 100;
         for (BuyAble ba : _owner.getPossession()) {
-            ba.getPropCard().MakePropertyCard(rotate, x, y, worldToScreen).paint(g);
+            ba.getPropCard().MakePropertyCard(rotate, x, y, new Point2D.Double(xOffset, yOffset)).paint(g);
             x += 175;
         }
     }
@@ -117,8 +117,8 @@ public class PlayerWalletBox extends JComponent implements Painter {
         //Backgroud 
 
         DrawPlayerMonye(g);
-        DrawPlayerName(g);        
-        DrawPlayerOwnedPossession(g, oldAT);
+        DrawPlayerName(g);
+        DrawPlayerOwnedPossession(g);
         g.setColor(Color.BLACK);
         g.setTransform(oldAT);
     }
