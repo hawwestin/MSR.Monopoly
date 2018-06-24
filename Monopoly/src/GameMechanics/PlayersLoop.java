@@ -86,6 +86,7 @@ public class PlayersLoop {
 
     /**
      * Remove Player who run out of money
+     *
      * @param player
      */
     public static void RemoveBankrupt(Player player) {
@@ -94,8 +95,9 @@ public class PlayersLoop {
         }
         _players.remove(player);
         for (BuyAble prop : player.getPossession()) {
-            prop.setOwner(null);            
+            prop.setOwner(null);
         }
+        player.getPossession().clear();
         Board.getSingleton().Repaint();
         if (_players.size() == 1) {
             Start.changeGameState(GameState.GAME_END);
