@@ -47,11 +47,17 @@ public class RailRoadUtilitiesCoreImpl extends UtilitiesCore {
         _railroad.add(this);        
         _rent = 25;
         
-        _propertyCard.setPropMsg("Rent 25$</br>"
-                + "If 2 Stations are owned 50$</br>"
-                + "If 3 Stations are owned 100$</br>"
-                + "If 4 Stations are owned 200$</br>"                
-                );
+        StringBuilder propmsg = new StringBuilder();
+        propmsg.append(String.format("%-35s", "RENT"));
+        propmsg.append(String.format("%5d$</br>", 25));
+        propmsg.append(String.format("%-27s", "If 2 Stations are owned"));
+        propmsg.append(String.format("%5d$</br>", 50));
+        propmsg.append(String.format("%-25s", "If 3 Stations are owned"));
+        propmsg.append(String.format("%5d$</br>", 100));
+        propmsg.append(String.format("%-25s", "If 4 Stations are owned"));
+        propmsg.append(String.format("%5d$</br>", 200));
+        
+        _propertyCard.setPropMsg(propmsg.toString());
         
     }
 

@@ -66,17 +66,26 @@ public class StreetCore extends BasePlace implements BuyAble {
         _construction = Constructions.GROUND;
 
         _propertyCard = new StreetPropertyCard(this);
-        String propmsg = "";
-        propmsg = propmsg.concat(String.format("Rent %d$</br>", _pricing.getRent()));
-        propmsg = propmsg.concat(String.format("Rent with colour set %d$</br>", _pricing.getRent() * 2));
-        propmsg = propmsg.concat(String.format("Rent with 1 house %d$</br>", _pricing.getHouse1()));
-        propmsg = propmsg.concat(String.format("Rent with 2 house %d$</br>", _pricing.getHouse2()));
-        propmsg = propmsg.concat(String.format("Rent with 3 house %d$</br>", _pricing.getHouse3()));
-        propmsg = propmsg.concat(String.format("Rent with 4 house %d$</br>", _pricing.getHouse4()));
-        propmsg = propmsg.concat(String.format("Rent with hotel %d$</br>", _pricing.getHotel()));
-        propmsg = propmsg.concat(String.format("Construction cost %d$</br>", _pricing.getBuilding()));
+        StringBuilder propmsg = new StringBuilder();
+        propmsg.append(String.format("%-32s", "RENT"));
+        propmsg.append(String.format("%5d $</br>", _pricing.getRent()));
+        propmsg.append(String.format("%-26s", "Rent with colour set"));
+        propmsg.append(String.format("%5d $</br>", _pricing.getRent() * 2));
+        propmsg.append(String.format("%-25s", "Rent with 1 house"));
+        propmsg.append(String.format("%6d $</br>", _pricing.getHouse1()));
+        propmsg.append(String.format("%-25s", "Rent with 2 house"));
+        propmsg.append(String.format("%6d $</br>", _pricing.getHouse2()));
+        propmsg.append(String.format("%-24s", "Rent with 3 house"));
+        propmsg.append(String.format("%6d $</br>", _pricing.getHouse3()));
+        propmsg.append(String.format("%-24s", "Rent with 4 house"));
+        propmsg.append(String.format("%6d $</br>", _pricing.getHouse4()));
+        propmsg.append(String.format("%-28s", "Rent with hotel"));
+        propmsg.append(String.format("%5d $</br>", _pricing.getHotel()));
+        propmsg.append("-----------------------------</br>");
+        propmsg.append(String.format("%-25s", "Construction cost"));
+        propmsg.append(String.format("%5d $</br>", _pricing.getBuilding()));
 
-        _propertyCard.setPropMsg(propmsg);
+        _propertyCard.setPropMsg(propmsg.toString());
     }
 
     @Override

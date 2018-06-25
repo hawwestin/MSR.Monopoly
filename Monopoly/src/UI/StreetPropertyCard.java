@@ -55,7 +55,7 @@ public class StreetPropertyCard extends PropCard {
     @Override
     public void paint(Graphics2D g) {
         Rectangle2D border = new Rectangle2D.Double(xOffset, yOffset, width, height);
-        Rectangle2D txtBorder = new Rectangle2D.Double(xOffset, yOffset, width, height * 0.75);
+        Rectangle2D txtBorder = new Rectangle2D.Double(xOffset, yOffset, width, height * 0.65);
 
         g.setStroke(new BasicStroke(5f));
         g.setColor(Color.BLACK);

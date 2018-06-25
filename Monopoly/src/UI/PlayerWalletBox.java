@@ -80,7 +80,7 @@ public class PlayerWalletBox extends JComponent implements Painter {
 
     private void DrawPlayerMonye(Graphics2D g) {
         g.setColor(Color.BLACK);
-        BaseField.DrawCenteredString(g, String.format("%d$", _owner.GetMoney()),
+        BaseField.DrawCenteredString(g, String.format("%,d $", _owner.GetMoney()),
                 xOffset + Math.abs(Board.getSingleton().getInnerBoardLength()) / 2,
                 yOffset,
                 Math.abs(Board.getSingleton().getInnerBoardLength()) / 2,
