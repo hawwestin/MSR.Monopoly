@@ -156,7 +156,7 @@ public class Player {
      *
      * @return
      */
-    public boolean getJailBreak() {
+    public boolean IsInJail() {
         return _jailBreak;
     }
 

@@ -25,7 +25,9 @@ package Core;
 
 import GameMechanics.Constructions;
 import GameMechanics.FieldAlign;
+import GameMechanics.Start;
 import UI.BaseField;
+import UI.Board;
 import UI.PropCard;
 import UI.StreetField;
 import UI.StreetPropertyCard;
@@ -47,7 +49,7 @@ public class StreetCore extends BasePlace implements BuyAble {
     private final FieldInit _pricing;
     private Color color;
     private static List<StreetCore> _streets = new ArrayList<>();
-    private Constructions _construction;
+    private Constructions _rentLevel;
     protected StreetPropertyCard _propertyCard;
 
     /**
@@ -63,29 +65,55 @@ public class StreetCore extends BasePlace implements BuyAble {
         _pricing = pricing;
         _streets.add(this);
         BoardCore.AddToBuyAbleStreets(this);
-        _construction = Constructions.GROUND;
-
+        _rentLevel = Constructions.GROUND;
         _propertyCard = new StreetPropertyCard(this);
+        SetPropMsg();
+
+    }
+
+    public void SetPropMsg() {
         StringBuilder propmsg = new StringBuilder();
         propmsg.append(String.format("%-32s", "RENT"));
+        if (_rentLevel == Constructions.GROUND && !HasColorSet()) {
+            propmsg.append("+");
+        }
         propmsg.append(String.format("%5d $</br>", _pricing.getRent()));
         propmsg.append(String.format("%-26s", "Rent with colour set"));
-        propmsg.append(String.format("%5d $</br>", _pricing.getRent() * 2));
+        if (_rentLevel == Constructions.GROUND && HasColorSet()) {
+            propmsg.append("+");
+        }
+        propmsg.append(String.format("%5d $</br>", _pricing.getConstructionRentMap().get(Constructions.GROUND)));
         propmsg.append(String.format("%-25s", "Rent with 1 house"));
-        propmsg.append(String.format("%6d $</br>", _pricing.getHouse1()));
+        if (_rentLevel == Constructions.HOUSE1) {
+            propmsg.append("+");
+        }
+        propmsg.append(String.format("%6d $</br>", _pricing.getConstructionRentMap().get(Constructions.HOUSE1)));
         propmsg.append(String.format("%-25s", "Rent with 2 house"));
-        propmsg.append(String.format("%6d $</br>", _pricing.getHouse2()));
+        if (_rentLevel == Constructions.HOUSE2) {
+            propmsg.append("+");
+        }
+        propmsg.append(String.format("%6d $</br>", _pricing.getConstructionRentMap().get(Constructions.HOUSE2)));
         propmsg.append(String.format("%-24s", "Rent with 3 house"));
-        propmsg.append(String.format("%6d $</br>", _pricing.getHouse3()));
+        if (_rentLevel == Constructions.HOUSE3) {
+            propmsg.append("+");
+        }
+        propmsg.append(String.format("%6d $</br>", _pricing.getConstructionRentMap().get(Constructions.HOUSE3)));
         propmsg.append(String.format("%-24s", "Rent with 4 house"));
-        propmsg.append(String.format("%6d $</br>", _pricing.getHouse4()));
+        if (_rentLevel == Constructions.HOUSE4) {
+            propmsg.append("+");
+        }
+        propmsg.append(String.format("%6d $</br>", _pricing.getConstructionRentMap().get(Constructions.HOUSE4)));
         propmsg.append(String.format("%-28s", "Rent with hotel"));
-        propmsg.append(String.format("%5d $</br>", _pricing.getHotel()));
+        if (_rentLevel == Constructions.HOTEL) {
+            propmsg.append("+");
+        }
+        propmsg.append(String.format("%5d $</br>", _pricing.getConstructionRentMap().get(Constructions.HOTEL)));
         propmsg.append("-----------------------------</br>");
         propmsg.append(String.format("%-25s", "Construction cost"));
         propmsg.append(String.format("%5d $</br>", _pricing.getBuilding()));
 
         _propertyCard.setPropMsg(propmsg.toString());
+
     }
 
     @Override
@@ -137,22 +165,28 @@ public class StreetCore extends BasePlace implements BuyAble {
     @Override
     public void setOwner(Player buyer) {
         owner = buyer;
+        for (StreetCore street : _streets) {
+            if (street.getColor() == this.color && street.owner == this.owner) {
+                street.SetPropMsg();
+            }
+        }
     }
 
     @Override
     public int getRent() {
         if (HasColorSet()) {
-            return _pricing.getRentMap().get(_construction);
+            return _pricing.getConstructionRentMap().get(_rentLevel);
         }
         return _pricing.getRent();
     }
 
     private boolean HasColorSet() {
         for (StreetCore street : _streets) {
-            if (street.getColor() == this.color && street.owner != this.owner) {
+            if (street.getColor() == this.color && (street.owner != this.owner || street.owner == null)) {
                 return false;
             }
         }
+
         return true;
     }
 
@@ -178,17 +212,40 @@ public class StreetCore extends BasePlace implements BuyAble {
 
     @Override
     public void Sell() {
-        if (_construction == Constructions.GROUND) {
-            //FIXME get proper price on sell
+        if (_rentLevel == Constructions.GROUND) {
             owner.Sell(this, getPrice());
             owner = null;
+
+            for (StreetCore street : _streets) {
+                if (street.getColor() == this.color) {
+                    street.SetPropMsg();
+                }
+            }
+
+            Board.getSingleton().Repaint();
+            Start.getGame().TextLog(String.format("You Sold %s and earn %d", this.toString(), getPrice()));
+        } else { //deconstruct a house.
+            owner.EarnMoney(_pricing.getBuilding());
+            _rentLevel = _pricing.getPrev();
+            Start.getGame().TextLog(String.format("You Sold building on %s and earn %d", this.toString(), _pricing.getBuilding()));
+            SetPropMsg();
         }
+
     }
 
     @Override
     public void Sell(Player buyer, int price) {
-        owner.Sell(this, price);
-        buyer.Buy(this, price);
+        if (_rentLevel == Constructions.GROUND) {
+            owner.Sell(this, price);
+            buyer.Buy(this, price);
+            owner = buyer;
+
+            for (StreetCore street : _streets) {
+                if (street.getColor() == this.color) {
+                    street.SetPropMsg();
+                }
+            }
+        }
     }
 
     @Override

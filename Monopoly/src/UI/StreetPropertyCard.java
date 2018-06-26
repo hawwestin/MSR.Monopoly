@@ -24,7 +24,10 @@
 package UI;
 
 import Core.StreetCore;
+import GameMechanics.FieldAlign;
+import GameMechanics.PlayersLoop;
 import GameMechanics.Settings;
+import GameMechanics.Start;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -49,6 +52,7 @@ public class StreetPropertyCard extends PropCard {
      * @param place
      */
     public StreetPropertyCard(StreetCore place) {
+        super();
         this._place = place;
     }
 
@@ -86,7 +90,6 @@ public class StreetPropertyCard extends PropCard {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        //click in sell & is owner & Construcion is grtoud else textLog
         //click in COnstruct & is owner & has whole color else textLog      
         if (_place.getOwner() == null) {
             return;
@@ -96,12 +99,25 @@ public class StreetPropertyCard extends PropCard {
         Rectangle2D transformClick = new Rectangle2D.Double(worldPoint.getX(),
                 worldPoint.getY(), 1, 1);
 
-        AffineTransform at = AffineTransform.getRotateInstance((Math.PI / 2) * -rotate.ordinal(), _cardAnchor.getX(), _cardAnchor.getY());
+        AffineTransform at = AffineTransform.getRotateInstance((Math.PI / 2) * -super.rotate.ordinal(), super._cardAnchor.getX(), super._cardAnchor.getY());
         Shape s = at.createTransformedShape(transformClick);
         transformClick = s.getBounds2D();
 
         if (SellButton != null) {
             if ((e.getButton() == 1) && SellButton.contains(transformClick.getX(), transformClick.getY())) {
+                //click in sell & is owner 
+                if (PlayersLoop.getCurrentPlayer() == _place.getOwner()) {
+                    // Construcion above groud then seel one house level                     
+                    if (_place.getOwner().getBoardPlace() == _place.getBaseFiled().getNumber()) {
+                        _place.Sell();
+                        if (_place.getOwner() == null) {
+                            Start.getGame().EnableBuyButton();
+                        }
+                    } else {
+                        _place.Sell();
+                    }
+                }
+
                 System.err.println(String.format("Sell Street %s", _place.toString()));
                 System.err.println(String.format("x %d", e.getX()));
                 System.err.println(String.format("y %d", e.getY()));

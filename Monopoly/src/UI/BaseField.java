@@ -101,6 +101,12 @@ public abstract class BaseField implements Painter {
         rotate = align;
     }
 
+    public int getNumber() {
+        return _number;
+    }
+
+    
+    
     //todo movement animation
     /**
      * Draw player counter on field

@@ -51,6 +51,10 @@ public abstract class BasePlace {
         _name = name;
     }
 
+    public BaseField getBaseFiled() {
+        return _baseFiled;
+    }
+
     /**
      * When a player ends his movement on the field run individual field action.
      *

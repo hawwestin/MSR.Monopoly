@@ -28,7 +28,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * A set of values for payments that can be made on the.  
+ * A set of values for payments that can be made on the.
+ *
  * @author Michal
  */
 public class FieldInit {
@@ -41,10 +42,13 @@ public class FieldInit {
     private final int house4;
     private final int hotel;
     private final int building;
-    private final Map<Constructions, Integer> rentMap;
+    private final Map<Constructions, Integer> constructionRentMap;
+
+    private Constructions _constructionLevel;
 
     /**
-     * Init values of payments. 
+     * Init values of payments.
+     *
      * @param price
      * @param groundRent
      * @param house1
@@ -64,7 +68,7 @@ public class FieldInit {
         this.hotel = hotel;
         this.building = building;
 
-        rentMap = new HashMap<Constructions, Integer>() {
+        constructionRentMap = new HashMap<Constructions, Integer>() {
             {
                 put(Constructions.GROUND, groundRent * 2);
                 put(Constructions.HOUSE1, house1);
@@ -77,15 +81,17 @@ public class FieldInit {
     }
 
     /**
-     * Get Agregated Payments map 
+     * Get Agregated Payments map
+     *
      * @return
      */
-    public Map<Constructions, Integer> getRentMap() {
-        return rentMap;
+    public Map<Constructions, Integer> getConstructionRentMap() {
+        return constructionRentMap;
     }
 
     /**
      * Get Field price
+     *
      * @return
      */
     public int getPrice() {
@@ -93,7 +99,8 @@ public class FieldInit {
     }
 
     /**
-     * get basic value of rent.
+     * Get Field Defaul ground rent value.
+     *
      * @return
      */
     public int getRent() {
@@ -101,51 +108,44 @@ public class FieldInit {
     }
 
     /**
-     * rent value with one house
-     * @return
-     */
-    public int getHouse1() {
-        return house1;
-    }
-
-    /**
-     * rent value with two house
-     * @return
-     */
-    public int getHouse2() {
-        return house2;
-    }
-
-    /**
-     * rent value with three house
-     * @return
-     */
-    public int getHouse3() {
-        return house3;
-    }
-
-    /**
-     * rent value with four house
-     * @return
-     */
-    public int getHouse4() {
-        return house4;
-    }
-
-    /**
-     * rent value with hotel
-     * @return
-     */
-    public int getHotel() {
-        return hotel;
-    }
-
-    /**
      * get price of single building construcion.
+     *
      * @return
      */
     public int getBuilding() {
         return building;
+    }
+
+    private boolean hasNext() {
+        return _constructionLevel.ordinal() < Constructions.HOTEL.ordinal();
+    }
+
+    /**
+     * * Get next Construction level
+     *
+     * @return
+     */
+    public Constructions getNext() {
+        if (hasNext()) {
+            _constructionLevel = Constructions.values()[_constructionLevel.ordinal() + 1];
+        }
+        return _constructionLevel;
+    }
+
+    private boolean hasPrev() {
+        return _constructionLevel.ordinal() > Constructions.GROUND.ordinal();
+    }
+
+    /**
+     * Get previous Construction level
+     *
+     * @return
+     */
+    public Constructions getPrev() {
+        if (hasNext()) {
+            _constructionLevel = Constructions.values()[_constructionLevel.ordinal() - 1];
+        }
+        return _constructionLevel;
     }
 
 }

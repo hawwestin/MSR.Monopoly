@@ -170,7 +170,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="JBBuy">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Kup"/>
+                <Property name="text" type="java.lang.String" value="Buy"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBBuyActionPerformed"/>

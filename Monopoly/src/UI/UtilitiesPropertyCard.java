@@ -24,7 +24,6 @@
 package UI;
 
 import Core.UtilitiesCore;
-import GameMechanics.FieldAlign;
 import GameMechanics.Settings;
 import java.awt.BasicStroke;
 import java.awt.Color;
