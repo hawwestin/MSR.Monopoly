@@ -6,7 +6,9 @@
 package Core;
 
 import GameMechanics.FieldAlign;
+import GameMechanics.Start;
 import UI.BaseField;
+import UI.Board;
 import UI.PropCard;
 import UI.UtilitiesField;
 import UI.UtilitiesPropertyCard;
@@ -91,7 +93,10 @@ public abstract class UtilitiesCore extends BasePlace implements BuyAble {
     public void Sell() {
 
         owner.Sell(this, getPrice());
-        owner = null;
+        setOwner(null);
+
+        Board.getSingleton().Repaint();
+        Start.getGame().TextLog(String.format("You Sold %s and earn %d", this.toString(), getPrice()));
 
     }
 
@@ -99,7 +104,9 @@ public abstract class UtilitiesCore extends BasePlace implements BuyAble {
     public void Sell(Player buyer, int price) {
         owner.Sell(this, price);
         buyer.Buy(this, price);
-
+        setOwner(buyer);
+        Board.getSingleton().Repaint();
+        Start.getGame().TextLog(String.format("You Sold %s and earn %d", this.toString(), getPrice()));
     }
 
     @Override

@@ -104,10 +104,8 @@ public class StreetPropertyCard extends PropCard {
         transformClick = s.getBounds2D();
 
         if (SellButton != null) {
-            if ((e.getButton() == 1) && SellButton.contains(transformClick.getX(), transformClick.getY())) {
-                //click in sell & is owner 
-                if (PlayersLoop.getCurrentPlayer() == _place.getOwner()) {
-                    // Construcion above groud then seel one house level                     
+            if ((e.getButton() == 1) && SellButton.contains(transformClick.getX(), transformClick.getY())) {                
+                if (PlayersLoop.getCurrentPlayer() == _place.getOwner()) {                    
                     if (_place.getOwner().getBoardPlace() == _place.getBaseFiled().getNumber()) {
                         _place.Sell();
                         if (_place.getOwner() == null) {
@@ -117,10 +115,6 @@ public class StreetPropertyCard extends PropCard {
                         _place.Sell();
                     }
                 }
-
-                System.err.println(String.format("Sell Street %s", _place.toString()));
-                System.err.println(String.format("x %d", e.getX()));
-                System.err.println(String.format("y %d", e.getY()));
             }
         }
         if (ConstructButton != null) {

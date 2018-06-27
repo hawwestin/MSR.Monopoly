@@ -24,7 +24,9 @@
 package UI;
 
 import Core.UtilitiesCore;
+import GameMechanics.PlayersLoop;
 import GameMechanics.Settings;
+import GameMechanics.Start;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -87,12 +89,16 @@ public class UtilitiesPropertyCard extends PropCard {
 
         if (SellButton != null) {
             if ((e.getButton() == 1) && SellButton.contains(transformClick.getX(), transformClick.getY())) {
-                System.err.println(String.format("Sell Street %s", _place.toString()));
-                System.err.println(String.format("x %d", e.getX()));
-                System.err.println(String.format("y %d", e.getY()));
+                if (PlayersLoop.getCurrentPlayer() == _place.getOwner()) {
+                    if (_place.getOwner().getBoardPlace() == _place.getBaseFiled().getNumber()) {
+                        _place.Sell();
+                        Start.getGame().EnableBuyButton();
+                    } else {
+                        _place.Sell();
+                    }
+                }
             }
         }
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

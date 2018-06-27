@@ -95,7 +95,7 @@ public class PlayersLoop {
         }
         _players.remove(player);
         for (BuyAble prop : player.getPossession()) {
-            prop.setOwner(null);
+            prop.setOwner(null);            
         }
         player.getPossession().clear();
         Board.getSingleton().Repaint();

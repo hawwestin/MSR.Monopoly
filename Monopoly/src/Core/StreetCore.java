@@ -166,7 +166,7 @@ public class StreetCore extends BasePlace implements BuyAble {
     public void setOwner(Player buyer) {
         owner = buyer;
         for (StreetCore street : _streets) {
-            if (street.getColor() == this.color && street.owner == this.owner) {
+            if (street.getColor() == this.color) {
                 street.SetPropMsg();
             }
         }
@@ -214,13 +214,7 @@ public class StreetCore extends BasePlace implements BuyAble {
     public void Sell() {
         if (_rentLevel == Constructions.GROUND) {
             owner.Sell(this, getPrice());
-            owner = null;
-
-            for (StreetCore street : _streets) {
-                if (street.getColor() == this.color) {
-                    street.SetPropMsg();
-                }
-            }
+            setOwner(null);
 
             Board.getSingleton().Repaint();
             Start.getGame().TextLog(String.format("You Sold %s and earn %d", this.toString(), getPrice()));
