@@ -44,25 +44,13 @@ public class RailRoadUtilitiesCoreImpl extends UtilitiesCore {
      */
     public RailRoadUtilitiesCoreImpl(String name, int price) {
         super(name, price);
-        _railroad.add(this);        
+        _railroad.add(this);
         _rent = 25;
-        
-        StringBuilder propmsg = new StringBuilder();
-        propmsg.append(String.format("%-35s", "RENT"));
-        propmsg.append(String.format("%5d$</br>", 25));
-        propmsg.append(String.format("%-27s", "If 2 Stations are owned"));
-        propmsg.append(String.format("%5d$</br>", 50));
-        propmsg.append(String.format("%-25s", "If 3 Stations are owned"));
-        propmsg.append(String.format("%5d$</br>", 100));
-        propmsg.append(String.format("%-25s", "If 4 Stations are owned"));
-        propmsg.append(String.format("%5d$</br>", 200));
-        
-        _propertyCard.setPropMsg(propmsg.toString());
-        
+
+        SetPropMsg();
     }
 
-    @Override
-    public int getRent() {
+    private int CountOwnership() {
         Map< Player, Integer> map = new HashMap<>();
         for (RailRoadUtilitiesCoreImpl rail : _railroad) {
             if (map.containsKey(rail.owner)) {
@@ -71,7 +59,46 @@ public class RailRoadUtilitiesCoreImpl extends UtilitiesCore {
                 map.put(rail.owner, 1);
             }
         }
-        return (int) (_rent * Math.pow(2, map.get(owner) - 1));
+        return map.get(owner);
+    }
+
+    private void SetPropMsg() {
+        StringBuilder propmsg = new StringBuilder();
+        propmsg.append(String.format("%-35s", "RENT"));
+        if (CountOwnership() == 1) {
+            propmsg.append("+");
+        }
+        propmsg.append(String.format("%5d$</br>", 25));
+        propmsg.append(String.format("%-27s", "If 2 Stations are owned"));
+        if (CountOwnership() == 2) {
+            propmsg.append("+");
+        }
+        propmsg.append(String.format("%5d$</br>", 50));
+        propmsg.append(String.format("%-25s", "If 3 Stations are owned"));
+        if (CountOwnership() == 3) {
+            propmsg.append("+");
+        }
+        propmsg.append(String.format("%5d$</br>", 100));
+        propmsg.append(String.format("%-25s", "If 4 Stations are owned"));
+        if (CountOwnership() == 4) {
+            propmsg.append("+");
+        }
+        propmsg.append(String.format("%5d$</br>", 200));
+
+        _propertyCard.setPropMsg(propmsg.toString());
+    }
+
+    @Override
+    public void setOwner(Player buyer) {
+        super.setOwner(buyer); //To change body of generated methods, choose Tools | Templates.
+        _railroad.forEach((rail) -> {
+            rail.SetPropMsg();
+        });
+    }
+
+    @Override
+    public int getRent() {
+        return (int) (_rent * Math.pow(2, CountOwnership() - 1));
 
     }
 
