@@ -104,8 +104,8 @@ public class StreetPropertyCard extends PropCard {
         transformClick = s.getBounds2D();
 
         if (SellButton != null) {
-            if ((e.getButton() == 1) && SellButton.contains(transformClick.getX(), transformClick.getY())) {                
-                if (PlayersLoop.getCurrentPlayer() == _place.getOwner()) {                    
+            if ((e.getButton() == 1) && SellButton.contains(transformClick.getX(), transformClick.getY())) {
+                if (PlayersLoop.getCurrentPlayer() == _place.getOwner()) {
                     if (_place.getOwner().getBoardPlace() == _place.getBaseFiled().getNumber()) {
                         _place.Sell();
                         if (_place.getOwner() == null) {
@@ -119,9 +119,7 @@ public class StreetPropertyCard extends PropCard {
         }
         if (ConstructButton != null) {
             if ((e.getButton() == 1) && ConstructButton.contains(transformClick.getX(), transformClick.getY())) {
-                System.err.println(String.format("Construct Street %s", _place.toString()));
-                System.err.println(String.format("x %d", e.getX()));
-                System.err.println(String.format("y %d", e.getY()));
+                _place.ConstructBuilding();
             }
         }
     }

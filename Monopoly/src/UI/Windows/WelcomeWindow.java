@@ -80,7 +80,7 @@ public class WelcomeWindow extends javax.swing.JPanel {
     public WelcomeWindow() {
         initComponents();
 
-        Icon.getIconMap().keySet().forEach((String kind) -> cbm.addElement(kind));
+        Icon.getPlayerIconMap().keySet().forEach((String kind) -> cbm.addElement(kind));
         JCBIcon.setModel(cbm);
 
         JBPrevPlayer.setEnabled(false);
@@ -203,7 +203,7 @@ public class WelcomeWindow extends javax.swing.JPanel {
         if (players.size() > _currentPlayerIndex) {
             players.get(_currentPlayerIndex).setColor(jColorChooser1.getColor());
             players.get(_currentPlayerIndex).setName(JTFName.getText());
-            players.get(_currentPlayerIndex).setPlayerIcon(Icon.getIconMap().get(JCBIcon.getSelectedItem()));
+            players.get(_currentPlayerIndex).setPlayerIcon(Icon.getPlayerIconMap().get(JCBIcon.getSelectedItem()));
         } else if (players.size() == Settings.PlayersLimit) {
             setCurrentPlayerIndex(_currentPlayerIndex -= 1);
             players.get(_currentPlayerIndex).setColor(jColorChooser1.getColor());
@@ -218,14 +218,14 @@ public class WelcomeWindow extends javax.swing.JPanel {
         if (players.size() > _currentPlayerIndex) {
             players.get(_currentPlayerIndex).setColor(jColorChooser1.getColor());
             players.get(_currentPlayerIndex).setName(JTFName.getText());
-            players.get(_currentPlayerIndex).setPlayerIcon(Icon.getIconMap().get(JCBIcon.getSelectedItem()));
+            players.get(_currentPlayerIndex).setPlayerIcon(Icon.getPlayerIconMap().get(JCBIcon.getSelectedItem()));
         }
         setCurrentPlayerIndex(_currentPlayerIndex += 1);
         if (players.size() < _currentPlayerIndex) {
             players.add(new Player(players.size(),
                     JTFName.getText(),
                     jColorChooser1.getColor(),
-                    Icon.getIconMap().get(JCBIcon.getSelectedItem())));
+                    Icon.getPlayerIconMap().get(JCBIcon.getSelectedItem())));
             if (players.size() < Settings.PlayersLimit) {
                 JTFName.setText("");
                 jColorChooser1.setColor(Color.WHITE);

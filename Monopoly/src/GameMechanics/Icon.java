@@ -33,15 +33,19 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 /**
- * Container for images of player counters 
+ * Container for images of player counters
+ *
  * @author Michal
  */
 public class Icon {
-    private static HashMap<String, BufferedImage> iconMap = makeMap();
-    
-    private static HashMap<String, BufferedImage> makeMap() {
+
+    private static HashMap<String, BufferedImage> playerIconMap = makePlayerIconMap();
+    private static HashMap<String, BufferedImage> buildngIconMap = makeBuildingMap();
+
+    private static HashMap<String, BufferedImage> makePlayerIconMap() {
         HashMap<String, BufferedImage> map = new HashMap<String, BufferedImage>();
         try {
+            //todo remake to directory content listing.
             map.put("Laptop", ImageIO.read(new File("img/laptop.gif")));
             map.put("Mouse", ImageIO.read(new File("img/mouse.gif")));
             map.put("Car", ImageIO.read(new File("img/car.png")));
@@ -59,12 +63,30 @@ public class Icon {
         return map;
     }
 
+    private static HashMap<String, BufferedImage> makeBuildingMap() {
+        HashMap<String, BufferedImage> map = new HashMap<String, BufferedImage>();
+        try {
+            //todo remake to directory content listing.
+            map.put("House", ImageIO.read(new File("img/house.png")));
+            map.put("hotel", ImageIO.read(new File("img/hotel.png")));
+        } catch (IOException ex) {
+            Logger.getLogger(WelcomeWindow.class.getName()).log(Level.SEVERE, null, ex);
+            //todo logger
+        }
+        return map;
+    }
+
     /**
      * Return map of in game supported counters image.
+     *
      * @return
      */
-    public static HashMap<String, BufferedImage> getIconMap() {
-        return iconMap;
-    }    
-    
+    public static HashMap<String, BufferedImage> getPlayerIconMap() {
+        return playerIconMap;
+    }
+
+    public static HashMap<String, BufferedImage> getBuildingIconMap() {
+        return buildngIconMap;
+    }
+
 }

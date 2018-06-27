@@ -163,6 +163,11 @@ public class StreetCore extends BasePlace implements BuyAble {
     }
 
     @Override
+    public PropCard getPropCard() {
+        return _propertyCard;
+    }
+
+    @Override
     public void setOwner(Player buyer) {
         owner = buyer;
         for (StreetCore street : _streets) {
@@ -186,7 +191,15 @@ public class StreetCore extends BasePlace implements BuyAble {
                 return false;
             }
         }
+        return true;
+    }
 
+    private boolean CanSell() {
+        for (StreetCore street : _streets) {
+            if (street.getColor() == this.color && street._rentLevel.ordinal() > Constructions.GROUND.ordinal()) {
+                return false;
+            }
+        }
         return true;
     }
 
@@ -212,24 +225,31 @@ public class StreetCore extends BasePlace implements BuyAble {
 
     @Override
     public void Sell() {
-        if (_rentLevel == Constructions.GROUND) {
-            owner.Sell(this, getPrice());
-            setOwner(null);
 
-            Board.getSingleton().Repaint();
-            Start.getGame().TextLog(String.format("You Sold %s and earn %d", this.toString(), getPrice()));
+        if (_rentLevel == Constructions.GROUND) {
+            if (CanSell()) {
+                owner.Sell(this, getPrice());
+                setOwner(null);
+
+                Board.getSingleton().Repaint();
+                Start.getGame().TextLog(String.format("You Sold %s and earn %d", this.toString(), getPrice()));
+            } else {
+                Start.getGame().TextLog("Other steet in this colour has some Building on It.\nYou cannot sell this street now.");
+            }
         } else { //deconstruct a house.
             owner.EarnMoney(_pricing.getBuilding());
             _rentLevel = _pricing.getPrev();
             Start.getGame().TextLog(String.format("You Sold building on %s and earn %d", this.toString(), _pricing.getBuilding()));
+            Board.getSingleton().Repaint();
             SetPropMsg();
+            //todo remove BuildingIcon
         }
 
     }
 
     @Override
     public void Sell(Player buyer, int price) {
-        if (_rentLevel == Constructions.GROUND) {
+        if (_rentLevel == Constructions.GROUND && CanSell()) {
             owner.Sell(this, price);
             buyer.Buy(this, price);
             owner = buyer;
@@ -242,9 +262,15 @@ public class StreetCore extends BasePlace implements BuyAble {
         }
     }
 
-    @Override
-    public PropCard getPropCard() {
-        return _propertyCard;
+    public void ConstructBuilding() {
+        if (HasColorSet() && _pricing.hasNext()) {
+            _rentLevel = _pricing.getNext();
+            owner.Pay(_pricing.getBuilding());
+            SetPropMsg();
+            Board.getSingleton().Repaint();
+            Start.getGame().TextLog(String.format("You build on %s for %d", this.toString(), _pricing.getBuilding()));
+            //todo set icon on board.
+        }
     }
 
 }

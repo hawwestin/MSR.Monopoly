@@ -44,7 +44,7 @@ public class FieldInit {
     private final int building;
     private final Map<Constructions, Integer> constructionRentMap;
 
-    private Constructions _constructionLevel;
+    private Constructions _constructionLevel = Constructions.GROUND;
 
     /**
      * Init values of payments.
@@ -116,7 +116,7 @@ public class FieldInit {
         return building;
     }
 
-    private boolean hasNext() {
+    public boolean hasNext() {
         return _constructionLevel.ordinal() < Constructions.HOTEL.ordinal();
     }
 
@@ -142,7 +142,7 @@ public class FieldInit {
      * @return
      */
     public Constructions getPrev() {
-        if (hasNext()) {
+        if (hasPrev()) {
             _constructionLevel = Constructions.values()[_constructionLevel.ordinal() - 1];
         }
         return _constructionLevel;
