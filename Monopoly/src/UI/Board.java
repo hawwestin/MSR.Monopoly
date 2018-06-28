@@ -23,12 +23,9 @@
  */
 package UI;
 
-import Core.BasePlace;
 import Core.BoardCore;
 import Core.BuyAble;
 import Core.Player;
-import Core.StreetCore;
-import Core.UtilitiesCore;
 import GameMechanics.FieldAlign;
 import GameMechanics.PlayersLoop;
 import GameMechanics.Settings;
@@ -37,14 +34,10 @@ import Viewer.Viewer;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.NoninvertibleTransformException;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Main grapihics of board game initializer
@@ -113,6 +106,24 @@ public class Board {
         _viewer.repaint();
     }
 
+    /**
+     * Add imagePanel to be painted on board
+     * @param ipanel
+     */
+    public void AddImagePanel(ImagePanel ipanel){
+        _viewer.addPainter(ipanel,PlayersLayer);     
+        Repaint();
+    }
+    
+    /**
+     * remove displaying image panel from board.
+     * @param ipanel
+     */
+    public void RemoveImagePanel(ImagePanel ipanel){
+        _viewer.removePainter(ipanel);
+        Repaint();
+    }
+    
     public Point2D ScreenToWorldPoint(Point2D screenPoint) {
         AffineTransform screenToWorld = _viewer.getScreenToWorld();
         return screenToWorld.transform(screenPoint, null);

@@ -68,7 +68,7 @@ public class Icon {
         try {
             //todo remake to directory content listing.
             map.put("House", ImageIO.read(new File("img/house.png")));
-            map.put("hotel", ImageIO.read(new File("img/hotel.png")));
+            map.put("Hotel", ImageIO.read(new File("img/hotel.png")));
         } catch (IOException ex) {
             Logger.getLogger(WelcomeWindow.class.getName()).log(Level.SEVERE, null, ex);
             //todo logger

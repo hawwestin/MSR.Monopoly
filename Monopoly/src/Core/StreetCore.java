@@ -28,16 +28,18 @@ import GameMechanics.FieldAlign;
 import GameMechanics.Start;
 import UI.BaseField;
 import UI.Board;
+import UI.ImagePanel;
 import UI.PropCard;
 import UI.StreetField;
 import UI.StreetPropertyCard;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
  * Street instance. Street can be buy and sold by a player form bank or other
- * player. If player have color set of the street he can buy some houses or
+ * player. If player have _color set of the street he can buy some houses or
  * hotel on it. If other player step on the field he will pay rent to the onwer.
  * Rent is calculated based on current construcion and street pricing
  *
@@ -45,9 +47,9 @@ import java.util.List;
  */
 public class StreetCore extends BasePlace implements BuyAble {
 
-    private Player owner;
+    private Player _owner;
     private final FieldInit _pricing;
-    private Color color;
+    private Color _color;
     private static List<StreetCore> _streets = new ArrayList<>();
     private Constructions _rentLevel;
     protected StreetPropertyCard _propertyCard;
@@ -61,11 +63,12 @@ public class StreetCore extends BasePlace implements BuyAble {
      */
     public StreetCore(String name, Color color, FieldInit pricing) {
         super(name);
-        this.color = color;
+        BoardCore.AddToBuyAbleStreets(this);
+        _color = color;
         _pricing = pricing;
         _streets.add(this);
-        BoardCore.AddToBuyAbleStreets(this);
         _rentLevel = Constructions.GROUND;
+
         _propertyCard = new StreetPropertyCard(this);
         SetPropMsg();
 
@@ -118,33 +121,33 @@ public class StreetCore extends BasePlace implements BuyAble {
 
     @Override
     public String StepAction(Player guest) {
-        if (owner != guest && owner != null) {
+        if (_owner != guest && _owner != null) {
             guest.Pay(getRent());
-            owner.EarnMoney(getRent());
-            return String.format("Pay %d$ to player %s who owns %s", getRent(), owner.toString(), this.toString());
+            _owner.EarnMoney(getRent());
+            return String.format("Pay %d$ to player %s who owns %s", getRent(), _owner.toString(), this.toString());
         }
-        if (owner == guest) {
+        if (_owner == guest) {
             return String.format("Steped on your property %s", this.toString());
         }
         return String.format("Steped on unowned %s", this.toString());
     }
 
     /**
-     * Get street tile color
+     * Get street tile _color
      *
      * @return
      */
     public Color getColor() {
-        return color;
+        return _color;
     }
 
     /**
-     * Set street tile color
+     * Set street tile _color
      *
      * @param color
      */
     public void setColor(Color color) {
-        this.color = color;
+        this._color = color;
     }
 
     @Override
@@ -159,7 +162,7 @@ public class StreetCore extends BasePlace implements BuyAble {
 
     @Override
     public Player getOwner() {
-        return owner;
+        return _owner;
     }
 
     @Override
@@ -169,9 +172,9 @@ public class StreetCore extends BasePlace implements BuyAble {
 
     @Override
     public void setOwner(Player buyer) {
-        owner = buyer;
+        _owner = buyer;
         for (StreetCore street : _streets) {
-            if (street.getColor() == this.color) {
+            if (street.getColor() == this._color) {
                 street.SetPropMsg();
             }
         }
@@ -187,7 +190,7 @@ public class StreetCore extends BasePlace implements BuyAble {
 
     private boolean HasColorSet() {
         for (StreetCore street : _streets) {
-            if (street.getColor() == this.color && (street.owner != this.owner || street.owner == null)) {
+            if (street.getColor() == this._color && (street._owner != this._owner || street._owner == null)) {
                 return false;
             }
         }
@@ -196,7 +199,7 @@ public class StreetCore extends BasePlace implements BuyAble {
 
     private boolean CanSell() {
         for (StreetCore street : _streets) {
-            if (street.getColor() == this.color && street._rentLevel.ordinal() > Constructions.GROUND.ordinal()) {
+            if (street.getColor() == this._color && street._rentLevel.ordinal() > Constructions.GROUND.ordinal()) {
                 return false;
             }
         }
@@ -205,8 +208,8 @@ public class StreetCore extends BasePlace implements BuyAble {
 
     @Override
     public Color BorderColor() {
-        if (owner != null) {
-            return owner.getColor();
+        if (_owner != null) {
+            return _owner.getColor();
         } else {
             return Color.BLACK;
         }
@@ -216,7 +219,6 @@ public class StreetCore extends BasePlace implements BuyAble {
     public BaseField makeField(int number, int x, int y, FieldAlign align) {
         if (_baseFiled == null) {
             _baseFiled = new StreetField(this, number, x, y, align);
-
             return _baseFiled;
         } else {
             return _baseFiled;
@@ -228,7 +230,7 @@ public class StreetCore extends BasePlace implements BuyAble {
 
         if (_rentLevel == Constructions.GROUND) {
             if (CanSell()) {
-                owner.Sell(this, getPrice());
+                _owner.Sell(this, getPrice());
                 setOwner(null);
 
                 Board.getSingleton().Repaint();
@@ -237,12 +239,15 @@ public class StreetCore extends BasePlace implements BuyAble {
                 Start.getGame().TextLog("Other steet in this colour has some Building on It.\nYou cannot sell this street now.");
             }
         } else { //deconstruct a house.
-            owner.EarnMoney(_pricing.getBuilding());
+            _owner.EarnMoney(_pricing.getBuilding());
+
+            StreetField baseFiled = (StreetField) _baseFiled;
+            baseFiled.getBuildings().get(_rentLevel).ToogleVisibility(false);
+
             _rentLevel = _pricing.getPrev();
             Start.getGame().TextLog(String.format("You Sold building on %s and earn %d", this.toString(), _pricing.getBuilding()));
             Board.getSingleton().Repaint();
             SetPropMsg();
-            //todo remove BuildingIcon
         }
 
     }
@@ -250,12 +255,12 @@ public class StreetCore extends BasePlace implements BuyAble {
     @Override
     public void Sell(Player buyer, int price) {
         if (_rentLevel == Constructions.GROUND && CanSell()) {
-            owner.Sell(this, price);
+            _owner.Sell(this, price);
             buyer.Buy(this, price);
-            owner = buyer;
+            _owner = buyer;
 
             for (StreetCore street : _streets) {
-                if (street.getColor() == this.color) {
+                if (street.getColor() == this._color) {
                     street.SetPropMsg();
                 }
             }
@@ -263,13 +268,16 @@ public class StreetCore extends BasePlace implements BuyAble {
     }
 
     public void ConstructBuilding() {
-        if (HasColorSet() && _pricing.hasNext()) {
+        if (HasColorSet() && _pricing.hasNext() && getOwner().GetMoney() > _pricing.getBuilding()) {
             _rentLevel = _pricing.getNext();
-            owner.Pay(_pricing.getBuilding());
+
+            StreetField baseFiled = (StreetField) _baseFiled;
+            baseFiled.getBuildings().get(_rentLevel).ToogleVisibility(true);
+
+            _owner.Pay(_pricing.getBuilding());
             SetPropMsg();
             Board.getSingleton().Repaint();
             Start.getGame().TextLog(String.format("You build on %s for %d", this.toString(), _pricing.getBuilding()));
-            //todo set icon on board.
         }
     }
 

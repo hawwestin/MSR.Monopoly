@@ -24,11 +24,15 @@
 package UI;
 
 import Core.StreetCore;
+import GameMechanics.Constructions;
 import GameMechanics.FieldAlign;
+import GameMechanics.Icon;
 import Viewer.Painter;
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.geom.AffineTransform;
+import java.util.HashMap;
 
 /**
  * Street field graphics on game board
@@ -37,10 +41,12 @@ import java.awt.geom.AffineTransform;
  */
 public class StreetField extends BaseField implements Painter {
 
-    private StreetCore _place;
+    private final StreetCore _place;
+    private final HashMap<Constructions, ImagePanel> _buildings = MakeBuildingMap();
 
     /**
      * New graphics of street field
+     *
      * @param place
      * @param number
      * @param x
@@ -50,6 +56,55 @@ public class StreetField extends BaseField implements Painter {
     public StreetField(StreetCore place, int number, int x, int y, FieldAlign align) {
         super(place, number, x, y, align);
         this._place = place;
+    }
+
+    public HashMap<Constructions, ImagePanel> getBuildings() {
+        return _buildings;
+    }
+
+    private HashMap<Constructions, ImagePanel> MakeBuildingMap() {
+        Point buildingDimension = new Point(35, 40);
+
+        HashMap<Constructions, ImagePanel> map = new HashMap<Constructions, ImagePanel>() {
+            {
+                put(Constructions.HOUSE1, new ImagePanel(xOffset, yOffset, Icon.getBuildingIconMap().get("House"), "House1"));
+                put(Constructions.HOUSE2, new ImagePanel(xOffset, yOffset, Icon.getBuildingIconMap().get("House"), "House2"));
+                put(Constructions.HOUSE3, new ImagePanel(xOffset, yOffset, Icon.getBuildingIconMap().get("House"), "House3"));
+                put(Constructions.HOUSE4, new ImagePanel(xOffset, yOffset, Icon.getBuildingIconMap().get("House"), "House4"));
+                put(Constructions.HOTEL, new ImagePanel(xOffset, yOffset, Icon.getBuildingIconMap().get("Hotel"), "Hotel"));
+            }
+        };
+
+        map.forEach((x, ipanel) -> {
+            ipanel.Resize((int) buildingDimension.getX(), (int) buildingDimension.getY());
+        });
+        map.forEach((x, ipanel) -> {
+            ipanel.setRotate(rotate);
+        });
+
+        map.forEach((x, ipanel) -> {
+            int index = x.ordinal() - 1;
+            switch (rotate) {
+                case UP:
+                    ipanel.setxOffset(xOffset + index * (int) buildingDimension.getX());
+                    ipanel.setyOffset(yOffset);
+                    break;
+                case LEFT:
+                    ipanel.setxOffset(xOffset);
+                    ipanel.setyOffset(yOffset + index * (int) buildingDimension.getX());
+                    break;
+                case DOWN:
+                    ipanel.setxOffset(xOffset - index * (int) buildingDimension.getX());
+                    ipanel.setyOffset(yOffset);
+                    break;
+                case RIGHT:
+                    ipanel.setxOffset(xOffset);
+                    ipanel.setyOffset(yOffset - index * (int) buildingDimension.getX());
+                    break;
+            }
+        });
+
+        return map;
     }
 
     @Override
