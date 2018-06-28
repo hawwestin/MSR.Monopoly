@@ -9,6 +9,7 @@ import java.awt.Font;
 
 /**
  * Game application settings constants.
+ *
  * @author Michal
  */
 public class Settings {
@@ -17,7 +18,6 @@ public class Settings {
     /**
      * Maximum player limit
      */
-    
     public static int PlayersLimit = 4;
 
     /**
@@ -26,13 +26,13 @@ public class Settings {
     public static int StartAmountOfMoney = 1500;
 
     /**
-     * Size of player counter image on board. 
+     * Size of player counter image on board.
      */
     public static int SizeOfIconOnBoard = 55;
-    
+
     /**
      * Dafault in game font for on board text.
      */
     public static final Font DEFAULT_FONT = new Font("Arial", Font.PLAIN, 20);
-    
+
 }

@@ -146,44 +146,50 @@ public class BoardCore implements Iterable<BasePlace> {
                 new FieldInit(60, 4, 20, 60, 180, 320, 450, 50)));
 
         //white 
-        FieldInit whiteField = new FieldInit(100, 6, 30, 90, 270, 400, 550, 50);
-        map.put(6, new StreetCore("Ortinal", Color.GRAY, whiteField));
-        map.put(8, new StreetCore("Vermount", Color.GRAY, whiteField));
+        FieldInit whiteField1 = new FieldInit(100, 6, 30, 90, 270, 400, 550, 50);
+        FieldInit whiteField2 = new FieldInit(100, 6, 30, 90, 270, 400, 550, 50);
+        map.put(6, new StreetCore("Ortinal", Color.GRAY, whiteField1));
+        map.put(8, new StreetCore("Vermount", Color.GRAY, whiteField2));
         map.put(9, new StreetCore("Connect", Color.GRAY,
                 new FieldInit(120, 8, 40, 100, 300, 450, 600, 50)));
 
         //purple
-        FieldInit purpleField = new FieldInit(140, 10, 50, 150, 450, 625, 750, 100);
-        map.put(11, new StreetCore("St.Charles", Color.PINK, purpleField));
-        map.put(13, new StreetCore("States", Color.PINK, purpleField));
+        FieldInit purpleField1 = new FieldInit(140, 10, 50, 150, 450, 625, 750, 100);
+        FieldInit purpleField2 = new FieldInit(140, 10, 50, 150, 450, 625, 750, 100);
+        map.put(11, new StreetCore("St.Charles", Color.PINK, purpleField1));
+        map.put(13, new StreetCore("States", Color.PINK, purpleField2));
         map.put(14, new StreetCore("Virginia", Color.PINK,
                 new FieldInit(160, 12, 60, 180, 500, 700, 900, 100)));
 
         //orange
-        FieldInit orangeField = new FieldInit(180, 14, 70, 200, 550, 750, 950, 100);
-        map.put(16, new StreetCore("St. James", Color.ORANGE, orangeField));
-        map.put(18, new StreetCore("Tennessee", Color.ORANGE, orangeField));
+        FieldInit orangeField1 = new FieldInit(180, 14, 70, 200, 550, 750, 950, 100);
+        FieldInit orangeField2 = new FieldInit(180, 14, 70, 200, 550, 750, 950, 100);
+        map.put(16, new StreetCore("St. James", Color.ORANGE, orangeField1));
+        map.put(18, new StreetCore("Tennessee", Color.ORANGE, orangeField2));
         map.put(19, new StreetCore("New York", Color.ORANGE,
                 new FieldInit(200, 16, 80, 220, 600, 800, 1000, 100)));
 
         //red
-        FieldInit redField = new FieldInit(220, 18, 90, 250, 700, 875, 1050, 150);
-        map.put(21, new StreetCore("Kentucky", Color.RED, redField));
-        map.put(23, new StreetCore("Indiana", Color.RED, redField));
+        FieldInit redField1 = new FieldInit(220, 18, 90, 250, 700, 875, 1050, 150);
+        FieldInit redField2 = new FieldInit(220, 18, 90, 250, 700, 875, 1050, 150);
+        map.put(21, new StreetCore("Kentucky", Color.RED, redField1));
+        map.put(23, new StreetCore("Indiana", Color.RED, redField2));
         map.put(24, new StreetCore("Illinois", Color.RED,
                 new FieldInit(240, 20, 100, 300, 750, 925, 1100, 150)));
 
         //yellow
-        FieldInit yellowField = new FieldInit(260, 22, 110, 330, 800, 975, 1150, 150);
-        map.put(26, new StreetCore("Atlantic", Color.YELLOW, yellowField));
-        map.put(27, new StreetCore("Venteor", Color.YELLOW, yellowField));
+        FieldInit yellowField1 = new FieldInit(260, 22, 110, 330, 800, 975, 1150, 150);
+        FieldInit yellowField2 = new FieldInit(260, 22, 110, 330, 800, 975, 1150, 150);
+        map.put(26, new StreetCore("Atlantic", Color.YELLOW, yellowField1));
+        map.put(27, new StreetCore("Venteor", Color.YELLOW, yellowField2));
         map.put(29, new StreetCore("Marvin", Color.YELLOW,
                 new FieldInit(280, 24, 120, 360, 850, 1025, 1200, 150)));
 
         //green
-        FieldInit greenField = new FieldInit(300, 26, 130, 390, 900, 1100, 1275, 200);
-        map.put(31, new StreetCore("Pacific", Color.GREEN, greenField));
-        map.put(32, new StreetCore("Newton Core</br>Lorem Ipsum", Color.GREEN, greenField));
+        FieldInit greenField1 = new FieldInit(300, 26, 130, 390, 900, 1100, 1275, 200);
+        FieldInit greenField2 = new FieldInit(300, 26, 130, 390, 900, 1100, 1275, 200);
+        map.put(31, new StreetCore("Pacific", Color.GREEN, greenField1));
+        map.put(32, new StreetCore("Newton Core", Color.GREEN, greenField2));
         map.put(34, new StreetCore("Pennsylvania", Color.GREEN, new FieldInit(320, 28, 150, 450, 1000, 1200, 1400, 200)));
 
         //blue

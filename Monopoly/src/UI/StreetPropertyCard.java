@@ -24,7 +24,6 @@
 package UI;
 
 import Core.StreetCore;
-import GameMechanics.FieldAlign;
 import GameMechanics.PlayersLoop;
 import GameMechanics.Settings;
 import GameMechanics.Start;
@@ -114,12 +113,12 @@ public class StreetPropertyCard extends PropCard {
                     } else {
                         _place.Sell();
                     }
-                }
+                }                
             }
         }
         if (ConstructButton != null) {
             if ((e.getButton() == 1) && ConstructButton.contains(transformClick.getX(), transformClick.getY())) {
-                _place.ConstructBuilding();
+                _place.ConstructBuilding();               
             }
         }
     }
