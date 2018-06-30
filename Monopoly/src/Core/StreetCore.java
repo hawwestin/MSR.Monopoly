@@ -28,13 +28,11 @@ import GameMechanics.FieldAlign;
 import GameMechanics.Start;
 import UI.BaseField;
 import UI.Board;
-import UI.ImagePanel;
 import UI.PropCard;
 import UI.StreetField;
 import UI.StreetPropertyCard;
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -52,7 +50,7 @@ public class StreetCore extends BasePlace implements BuyAble {
     private Color _color;
     private static List<StreetCore> _streets = new ArrayList<>();
     private Constructions _rentLevel;
-    protected StreetPropertyCard _propertyCard;
+    private final StreetPropertyCard _propertyCard;
 
     /**
      * Create new object of streetCore
@@ -74,6 +72,11 @@ public class StreetCore extends BasePlace implements BuyAble {
 
     }
 
+    /**
+     * Set message for bought street card in player wallet Box. Indicate current
+     * rent level with a + on curretn rent level
+     *
+     */
     public void SetPropMsg() {
         StringBuilder propmsg = new StringBuilder();
         propmsg.append(String.format("%-32s", "RENT"));
@@ -267,6 +270,10 @@ public class StreetCore extends BasePlace implements BuyAble {
         }
     }
 
+    /**
+     * If player can build new building it raise current rent level and place
+     * new builidng on board game.
+     */
     public void ConstructBuilding() {
         if (HasColorSet() && _pricing.hasNext() && getOwner().GetMoney() > _pricing.getBuilding()) {
             _rentLevel = _pricing.getNext();

@@ -30,11 +30,6 @@ import GameMechanics.Settings;
 import Viewer.Painter;
 import java.awt.BasicStroke;
 import java.awt.Color;
-
-/**
- *
- * @author Michal
- */
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
@@ -42,6 +37,10 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.JComponent;
 
 /**
+ * Rectangle box for player owned properties. Interface for a player to
+ * construct a buiildng on streets. Interface for a player to sell a street or a
+ * building. Display player name and his money count.
+ *
  *
  * @author Michal
  */
@@ -52,15 +51,22 @@ public class PlayerWalletBox extends JComponent implements Painter {
     /**
      * X offset of top left corner of the field in game board Viewer.
      */
-    private int xOffset;
+    private final int xOffset;
 
     /**
      * Y offset of top left corner of the field in game board Viewer.
      */
-    private int yOffset;
+    private final int yOffset;
 
-    private FieldAlign rotate;
+    private final FieldAlign rotate;
 
+    /**
+     * Draw for new player his property wallet box with his name and money
+     *
+     * @param owner
+     * @param x
+     * @param y
+     */
     public PlayerWalletBox(Player owner, int x, int y) {
         _owner = owner;
         xOffset = x;

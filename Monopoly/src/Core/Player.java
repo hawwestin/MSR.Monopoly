@@ -70,10 +70,20 @@ public class Player {
         _counterPanel.setyOffset(number * Settings.SizeOfIconOnBoard);
     }
 
+    /**
+     * Get player property wallet {@link Viewer.Painter} instnace
+     *
+     * @return
+     */
     public PlayerWalletBox getWalletBox() {
         return walletBox;
     }
 
+    /**
+     * Set player property wallet {@link Viewer.Painter} instnace
+     *
+     * @param walletBox
+     */
     public void setWalletBox(PlayerWalletBox walletBox) {
         this.walletBox = walletBox;
     }

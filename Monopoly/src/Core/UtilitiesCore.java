@@ -26,6 +26,10 @@ public abstract class UtilitiesCore extends BasePlace implements BuyAble {
      */
     protected Player owner;
     private int _price;
+
+    /**
+     * Object of utilites card displayed afrter player buy a field.
+     */
     protected UtilitiesPropertyCard _propertyCard;
 
     /**

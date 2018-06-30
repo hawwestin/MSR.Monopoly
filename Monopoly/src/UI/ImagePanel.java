@@ -41,7 +41,7 @@ import javax.swing.JComponent;
  * @author Michal
  */
 public class ImagePanel extends JComponent implements Painter {
-    
+
     private BufferedImage _image;
     private int _xOffset;
     private int _yOffset;
@@ -103,11 +103,11 @@ public class ImagePanel extends JComponent implements Painter {
         _xOffset = xOffset;
         _yOffset = yOffset;
         _rotate = FieldAlign.UP;
-        
+
         try {
             _image = ImageIO.read(new File(imagePath));
         } catch (IOException e) {
-            
+
         }
     }
 
@@ -126,14 +126,19 @@ public class ImagePanel extends JComponent implements Painter {
         _rotate = FieldAlign.UP;
         setToolTipText(toolTipText);
     }
-    
+
+    /**
+     * Set visibility of this Painter on game board.
+     *
+     * @param view
+     */
     public void ToogleVisibility(boolean view) {
         if (view) {
             Board.getSingleton().AddImagePanel(this);
         } else {
             Board.getSingleton().RemoveImagePanel(this);
         }
-        
+
     }
 
     /**
@@ -145,19 +150,19 @@ public class ImagePanel extends JComponent implements Painter {
     public void Resize(int width, int height) {
         BufferedImage result = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Image tmp = _image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        
+
         Graphics2D transform = result.createGraphics();
         transform.drawImage(tmp, 0, 0, null);
         transform.dispose();
         _image = result;
     }
-    
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(_image, _xOffset, _yOffset, this);
     }
-    
+
     @Override
     public void paint(Graphics2D g, AffineTransform worldToScreen, double w, double h) {
         AffineTransform oldAT = g.getTransform();

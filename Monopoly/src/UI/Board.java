@@ -74,6 +74,11 @@ public class Board {
         ResetWorldView();
     }
 
+    /**
+     * Get current in game instance of the board.s
+     *
+     * @return
+     */
     public static Board getSingleton() {
         if (Singleton == null) {
 //        todo write to log
@@ -108,22 +113,30 @@ public class Board {
 
     /**
      * Add imagePanel to be painted on board
+     *
      * @param ipanel
      */
-    public void AddImagePanel(ImagePanel ipanel){
-        _viewer.addPainter(ipanel,PlayersLayer);     
+    public void AddImagePanel(ImagePanel ipanel) {
+        _viewer.addPainter(ipanel, PlayersLayer);
         Repaint();
     }
-    
+
     /**
      * remove displaying image panel from board.
+     *
      * @param ipanel
      */
-    public void RemoveImagePanel(ImagePanel ipanel){
+    public void RemoveImagePanel(ImagePanel ipanel) {
         _viewer.removePainter(ipanel);
         Repaint();
     }
-    
+
+    /**
+     * Get translation of given point in window to given point in game world
+     *
+     * @param screenPoint
+     * @return
+     */
     public Point2D ScreenToWorldPoint(Point2D screenPoint) {
         AffineTransform screenToWorld = _viewer.getScreenToWorld();
         return screenToWorld.transform(screenPoint, null);

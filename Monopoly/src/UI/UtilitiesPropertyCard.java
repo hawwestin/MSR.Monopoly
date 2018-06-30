@@ -37,6 +37,8 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
 /**
+ * Utilites prperty card to be displayed in owner wallet box after he buy this
+ * place.
  *
  * @author Michal
  */
@@ -44,10 +46,16 @@ public class UtilitiesPropertyCard extends PropCard {
 
     private UtilitiesCore _place;
 
+    /**
+     * Make new property card for given utilites field.
+     *
+     * @param place
+     */
     public UtilitiesPropertyCard(UtilitiesCore place) {
         _place = place;
     }
 
+    
     @Override
     public void paint(Graphics2D g) {
 
@@ -62,8 +70,8 @@ public class UtilitiesPropertyCard extends PropCard {
         g.drawRect(xOffset, yOffset, width, 50);
         g.fillRect(xOffset + 1, yOffset + 1, width - 3, 48);
 
-        BaseField.DrawMultiLineString(g, _place.toString(), xOffset, yOffset, width, (int) (height * 0.5), Settings.DEFAULT_FONT);
-        BaseField.DrawMultiLineString(g, _propMsg, txtBorder, Settings.DEFAULT_FONT.deriveFont(12f));
+        BaseField.DrawMultiLineString(g, _place.toString(), xOffset, yOffset, width, (int) (height * 0.5), Settings.DEFAULT_FONT, "\n");
+        BaseField.DrawMultiLineString(g, _propMsg, txtBorder, Settings.DEFAULT_FONT.deriveFont(12f), "(<\\/br>)");
 
         SellButton = new Rectangle2D.Double(xOffset, yOffset + height - 35, width, 35);
         g.setStroke(new BasicStroke(3f));

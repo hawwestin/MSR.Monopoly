@@ -51,6 +51,11 @@ public abstract class BasePlace {
         _name = name;
     }
 
+    /**
+     * Get object of graphical representation of the place.
+     *
+     * @return
+     */
     public BaseField getBaseFiled() {
         return _baseFiled;
     }

@@ -37,6 +37,8 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
 /**
+ * Street property card to be displayed in player wallet box after player buy
+ * given street.
  *
  * @author Michal
  */
@@ -44,15 +46,16 @@ public class StreetPropertyCard extends PropCard {
 
     private final StreetCore _place;
 
-    private Rectangle2D ConstructButton;
+    private Rectangle2D _constructButton;
 
     /**
+     * Make new property card for given street.
      *
      * @param place
      */
     public StreetPropertyCard(StreetCore place) {
         super();
-        this._place = place;
+        _place = place;
     }
 
     @Override
@@ -70,8 +73,8 @@ public class StreetPropertyCard extends PropCard {
         g.fillRect(xOffset + 1, yOffset + 1, width - 3, 48);
 
         g.setColor(Color.BLACK);
-        BaseField.DrawMultiLineString(g, _place.toString(), xOffset, yOffset, width, (int) (height * 0.5), Settings.DEFAULT_FONT);
-        BaseField.DrawMultiLineString(g, _propMsg, txtBorder, Settings.DEFAULT_FONT.deriveFont(12f));
+        BaseField.DrawMultiLineString(g, _place.toString(), xOffset, yOffset, width, (int) (height * 0.5), Settings.DEFAULT_FONT, "\n");
+        BaseField.DrawMultiLineString(g, _propMsg, txtBorder, Settings.DEFAULT_FONT.deriveFont(12f), "(<\\/br>)");
 
         SellButton = new Rectangle2D.Double(xOffset, yOffset + height - 35, width / 2, 35);
         g.setStroke(new BasicStroke(3f));
@@ -79,11 +82,11 @@ public class StreetPropertyCard extends PropCard {
         g.draw(SellButton);
         BaseField.DrawCenteredString(g, "Sell", SellButton, Settings.DEFAULT_FONT.deriveFont(12f));
 
-        ConstructButton = new Rectangle2D.Double(xOffset + (width / 2), yOffset + height - 35, width / 2, 35);
+        _constructButton = new Rectangle2D.Double(xOffset + (width / 2), yOffset + height - 35, width / 2, 35);
         g.setStroke(new BasicStroke(3f));
         g.setColor(Color.BLACK);
-        g.draw(ConstructButton);
-        BaseField.DrawCenteredString(g, "Construct", ConstructButton, Settings.DEFAULT_FONT.deriveFont(12f));
+        g.draw(_constructButton);
+        BaseField.DrawCenteredString(g, "Construct", _constructButton, Settings.DEFAULT_FONT.deriveFont(12f));
 
     }
 
@@ -113,12 +116,12 @@ public class StreetPropertyCard extends PropCard {
                     } else {
                         _place.Sell();
                     }
-                }                
+                }
             }
         }
-        if (ConstructButton != null) {
-            if ((e.getButton() == 1) && ConstructButton.contains(transformClick.getX(), transformClick.getY())) {
-                _place.ConstructBuilding();               
+        if (_constructButton != null) {
+            if ((e.getButton() == 1) && _constructButton.contains(transformClick.getX(), transformClick.getY())) {
+                _place.ConstructBuilding();
             }
         }
     }

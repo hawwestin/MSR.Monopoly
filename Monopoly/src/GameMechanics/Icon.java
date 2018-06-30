@@ -33,7 +33,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 /**
- * Container for images of player counters
+ * Container for images of in game images to be displayed on game board.
  *
  * @author Michal
  */
@@ -85,6 +85,11 @@ public class Icon {
         return playerIconMap;
     }
 
+    /**
+     * Map of supported building to be displayed on game board.
+     *
+     * @return
+     */
     public static HashMap<String, BufferedImage> getBuildingIconMap() {
         return buildngIconMap;
     }

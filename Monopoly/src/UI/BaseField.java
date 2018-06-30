@@ -101,12 +101,15 @@ public abstract class BaseField implements Painter {
         rotate = align;
     }
 
+    /**
+     * Return index of field in game board field loop.
+     *
+     * @return
+     */
     public int getNumber() {
         return _number;
     }
 
-    
-    
     //todo movement animation
     /**
      * Draw player counter on field
@@ -150,7 +153,7 @@ public abstract class BaseField implements Painter {
                 RenderingHints.VALUE_ANTIALIAS_ON);
         g.setColor(Color.BLACK);
         g.setFont(Settings.DEFAULT_FONT);
-        DrawMultiLineString(g, _place.toString(), xOffset, yOffset, width, height / 2, Settings.DEFAULT_FONT);
+        DrawMultiLineString(g, _place.toString(), xOffset, yOffset, width, height / 2, Settings.DEFAULT_FONT, "\n");
         g.setFont(oldFont);
     }
 
@@ -204,6 +207,18 @@ public abstract class BaseField implements Painter {
         g.drawString(text, Math.round(rect.getX() + xOffset), Math.round(rect.getY() + yOffset));
     }
 
+    /**
+     * Draw string in center of given area. X, Y is top left corner of an Area
+     * with give width and high.
+     *
+     * @param g
+     * @param text
+     * @param x
+     * @param y
+     * @param width
+     * @param hight
+     * @param font
+     */
     public static void DrawCenteredString(Graphics2D g, String text, int x, int y, int width, int hight, Font font) {
         FontRenderContext frc = new FontRenderContext(null, true, true);
         g.setRenderingHint(
@@ -226,16 +241,38 @@ public abstract class BaseField implements Painter {
         g.drawString(text, Math.round(x + xOffset), Math.round(y + yOffset));
     }
 
-    public static void DrawMultiLineString(Graphics2D g, String text, int x, int y, int width, int hight, Font font) {
-        for (String line : text.split("(<\\/br>)")) {
+    /**
+     * Draw string and split it to multi line in center of given area. Where X,
+     * Y is top left corner of an area with given widtch and hight
+     *
+     * @param g current Graphics instance
+     * @param text Text to be displayed
+     * @param x offset of top left corner
+     * @param y offset of top left corner
+     * @param width of given area
+     * @param hight of given area
+     * @param font to measure font hight and boundry
+     * @param LineBraek String to indicate end of the line egz. "\n"
+     */
+    public static void DrawMultiLineString(Graphics2D g, String text, int x, int y, int width, int hight, Font font, String LineBraek) {
+        for (String line : text.split(LineBraek)) { //"(<\\/br>)"
             DrawCenteredString(g, line, x, y, width, hight, font);
             y += g.getFontMetrics().getHeight();
         }
     }
 
-    public static void DrawMultiLineString(Graphics2D g, String text, Rectangle2D rect, Font font) {
+    /**
+     * Draw string and split it to multi line in center of given Rectangel.
+     *
+     * @param g current Graphics instance
+     * @param text Text to be displayed
+     * @param rect Rectangle in witch text will be drawed
+     * @param font to measure font hight and boundry
+     * @param LineBraek String to indicate end of the line egz. "\n"
+     */
+    public static void DrawMultiLineString(Graphics2D g, String text, Rectangle2D rect, Font font, String LineBraek) {
         double y = rect.getY();
-        for (String line : text.split("(<\\/br>)")) {
+        for (String line : text.split(LineBraek)) {
             rect.setRect(rect.getX(), y += g.getFontMetrics().getHeight(), rect.getWidth(), rect.getHeight());
             DrawCenteredString(g, line, rect, font);
 //            g.drawString(line, x, y += g.getFontMetrics().getHeight());

@@ -31,6 +31,9 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
 /**
+ * Abstract property card of an buyable place to be displayed in player wallet
+ * box after he buy the place. Implements Mouse listner for mock button area for
+ * player interaction with property card like sell or construct.
  *
  * @author Michal
  */
@@ -71,22 +74,46 @@ public abstract class PropCard implements MouseListener {
      */
     protected int height = 280;
 
+    /**
+     * Top left corner of point around which card should be rotate. For prperty
+     * Card should be top left corner of player wallet box.
+     */
     protected Point2D _cardAnchor;
 
+    /**
+     * Set message to be dispalyed on property card.
+     *
+     * @param propMsg
+     */
     public void setPropMsg(String propMsg) {
         _propMsg = propMsg;
     }
 
+    /**
+     * Set x offset of top left corner of place in player wallet box
+     *
+     * @param x
+     */
     public void SetXOffset(int x) {
         xOffset = x;
 
     }
 
+    /**
+     * Set y offset of top left corner of place in player wallet box
+     *
+     * @param y
+     */
     public void SetYOffset(int y) {
         yOffset = y;
 
     }
 
+    /**
+     * Set property alignment in the game world.
+     *
+     * @param align
+     */
     public void setRotate(FieldAlign align) {
         rotate = align;
 
@@ -109,6 +136,11 @@ public abstract class PropCard implements MouseListener {
         return this;
     }
 
+    /**
+     * Draw property card in game world for given Graphics painter
+     *
+     * @param g
+     */
     public abstract void paint(Graphics2D g);
 
     @Override

@@ -116,12 +116,17 @@ public class FieldInit {
         return building;
     }
 
+    /**
+     * Check If next construction level exist.
+     *
+     * @return
+     */
     public boolean hasNext() {
         return _constructionLevel.ordinal() < Constructions.HOTEL.ordinal();
     }
 
     /**
-     * * Get next Construction level
+     * Get next Construction level
      *
      * @return
      */

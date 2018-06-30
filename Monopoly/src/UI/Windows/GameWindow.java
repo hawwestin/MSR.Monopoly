@@ -104,6 +104,10 @@ public class GameWindow extends javax.swing.JPanel {
         JBShowFieldInfo.setEnabled(false);
     }
 
+    /**
+     * Check if buy button can be anbled and if so enable it for player
+     * interaction.
+     */
     public void EnableBuyButton() {
         BasePlace tmpField = BoardCore.getFieldsOnBoard().get(PlayersLoop.getCurrentPlayer().getBoardPlace());
         if (tmpField instanceof BuyAble) {

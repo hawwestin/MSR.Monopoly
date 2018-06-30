@@ -58,6 +58,11 @@ public class StreetField extends BaseField implements Painter {
         this._place = place;
     }
 
+    /**
+     * Get map of construction levels and its building image painter.
+     *
+     * @return
+     */
     public HashMap<Constructions, ImagePanel> getBuildings() {
         return _buildings;
     }

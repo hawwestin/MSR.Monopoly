@@ -39,7 +39,7 @@ import java.util.ArrayList;
 public class BoardCore implements Iterable<BasePlace> {
 
     private int _cursor;
-    private static final ArrayList<BuyAble> buyAbleStreets=new ArrayList<>();
+    private static final ArrayList<BuyAble> buyAbleStreets = new ArrayList<>();
     private static final HashMap<Integer, BasePlace> fieldsOnBoard = MakeStreets();
 
     /**
@@ -49,15 +49,23 @@ public class BoardCore implements Iterable<BasePlace> {
      */
     public BoardCore(int cursor) {
         _cursor = cursor;
-//        buyAbleStreets = new ArrayList<>();
     }
 
+    /**
+     * Get list of places that player can buy. List of Places implementing
+     * BuyAble Interface.
+     *
+     * @return
+     */
     public static ArrayList<BuyAble> getBuyAbleStreets() {
         return buyAbleStreets;
     }
 
-    
-    
+    /**
+     * Append to BayAble list of places new street.
+     *
+     * @param ba BayAble Instance
+     */
     public static void AddToBuyAbleStreets(BuyAble ba) {
         buyAbleStreets.add(ba);
     }
