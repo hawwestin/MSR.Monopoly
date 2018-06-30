@@ -23,9 +23,13 @@
  */
 package GameMechanics.Card;
 
+import Core.BuyAble;
 import Core.Player;
+import Core.StreetCore;
 import java.util.ArrayList;
 import java.util.Random;
+import java.awt.Color;
+import java.util.HashMap;
 
 /**
  * Collection of ICard. Implements Comunity chest card logic witch you can find
@@ -63,6 +67,11 @@ public class ComunityCard implements ICardCollection {
         innerList.add(LottoWiner);
         innerList.add(LegacyTax);
         innerList.add(LegacyTax);
+        innerList.add(Budimex);
+        innerList.add(Budimex);
+        innerList.add(Renovation);
+        innerList.add(Renovation);
+        innerList.add(Renovation);
 
         return innerList;
     }
@@ -79,12 +88,60 @@ public class ComunityCard implements ICardCollection {
             return "You won on Lottery 25$\n";
         }
     };
-    
+
     private final ICard LegacyTax = new ICard() {
         @Override
         public String actionPerformed(Player player) {
             player.Pay(500);
             return "Your ancestor left you with 500 unpaid tax";
+        }
+    };
+
+    private final ICard Budimex = new ICard() {
+        @Override
+        public String actionPerformed(Player player) {
+            ArrayList<StreetCore> al = new ArrayList<>();
+            for (BuyAble ba : player.getPossession()) {
+                if (ba instanceof StreetCore) {
+                    StreetCore sc = (StreetCore) ba;
+                    if (sc.HasColorSet()) {
+                        al.add(sc);
+                    }
+                }
+            }
+            if (al.size() > 0) {
+                String msg = "";
+                Random r = new Random();
+                Color ccc = al.get(r.nextInt(al.size())).getColor();
+                for (StreetCore sc : al) {
+                    if (sc.getColor() == ccc) {
+                        player.EarnMoney(sc.getBuildingPrice(), sc.getBuildingPrice());
+                        sc.ConstructBuilding();
+                        msg = msg.concat(", " + sc.toString());
+                    }
+                }
+                return String.format("Developer raise on level of housing on streets:\n%s", msg);
+
+            }
+            player.EarnMoney(500);
+            return "Developer give you 500$ for your incoming constructions!";
+        }
+    };
+
+    private final ICard Renovation = new ICard() {
+        @Override
+        public String actionPerformed(Player player) {
+            int amount = 0;
+            for (BuyAble ba : player.getPossession()) {
+                if (ba instanceof StreetCore) {
+                    StreetCore sc = (StreetCore) ba;
+                    if (sc.getRentLevel().ordinal() > 0) {
+                        player.Pay(20 * sc.getRentLevel().ordinal());
+                        amount += 20 * sc.getRentLevel().ordinal();
+                    }
+                }
+            }
+            return String.format("City housing check. Pay 20$ for each builidng.\nPays : %d", amount);
         }
     };
 

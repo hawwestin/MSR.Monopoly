@@ -145,6 +145,14 @@ public class StreetCore extends BasePlace implements BuyAble {
     }
 
     /**
+     * Street current housing level.
+     * @return
+     */
+    public Constructions getRentLevel() {
+        return _rentLevel;
+    }
+
+    /**
      * Set street tile _color
      *
      * @param color
@@ -156,6 +164,14 @@ public class StreetCore extends BasePlace implements BuyAble {
     @Override
     public void MoveOver(Player guest) {
         _baseFiled.DrawPlayer(guest);
+    }
+
+    /**
+     * Get price for one building level.
+     * @return
+     */
+    public int getBuildingPrice() {
+        return _pricing.getBuilding();
     }
 
     @Override
@@ -191,7 +207,12 @@ public class StreetCore extends BasePlace implements BuyAble {
         return _pricing.getRent();
     }
 
-    private boolean HasColorSet() {
+    /**
+     * Check if owner of thise street ownes other street of same colour.
+     *
+     * @return
+     */
+    public boolean HasColorSet() {
         for (StreetCore street : _streets) {
             if (street.getColor() == this._color && (street._owner != this._owner || street._owner == null)) {
                 return false;
