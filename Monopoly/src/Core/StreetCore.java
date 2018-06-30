@@ -242,7 +242,7 @@ public class StreetCore extends BasePlace implements BuyAble {
                 Start.getGame().TextLog("Other steet in this colour has some Building on It.\nYou cannot sell this street now.");
             }
         } else { //deconstruct a house.
-            _owner.EarnMoney(_pricing.getBuilding());
+            _owner.EarnMoney(_pricing.getBuilding(), _pricing.getBuilding());
 
             StreetField baseFiled = (StreetField) _baseFiled;
             baseFiled.getBuildings().get(_rentLevel).ToogleVisibility(false);
@@ -281,7 +281,7 @@ public class StreetCore extends BasePlace implements BuyAble {
             StreetField baseFiled = (StreetField) _baseFiled;
             baseFiled.getBuildings().get(_rentLevel).ToogleVisibility(true);
 
-            _owner.Pay(_pricing.getBuilding());
+            _owner.Pay(_pricing.getBuilding(), _pricing.getBuilding());
             SetPropMsg();
             Board.getSingleton().Repaint();
             Start.getGame().TextLog(String.format("You build on %s for %d", this.toString(), _pricing.getBuilding()));

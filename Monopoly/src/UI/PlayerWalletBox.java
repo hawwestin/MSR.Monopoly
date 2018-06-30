@@ -84,12 +84,23 @@ public class PlayerWalletBox extends JComponent implements Painter {
                 Settings.DEFAULT_FONT.deriveFont(45f));
     }
 
-    private void DrawPlayerMonye(Graphics2D g) {
+    private void DrawPlayerMoney(Graphics2D g) {
         g.setColor(Color.BLACK);
-        BaseField.DrawCenteredString(g, String.format("%,d $", _owner.GetMoney()),
-                xOffset + Math.abs(Board.getSingleton().getInnerBoardLength()) / 2,
+        BaseField.DrawCenteredString(g, String.format("Money %,d $", _owner.GetMoney()),
+                (int) (xOffset + Math.abs(Board.getSingleton().getInnerBoardLength()) * 0.5),
                 yOffset,
-                Math.abs(Board.getSingleton().getInnerBoardLength()) / 2,
+                (int) (Math.abs(Board.getSingleton().getInnerBoardLength()) * 0.25),
+                100,
+                Settings.DEFAULT_FONT.deriveFont(45f)
+        );
+    }
+
+    private void DrawPlayerWealth(Graphics2D g) {
+        g.setColor(Color.BLACK);
+        BaseField.DrawCenteredString(g, String.format("Wealth %,d $", _owner.getTotalWealth()),
+                (int) (xOffset + Math.abs(Board.getSingleton().getInnerBoardLength()) * 0.75),
+                yOffset,
+                (int) (Math.abs(Board.getSingleton().getInnerBoardLength()) * 0.25),
                 100,
                 Settings.DEFAULT_FONT.deriveFont(45f));
     }
@@ -123,10 +134,10 @@ public class PlayerWalletBox extends JComponent implements Painter {
         g.setStroke(new BasicStroke(8));
         g.setColor(_owner.getColor());
         g.draw(border);
-        //Backgroud 
 
-        DrawPlayerMonye(g);
+        DrawPlayerMoney(g);
         DrawPlayerName(g);
+        DrawPlayerWealth(g);
         DrawPlayerOwnedPossession(g);
         g.setColor(Color.BLACK);
         g.setTransform(oldAT);

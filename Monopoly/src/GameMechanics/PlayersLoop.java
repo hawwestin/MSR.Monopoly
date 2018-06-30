@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * Iteration over players list
+ * Players tour movement loop.
  *
  * @author Michal
  */
@@ -41,7 +41,7 @@ public class PlayersLoop {
     private static Player _currentPlayer;
 
     /**
-     * Persis player list.
+     * Persist player list.
      *
      * @param players
      */
@@ -51,7 +51,7 @@ public class PlayersLoop {
     }
 
     /**
-     * return player object list.
+     * Current players' in game. 
      *
      * @return
      */
@@ -95,12 +95,12 @@ public class PlayersLoop {
         }
         _players.remove(player);
         for (BuyAble prop : player.getPossession()) {
-            prop.setOwner(null);            
+            prop.setOwner(null);
         }
         player.getPossession().clear();
         Board.getSingleton().Repaint();
         if (_players.size() == 1) {
-            Start.changeGameState(GameState.GAME_END);
+            Start.changeGameState(GameState.GAME_END);            
         }
 
     }

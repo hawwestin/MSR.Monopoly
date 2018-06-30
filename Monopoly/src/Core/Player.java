@@ -24,6 +24,7 @@
 package Core;
 
 import GameMechanics.Settings;
+import GameMechanics.Start;
 import UI.ImagePanel;
 import UI.PlayerWalletBox;
 import java.awt.Color;
@@ -38,6 +39,7 @@ import java.util.ArrayList;
 public class Player {
 
     private int _money;
+    private int _totalWealth;
     private Color _color;
     private ArrayList<BuyAble> _possession = new ArrayList<BuyAble>();
     private final BoardCore _boardCore;
@@ -60,6 +62,7 @@ public class Player {
      */
     public Player(int number, String name, Color color, BufferedImage icon) {
         _money = Settings.StartAmountOfMoney;
+        _totalWealth = 0;
         _playerNumber = number;
         _playerCounter = icon;
         _name = name;
@@ -68,6 +71,10 @@ public class Player {
         _counterPanel = new ImagePanel(0, 0, icon, name);
         _counterPanel.Resize(Settings.SizeOfIconOnBoard, Settings.SizeOfIconOnBoard);
         _counterPanel.setyOffset(number * Settings.SizeOfIconOnBoard);
+    }
+
+    public int getTotalWealth() {
+        return _totalWealth;
     }
 
     /**
@@ -100,7 +107,7 @@ public class Player {
     /**
      * Set new value for jabil break atempt escape
      *
-     * @param _jailEscapeRetry
+     * @param jailEscapeRetry
      */
     public void setJailEscapeRetry(int jailEscapeRetry) {
         _jailEscapeRetry = jailEscapeRetry;
@@ -137,7 +144,7 @@ public class Player {
      * Set new value of player name. Name should not be changed after game
      * began.
      *
-     * @param _name
+     * @param name
      */
     public void setName(String name) {
         _name = name;
@@ -193,6 +200,11 @@ public class Player {
         return _money;
     }
 
+    public void setMoney(int money) {
+        _money = money;
+        Start.getGame().EnableBuyButton();
+    }
+
     /**
      * Add place to player possesion list at a given price.
      *
@@ -202,7 +214,8 @@ public class Player {
     public void Buy(BuyAble place, int price) {
         _possession.add(place);
         place.setOwner(this);
-        _money -= price;
+        setMoney(_money - price);
+        _totalWealth += price;
     }
 
     /**
@@ -214,7 +227,8 @@ public class Player {
      */
     public void Sell(BuyAble place, int income) {
         _possession.remove(place);
-        _money += income;
+        setMoney(_money + income);
+        _totalWealth -= income;
     }
 
     /**
@@ -223,7 +237,18 @@ public class Player {
      * @param salary
      */
     public void EarnMoney(int salary) {
-        _money += salary;
+        setMoney(_money + salary);
+    }
+
+    /**
+     * Increase the value of player money. Decrease player wealth
+     *
+     * @param salary
+     * @param building
+     */
+    public void EarnMoney(int salary, int building) {
+        setMoney(_money + salary);
+        _totalWealth -= building;
     }
 
     /**
@@ -232,7 +257,18 @@ public class Player {
      * @param amount
      */
     public void Pay(int amount) {
-        _money -= amount;
+        setMoney(_money - amount);
+    }
+
+    /**
+     * Decrease player money. Increase player wealth
+     *
+     * @param amount
+     * @param building
+     */
+    public void Pay(int amount, int building) {
+        setMoney(_money - amount);
+        _totalWealth += building;
     }
 
     /**

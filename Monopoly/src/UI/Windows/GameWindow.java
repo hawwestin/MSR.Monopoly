@@ -164,7 +164,7 @@ public class GameWindow extends javax.swing.JPanel {
         JPboard.setLayout(JPboardLayout);
         JPboardLayout.setHorizontalGroup(
             JPboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 734, Short.MAX_VALUE)
+            .addGap(0, 738, Short.MAX_VALUE)
         );
         JPboardLayout.setVerticalGroup(
             JPboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,7 +203,7 @@ public class GameWindow extends javax.swing.JPanel {
             }
         });
 
-        JBShowFieldInfo.setText("Pokarz kartę");
+        JBShowFieldInfo.setText("Pokaż kartę");
         JBShowFieldInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JBShowFieldInfoActionPerformed(evt);
@@ -276,7 +276,7 @@ public class GameWindow extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(JPboard, javax.swing.GroupLayout.DEFAULT_SIZE, 734, Short.MAX_VALUE)
+                .addComponent(JPboard, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JPMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -323,13 +323,6 @@ public class GameWindow extends javax.swing.JPanel {
             JBThrow.setEnabled(false);
         }
 
-        if (PlayersLoop.getCurrentPlayer().GetMoney() <= 0) {
-            TextLog("\nYou ran out of money! You lose!\n\n");
-            PlayersLoop.RemoveBankrupt(PlayersLoop.getCurrentPlayer());
-            JBThrow.setEnabled(false);
-            Dice.setThrowed(true);
-        }
-
         EnableBuyButton();
 
 
@@ -340,6 +333,20 @@ public class GameWindow extends javax.swing.JPanel {
             TextLog("You have to throw the dice\n");
             return;
         }
+
+        if (PlayersLoop.getCurrentPlayer().GetMoney() <= 0) {
+            if (PlayersLoop.getCurrentPlayer().getPossession().size() > 0) {
+                TextLog("\nYou ran out of money!\nYou have to sell sth!");
+                return;
+            } else {
+                TextLog("\nYou ran out of money! You lose\n\n");
+                PlayersLoop.RemoveBankrupt(PlayersLoop.getCurrentPlayer());
+                if (PlayersLoop.getPlayers().size() == 1) {
+                    return;
+                }
+            }
+        }
+
         PlayersLoop.iterator().next();
         TextLog(String.format("\nCurrent player %s (%d$)\n", PlayersLoop.getCurrentPlayer().toString(), PlayersLoop.getCurrentPlayer().GetMoney()));
         Dice.Reset();
@@ -355,6 +362,7 @@ public class GameWindow extends javax.swing.JPanel {
         } else {
             JBBuy.setText("Buy");
         }
+
 
     }//GEN-LAST:event_JBEndTurnActionPerformed
 
